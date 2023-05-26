@@ -1,0 +1,22 @@
+Copy importer style from youtube-dl
+
+// methods
+    Traverse pages
+    get all pages
+    Next Page
+    Next Event
+    Return event
+        Data Structure
+
+    Get Title
+        Get Event
+
+    Get Event HTML
+
+
+ Sources
+
+Categories
+    Festival
+    Music
+    Food
