@@ -17,16 +17,13 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $description
  * @property string $location
  * @property integer $space_id
- * @property Carbon $start
- * @property Carbon $end
- * @property string $schedule
+ * @property string $starts_at
+ * @property string $ends_at
  * @property string $gallery
  * @property string $url
  * @property string $email
- * @property double $price
  * @property string $status
  * @property string $source_id
- * @property string $category_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
@@ -44,6 +41,16 @@ class Event extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
+        'description',
+        'location',
+        'starts_at',
+        'ends_at',
+        'gallery',
+        'url',
+        'email',
+        'price',
+        'status',
     ];
 
     /**
