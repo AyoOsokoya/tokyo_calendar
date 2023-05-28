@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('enum_event_source');
             $table->string('handle')->unique();
-            $table->string('data_type'); // RSS/iCal/
+            $table->string('data_type'); // RSS/iCal/scraped
             $table->string('command_name'); // Command to run
             $table->string('command_parameters'); // Command to run
             $table->string('base_url');
