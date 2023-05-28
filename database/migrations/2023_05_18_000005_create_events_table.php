@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Event;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) { // change to use class table_name
+        Schema::create(app(Event::class)->getTable(), function (Blueprint $table) { // change to use class table_name
             $table->id();
             $table->string('title');
             $table->text('description');
@@ -24,10 +25,10 @@ return new class extends Migration
             $table->integer('event_source_id')->index();
             $table->string('url');
             $table->string('phone_number');
-            $table->integer('space_id')->index();
+            $table->integer('space_id')->index()->nullable();
             $table->string('status');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

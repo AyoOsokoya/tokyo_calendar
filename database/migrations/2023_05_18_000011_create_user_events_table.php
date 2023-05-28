@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('user_id')->index();
             $table->integer('event_id')->index();
             $table->string('user_event_status')->index();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\EventCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_categories', function (Blueprint $table) {
+        Schema::create(app(EventCategory::class)->getTable(), function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('event_category_enum');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->string('enum_event_category');
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

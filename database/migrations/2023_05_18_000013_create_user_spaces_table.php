@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_spaces', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('space_id');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('user_id')->index();
+            $table->integer('space_id')->index();
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

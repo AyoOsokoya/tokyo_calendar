@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('ends_at');
             $table->integer('duration');
 
-            $table->integer('daily')->nullable();
             $table->integer('every_n_days')->nullable();
 
             $table->integer('every_n_weeks')->nullable(); // every 3 weeks, 1 weeks, 2 weeks.
@@ -42,8 +41,9 @@ return new class extends Migration
 
             $table->string('schedule_type')->nullable(); // rule / rule_exclusion to rule ie but not on this day
             $table->string('parent_schedule_id')->nullable(); // base this rule on another existing rule
-            $table->timestamps();
-            $table->softDeletes();
+
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

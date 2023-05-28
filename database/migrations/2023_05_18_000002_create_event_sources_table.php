@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\EventSource;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_sources', function (Blueprint $table) {
+        Schema::create(app(EventSource::class)->getTable(), function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('event_source_enum');
+            $table->string('enum_event_source');
             $table->string('handle')->unique();
             $table->string('data_type'); // RSS/iCal/
             $table->string('command_name'); // Command to run
@@ -22,8 +23,8 @@ return new class extends Migration
             $table->string('base_url');
             $table->string('email');
             $table->string('phone_number');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

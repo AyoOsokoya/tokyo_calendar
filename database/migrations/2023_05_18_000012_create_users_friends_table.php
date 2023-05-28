@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('users_friends', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->index();
-            $table->timestamp('friend_id')->index();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('friend_id')->index();
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 

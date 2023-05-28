@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('event_event_categories', function (Blueprint $table) {
             $table->id();
             $table->integer('event_id')->index();
-            $table->timestamp('category_id')->index();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->dateTime('category_id')->index();
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 
