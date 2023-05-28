@@ -1,7 +1,11 @@
 <?php
+declare(strict_types = 1);
+
+namespace Database\Factories;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,22 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('/v1')->group(function () {
+    Route::get('/user/events/', [EventController::class, 'userEventsIcalFormat']);
 });
 
-// Route::get('/api', )
-// Auth
-// Events
-    // my calendar with all events (now)
-    // category
-        // all
-        // food
-        // ...
-            // this week
-            // this month
-            // next week
-            // next month
-
-// my events
-//
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

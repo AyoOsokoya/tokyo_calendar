@@ -1,9 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Enums;
 
-enum EnumUserType
+enum EnumUserType: string
 {
-    // admin
-    // normal
+    case ADMIN = 'admin'; // me for if I create an event
+    case NORMAL = 'normal'; // events from external sources
 }
