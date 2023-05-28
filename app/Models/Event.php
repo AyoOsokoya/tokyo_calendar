@@ -16,7 +16,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property string $description
  * @property string $location
- * @property integer $space_id
  * @property string $starts_at
  * @property string $ends_at
  * @property string $gallery
