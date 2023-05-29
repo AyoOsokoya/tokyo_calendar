@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Enums\EnumEventStatus;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 /**
  * App\Models\Event
@@ -21,7 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $gallery
  * @property string $url
  * @property string $email
- * @property string $status
+ * @property string $event_status
  * @property string $source_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -30,7 +30,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'events';
 
@@ -45,19 +45,11 @@ class Event extends Model
         'location',
         'starts_at',
         'ends_at',
-        'gallery',
         'url',
-        'email',
-        'price',
-        'status',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
+        'event_status',
+        'event_gallery_id',
+        'event_source_id',
+        'event_creator_id'
     ];
 
     /**
@@ -66,5 +58,8 @@ class Event extends Model
      * @var array<string, string>
      */
     protected $casts = [
+        'starts_at' => 'datetime',
+        'ends_at' => 'datetime',
+        'event_status' => EnumEventStatus::class,
     ];
 }

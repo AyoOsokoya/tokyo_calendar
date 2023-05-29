@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum EnumUserEventAttendanceStatus
+enum EnumUserEventAttendanceStatus: string
 {
-
+    case ATTENDING = 'attending';
 }

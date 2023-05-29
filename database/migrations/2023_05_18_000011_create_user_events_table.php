@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->index();
             $table->integer('event_id')->index();
-            $table->string('enum_user_event_status')->index();
+            $table->string('user_event_attendance_status')->index();
             $table->datetimes();
             $table->softDeletesDatetime();
         });

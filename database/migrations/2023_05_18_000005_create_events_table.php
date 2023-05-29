@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use App\Models\Event;
 use Illuminate\Database\Migrations\Migration;
@@ -14,19 +15,16 @@ return new class extends Migration
     {
         Schema::create(app(Event::class)->getTable(), function (Blueprint $table) { // change to use class table_name
             $table->id();
-            $table->string('title');
+            $table->string('name');
             $table->text('description');
-            $table->text('event_html'); // the html of the event for later parsing
             $table->text('location');
             $table->dateTime('starts_at')->index();
             $table->dateTime('ends_at')->index();
-            $table->boolean('is_repeated');
+            $table->string('url');
+            $table->string('event_status');
             $table->integer('event_gallery_id')->index();
             $table->integer('event_source_id')->index();
-            $table->string('url');
-            $table->string('phone_number');
-            $table->integer('space_id')->index()->nullable();
-            $table->string('status');
+            $table->integer('event_creator_id')->index();
             $table->datetimes();
             $table->softDeletesDatetime();
         });

@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum EnumEventStatus
+enum EnumEventStatus: string
 {
-    // Open
-    // Cancelled
-    // Started
-    // Finished
-    // In progress
+    case OPEN = 'open';
+    case CANCELLED = 'cancelled';
+    case STARTED = 'started';
+    case FINISHED = 'finished';
+    case IN_PROGRESS = 'in progress';
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Database\Factories;
 
@@ -6,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Event>
+ * @extends Factory
  */
 class EventFactory extends Factory
 {
@@ -25,12 +26,11 @@ class EventFactory extends Factory
             'source_id' => '1', // afterCreate...
             'location' => fake()->localCoordinates,
             'starts_at' => $eventStart,
-            'ends_at' => $eventStart->addHours(fake()->randomDigitNotZero())) ,
+            'ends_at' => $eventStart->addHours(fake()->randomDigitNotZero()) ,
             'gallery' => null, // after create
             'url' => fake()->url(),
             'email' => fake()->safeEmail(),
             'status' => '....', // TODO: random of ENUM
-
         ];
     }
 }

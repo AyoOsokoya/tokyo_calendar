@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +15,15 @@ return new class extends Migration
     {
         Schema::create(app(User::class)->getTable(), function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('age')->nullable();
+            $table->string('name_first');
+            $table->string('name_last')->nullable();
+            $table->string('name_middle')->nullable();
+            $table->string('name_handle');
+            $table->integer('age')->nullable();
             $table->string('sex')->nullable();
+            $table->string('user_type');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->dateTime('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->datetimes();
