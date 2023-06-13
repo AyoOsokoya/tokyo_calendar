@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->dateTime('ends_at')->index();
             // Event data
             $table->integer('event_source_id')->index();
+            $table->string('import_unique_id')->unique()->index();
             $table->string('event_status');
             $table->string('url')->nullable();
             $table->datetimes();

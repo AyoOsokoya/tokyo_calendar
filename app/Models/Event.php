@@ -28,6 +28,7 @@ use Illuminate\Support\Collection;
  * @property string $url
  * @property string $event_status
  * @property integer $event_source_id
+ * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
@@ -54,6 +55,7 @@ class Event extends Model
         'url',
         'event_status',
         'event_source_id',
+        'import_unique_id'
     ];
 
     /**

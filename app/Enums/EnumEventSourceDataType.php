@@ -5,10 +5,10 @@ namespace App\Enums;
 
 enum EnumEventSourceDataType: string
 {
-    case ICAL = 'ical';
-    case MANUAL = 'manual';
-    case RSS = 'rss';
+    case API = 'api'; // The provider has an api
+    case ICAL = 'ical'; // provider supports ical
+    case MANUAL = 'manual'; // manual entry through the database or a UI
+    case RSS = 'rss'; // provider supports rss
     case SCRAPE = 'scrape';
     case USER = 'user';
-    case me = 'me';
 }

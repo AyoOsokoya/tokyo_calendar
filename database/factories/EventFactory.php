@@ -38,6 +38,7 @@ class EventFactory extends Factory
             'url' => fake()->url(),
             'event_status' => EnumEventStatus::ACTIVE,
             'event_source_id' => NULL,
+            'import_unique_id' => rand(1000000000, 9999999999)
         ];
     }
 

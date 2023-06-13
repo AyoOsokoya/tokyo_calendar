@@ -24,11 +24,10 @@ class DatabaseSeeder extends Seeder
     {
         // TODO Extract to config directory
         $user_count = 5;
-        $event_source_count = 10;
         $event_count = 100;
 
+        $this->call([EventSourceSeeder::class]);
         User::factory()->count($user_count)->create();
-        EventSource::factory()->count($event_source_count)->create();
         Event::factory()->count($event_count)->create();
 
        $this->attendance_statuses = collect(EnumUserEventAttendanceStatus::cases());

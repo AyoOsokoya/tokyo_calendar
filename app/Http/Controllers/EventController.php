@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
@@ -23,6 +24,7 @@ class EventController extends BaseController
             $events_array []= iCalEvent::create($event->name)
                 ->startsAt($event->starts_at)
                 ->endsAt($event->ends_at)
+                ->uniqueIdentifier($event->import_unique_id)
                 ->description($event->description)
                 ->coordinates($event->latitude, $event->longitude)
                 ->url($event->url)
