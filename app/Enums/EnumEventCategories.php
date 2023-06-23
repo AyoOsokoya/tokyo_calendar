@@ -7,8 +7,10 @@ enum EnumEventCategories: string
 {
     case ART = 'art';
     case BARS = 'bars';
+    case BUSINESS = 'business';
     case CULTURAL = 'cultural';
     case DANCE = 'dance';
+    case EDUCATIONAL = 'educational';
     case ENTERTAINMENT = 'entertainment';
     case FESTIVAL = 'festival';
     case FOOD = 'food';

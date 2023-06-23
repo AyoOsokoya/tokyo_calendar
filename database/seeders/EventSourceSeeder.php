@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Database\Seeders;
 
@@ -14,7 +15,7 @@ class EventSourceSeeder extends Seeder
 
     public function run(): void
     {
-        $sources = [
+        $sources = collect([
             [
                 'name_display' => 'timeout',
                 'name_importer' => 'timeout',
@@ -71,16 +72,14 @@ class EventSourceSeeder extends Seeder
                 'command_parameters' => '',
                 'base_url' => 'https://japan-attractions.jp/'
             ],
-            /*
-            [ // Page with events is down
+            [
                 'name_display' => 'Yoyogi Koen',
                 'name_importer' => 'yoyogi_koen',
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => ''
+                'base_url' => '' // Page is gone right now
             ],
-            */
             [
                 'name_display' => 'Billboard Live Tokyo',
                 'name_importer' => 'billboard_live_tokyo',
@@ -145,8 +144,16 @@ class EventSourceSeeder extends Seeder
                 'command_parameters' => '',
                 'base_url' => 'https://tokyo.craigslist.org/search/eve#search=1~list~0~0'
             ],
-        ];
+            [
+                'name_display' => 'Tokyo Art Beat',
+                'name_importer' => 'tokyoartbeat',
+                'event_source_data_type' => EnumEventSourceDataType::SCRAPE, // SCRAPE
+                'command_name' => '',
+                'command_parameters' => '',
+                'base_url' => 'https://www.tokyoartbeat.com/en/events/orderBy/latest'
+            ],
+        ]);
 
-        EventSource::insert($sources);
+        $sources->each(fn ($source) => EventSource::create($source));
     }
 }
