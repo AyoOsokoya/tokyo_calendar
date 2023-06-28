@@ -12,6 +12,7 @@ enum EnumEventCategories: string
     case DANCE = 'dance';
     case EDUCATIONAL = 'educational';
     case ENTERTAINMENT = 'entertainment';
+    case FASHION = 'fashion';
     case FESTIVAL = 'festival';
     case FOOD = 'food';
     case KIDS = 'kids';

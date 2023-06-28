@@ -27,6 +27,8 @@ use Illuminate\Support\Carbon;
  * @property string $event_status
  * @property integer $event_source_id
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
+ * @property string $event_category
+ * @property EventSource source
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
@@ -53,7 +55,8 @@ class Event extends Model
         'url',
         'event_status',
         'event_source_id',
-        'import_unique_id'
+        'import_unique_id',
+        'event_category'
     ];
 
     /**
@@ -70,7 +73,7 @@ class Event extends Model
 
     public function source(): BelongsTo
     {
-        return $this->belongsTo(EventSource::class);
+        return $this->belongsTo(EventSource::class, 'event_source_id');
     }
 
     public function users(): BelongsToMany

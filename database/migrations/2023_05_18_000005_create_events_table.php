@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create(app(Event::class)->getTable(), function (Blueprint $table) { // change to use class table_name
             $table->id();
             // Descriptors
-            $table->string('name');
+            $table->text('name'); // some names are  very long
             $table->text('description')->nullable();
             // Location
             $table->double('latitude')->nullable();
@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->integer('event_source_id')->index();
             $table->string('import_unique_id')->unique()->index();
             $table->string('event_status');
+            $table->string('event_category');
             $table->string('url')->nullable();
             $table->datetimes();
             $table->softDeletesDatetime();

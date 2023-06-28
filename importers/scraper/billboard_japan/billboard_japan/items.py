@@ -7,17 +7,12 @@ import scrapy
 
 
 class EventItem(scrapy.Item):
-    # define the fields for your item here like:
     name = scrapy.Field()
-    image_url = scrapy.Field()
     description = scrapy.Field()
-    latitude = scrapy.Field()
-    longitude = scrapy.Field()
-    address = scrapy.Field()
-    dates = scrapy.Field()
-    prices = scrapy.Field()
+    image_url = scrapy.Field()
     starts_at = scrapy.Field()
     ends_at = scrapy.Field()
-    event_status = scrapy.Field()
+    address = scrapy.Field()
+    datetime_string = scrapy.Field()
     unique_identifier = scrapy.Field() # Becomes import_unique_id
     url = scrapy.Field()

@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
+use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
 use App\Enums\EnumUserEventAttendanceStatus;
 use App\Models\Event;
@@ -37,6 +38,7 @@ class EventFactory extends Factory
             'ends_at' => $eventStart->addHours(rand(1, 7)),
             'url' => fake()->url(),
             'event_status' => EnumEventStatus::ACTIVE,
+            'event_category' => collect(EnumEventCategories::cases())->random(),
             'event_source_id' => NULL,
             'import_unique_id' => rand(1000000000, 9999999999)
         ];

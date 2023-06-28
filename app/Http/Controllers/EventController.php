@@ -3,7 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Event as Calendar;
+use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
@@ -16,19 +17,20 @@ class EventController extends BaseController
     public function userEventsIcalFormat(): Response
     {
         $events_array = [];
-        $events = Calendar::all();
+        $events = Event::whereDate('starts_at', '>=', Carbon::now())
+            ->with('source')
+            ->get();
 
-        // TODO: move to action
         foreach ($events as $event) {
-            /** @var Calendar $event */
-            $events_array []= iCalEvent::create($event->name)
+            /** @var Event $event */
+             $events_array []= iCalEvent::create( "{$event->source->name_display}: $event->name")
                 ->startsAt($event->starts_at)
                 ->endsAt($event->ends_at)
-                ->uniqueIdentifier($event->import_unique_id)
+                ->uniqueIdentifier(md5($event->import_unique_id))
                 ->description($event->description)
-                ->coordinates($event->latitude, $event->longitude)
-                ->url($event->url)
-                ->address($event->address);
+                // ->coordinates($event->latitude, $event->longitude)
+                // ->address($event->address)
+                ->url($event->url);
         }
 
         $calendar = iCalCalendar::create('My Events')

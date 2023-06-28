@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->primary(['user_id', 'event_id']);
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('event_id')->index();
+            $table->dateTime('starts_at')->index()->nullable();
+            $table->dateTime('ends_at')->index()->nullable();
             $table->string('user_event_attendance_status')->index();
             $table->datetimes();
             $table->softDeletesDatetime();

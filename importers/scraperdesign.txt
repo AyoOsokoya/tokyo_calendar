@@ -1,22 +1,37 @@
-Copy importer style from youtube-dl
+Start with the default structure and then try to reorganize in to:
 
-// methods
-    Traverse pages
-    get all pages
-    Next Page
-    Next Event
-    Return event
-        Data Structure
+Directory Structure
+    - venv
+    scraper
+        scrapy.cfg
+            BluenoteLiveJapan.settings.py
+        - middlewares/
+        - spiders/
+            BluenoteLiveJapanSpider.py
+        - pipelines
+            BluenoteLiveJapanPipeline.py
 
-    Get Title
-        Get Event
-
-    Get Event HTML
-
-
- Sources
-
-Categories
-    Festival
-    Music
-    Food
+    
+Alternative Directory Structure:
+venv
+scraper
+    scrapy.cfg
+    GenericScraper
+        middlewares.py
+        spider.py
+        pipelines.py
+        settings.py
+        itemLoaders.py
+    BluenoteJapan
+        middlewares.py
+        spider.py
+        pipelines.py
+        settings.py
+        itemLoaders.py
+    BillboardJapan
+        middlewares.py
+        spider.py
+        pipelines.py
+        settings.py
+        itemLoaders.py
+    
