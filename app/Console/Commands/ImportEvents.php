@@ -38,20 +38,25 @@ class ImportEvents extends Command
 
         // $import = Storage::get('events/this_year_billboard_events.json');
         $import = Storage::get('events/bluenote.json');
-        $event_data = collect(json_decode($import, true));
-        $event_data->each(function ($event) {
-            Event::create([
-                'name' => $event['name'],
-                'description' => $event['description'],
-                'starts_at' => Carbon::parse($event['starts_at']),
-                'ends_at' => Carbon::parse($event['ends_at']),
-                'import_unique_id' => $event['unique_identifier'],
-                // 'event_source_id' => 2,
-                'event_source_id' => 5,
+        $event_data_all = collect(json_decode($import, true));
+        $event_data_all->each(function ($event_data) {
+            /** @var Event $event */
+            $event = Event::make([
+                'name' => $event_data['name'],
+                'description' => $event_data['description'],
+                'starts_at' => Carbon::parse($event_data['starts_at']),
+                'ends_at' => Carbon::parse($event_data['ends_at']),
+                'import_unique_id' => $event_data['unique_identifier'],
+                // 'event_source_id' => 1,
+                'event_source_id' => 2,
                 'event_category' => EnumEventCategories::MUSIC,
                 'event_status' => EnumEventStatus::ACTIVE,
-                'url' => $event['url'],
+                'url' => $event_data['url'],
             ]);
+
+            $event->refresh();
+            $event->import_data_hash = $event->createImportDataHash();
+            $event->save();
         });
         // open file
         // for each event

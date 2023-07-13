@@ -14,7 +14,8 @@ use Illuminate\Support\Carbon;
  * App\Models\EventSource
  *
  * @property integer $id
- * @property integer $name_display
+ * @property string $name_display
+ * @property string $name_display_short
  * @property string $name_importer
  * @property string $event_source_data_type
  * @property string $command_name
@@ -39,6 +40,7 @@ class EventSource extends Model
      */
     protected $fillable = [
         'name_display',
+        'name_display_short',
         'name_importer',
         'event_source',
         'event_source_data_type',

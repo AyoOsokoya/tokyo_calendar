@@ -27,6 +27,8 @@ return new class extends Migration {
             // Event data
             $table->integer('event_source_id')->index();
             $table->string('import_unique_id')->unique()->index();
+            $table->string('import_data_hash');
+
             $table->string('event_status');
             $table->string('event_category');
             $table->string('url')->nullable();

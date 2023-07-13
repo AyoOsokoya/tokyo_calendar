@@ -17,15 +17,8 @@ class EventSourceSeeder extends Seeder
     {
         $sources = collect([
             [
-                'name_display' => 'GaijinPot',
-                'name_importer' => 'gaijinpot',
-                'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
-                'command_name' => '',
-                'command_parameters' => '',
-                'base_url' => 'https://events.gaijinpot.com/'
-            ],
-            [
                 'name_display' => 'Billboard Live Japan',
+                'name_display_short' => 'Billboard',
                 'name_importer' => 'BillboardLiveJapan',
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
@@ -33,15 +26,17 @@ class EventSourceSeeder extends Seeder
                 'base_url' => 'http://www.billboard-live.com/pg/shop/show/index.php?mode=calendar&shop=1'
             ],
             [
-                'name_display' => 'Tokyo Art Beat',
-                'name_importer' => 'TokyoArtBeat',
-                'event_source_data_type' => EnumEventSourceDataType::SCRAPE, // SCRAPE
+                'name_display' => 'Bluenote Tokyo',
+                'name_display_short' => 'Bluenote',
+                'name_importer' => 'BluenoteTokyo',
+                'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'https://www.tokyoartbeat.com/en/events/orderBy/latest'
+                'base_url' => 'https://reserve.bluenote.co.jp/reserve/schedule/move/2'
             ],
             [
                 'name_display' => 'Metropolis Japan',
+                'name_display_short' => 'Metropolis',
                 'name_importer' => 'MetropolisJapan',
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
@@ -49,12 +44,22 @@ class EventSourceSeeder extends Seeder
                 'base_url' => 'https://metropolisjapan.com/events/?ical=1&tribe_display=list'
             ],
             [
-                'name_display' => 'Bluenote Tokyo',
-                'name_importer' => 'BluenoteTokyo',
+                'name_display' => 'GaijinPot',
+                'name_display_short' => 'GaijinPot',
+                'name_importer' => 'gaijinpot',
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'https://reserve.bluenote.co.jp/reserve/schedule/move/2'
+                'base_url' => 'https://events.gaijinpot.com/'
+            ],
+            [
+                'name_display' => 'Tokyo Art Beat',
+                'name_display_short' => 'ArtBeat',
+                'name_importer' => 'TokyoArtBeat',
+                'event_source_data_type' => EnumEventSourceDataType::SCRAPE, // SCRAPE
+                'command_name' => '',
+                'command_parameters' => '',
+                'base_url' => 'https://www.tokyoartbeat.com/en/events/orderBy/latest'
             ],
 //            [
 //                'name_display' => 'SavvyTokyo',
@@ -66,6 +71,7 @@ class EventSourceSeeder extends Seeder
 //            ],
             // [
             //     'name_display' => 'Timeout Japan',
+            //     'name_importer' => 'timeout',
             //     'name_importer' => 'timeout',
             //     'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
             //     'command_name' => '',

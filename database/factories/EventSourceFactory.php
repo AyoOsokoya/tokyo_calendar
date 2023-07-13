@@ -8,7 +8,7 @@ use App\Models\EventSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EventSource>
+ * @extends Factory<EventSource>
  */
 class EventSourceFactory extends Factory
 {
@@ -19,8 +19,10 @@ class EventSourceFactory extends Factory
      */
     public function definition(): array
     {
+        $name_display = fake()->domainName();
         return [
-            'name_display' => fake()->domainName(),
+            'name_display' => $name_display,
+            'name_display_short' => $name_display,
             'name_importer' => fake()->sha256,
             'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
             'command_name' => 'command_name',

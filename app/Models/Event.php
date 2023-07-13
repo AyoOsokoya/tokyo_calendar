@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property string $event_status
  * @property integer $event_source_id
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
+ * @property string $import_data_hash // If the hash changes, something in the event info has been updated
  * @property string $event_category
  * @property EventSource source
  * @property Carbon $created_at
@@ -56,6 +57,7 @@ class Event extends Model
         'event_status',
         'event_source_id',
         'import_unique_id',
+        'import_data_hash',
         'event_category'
     ];
 
@@ -65,7 +67,7 @@ class Event extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'ends_at' => 'datetime', // would like to use Carbon::class but get an error
+        'ends_at' => 'datetime',
         'starts_at' => 'datetime',
         'gps_json' => 'array',
         'event_status' => EnumEventStatus::class,
@@ -79,5 +81,10 @@ class Event extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function createImportDataHash(): string
+    {
+        return md5($this->name . $this->description . $this->starts_at . $this->address);
     }
 }

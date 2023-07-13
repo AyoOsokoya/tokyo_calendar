@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create(app(EventSource::class)->getTable(), function (Blueprint $table) {
             $table->id();
             $table->string('name_display');
+            $table->string('name_display_short');
             $table->string('name_importer')->unique();
             $table->string('event_source_data_type');
             $table->string('command_name')->nullable(); // Command to run, if no command name, do nothing

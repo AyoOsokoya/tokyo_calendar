@@ -28,6 +28,7 @@ class EventFactory extends Factory
         // Longer term, location GPS need to match the coordinates for better testing.
         $location = fake()->localCoordinates();
 
+        $url = fake()->url();
         return [
             'name' => ucwords(fake()->words(4, true)),
             'description' => fake()->text(),
@@ -36,11 +37,11 @@ class EventFactory extends Factory
             'address' => fake()->address(),
             'starts_at' => $eventStart,
             'ends_at' => $eventStart->addHours(rand(1, 7)),
-            'url' => fake()->url(),
             'event_status' => EnumEventStatus::ACTIVE,
             'event_category' => collect(EnumEventCategories::cases())->random(),
             'event_source_id' => NULL,
-            'import_unique_id' => rand(1000000000, 9999999999)
+            'import_unique_id' => md5($url . $eventStart->toString()),
+            'import_data_hash' => ''
         ];
     }
 
@@ -48,11 +49,13 @@ class EventFactory extends Factory
     {
         return $this->afterMaking(function (Event $event) {
             $event_sources = EventSource::all();
+            /** @var EventSource $event_source */
             if ($event_sources->isNotEmpty()) {
-                $event_source = $event_sources->random(); // Performance!
+                $event_source = $event_sources->random();
             } else {
                 $event_source = EventSource::factory()->create();
             }
+            $event->import_data_hash = $event->createImportDataHash();
 
             $event->event_source_id = $event_source->id;
             $event->save();
