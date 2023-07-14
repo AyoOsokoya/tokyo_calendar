@@ -3,42 +3,43 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\EnumUserEventAttendanceStatus;
 use App\Models\Event;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
-use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
-use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends BaseController
 {
     // use AuthorizesRequests, ValidatesRequests;
 
-    public function userEventsIcalFormat(): Response
+    public function userEvents(): JsonResponse
     {
-        $events_array = [];
-        $events = Event::whereDate('starts_at', '>=', Carbon::now())
-            ->with('source')
+        // $user = Auth::user();
+        $user = User::first();
+
+        return response()->json($user->events()->get());
+    }
+
+    public function allEvents(): JsonResponse | Response
+    {
+        $events = Event::with('source')
+            ->orderBy('starts_at')
             ->get();
+        return response()->jsonICalResponse($events);
+    }
 
-        foreach ($events as $event) {
-            /** @var Event $event */
-             $events_array []= iCalEvent::create( "{$event->source->name_display}: $event->name")
-                ->startsAt($event->starts_at)
-                ->endsAt($event->ends_at)
-                ->uniqueIdentifier(md5($event->import_unique_id))
-                ->description($event->description)
-                // ->coordinates($event->latitude, $event->longitude)
-                // ->address($event->address)
-                ->url($event->url);
-        }
+    public function userEventsByAttendanceStatus(EnumUserEventAttendanceStatus $attendance_status): JsonResponse
+    {
+        $user = Auth::user();
+        $user = User::first();
 
-        $calendar = iCalCalendar::create('My Events')
-            ->event($events_array);
-
-        return response($calendar->get())
-            ->withHeaders([
-                'Content-Type' => 'text/plain'
-            ]);
+        $events = $user->events()
+            ->wherePivot('user_event_attendance_status', 'going')
+            ->get();
+        return response()->json($events);
     }
 }

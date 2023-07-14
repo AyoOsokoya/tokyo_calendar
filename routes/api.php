@@ -19,7 +19,19 @@ use App\Http\Controllers\EventController;
 */
 
 Route::prefix('/v1')->group(function () {
-    Route::get('/user/events/', [EventController::class, 'userEventsIcalFormat']);
+    // all events
+    //
+    Route::get('/events/', [EventController::class, 'allEvents']);
+    Route::get('/user/events/', [EventController::class, 'userEvents']);
+    Route::get('/user/events/attendance_status/{attendance_status}', [EventController::class, 'userEventsByAttendanceStatus']);
+
+    // Route::get('/user/events/now/', [EventController::class, 'userEventsIcalFormat']);
+    // Route::get('/user/events/recommended/', [EventController::class, 'userEventsIcalFormat']);
+    // Route::get('/user/events/weekend/', [EventController::class, 'userEventsIcalFormat']);
+    // Route::get('/user/events/history/', [EventController::class, 'userEventsIcalFormat']);
+    // Route::get('/user/events/soon/', [EventController::class, 'userEventsIcalFormat']);
+    // Route::get('/user/events/interest/soon/', [EventController::class, 'userEventsIcalFormat']);
+    // Route::get('/user/events/curious/', [EventController::class, 'userEventsIcalFormat']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
