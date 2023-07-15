@@ -3,7 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Providers;
 
+use App\Enums\EnumApiResponseFormat;
 use App\Models\Event;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
@@ -24,17 +26,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Response::macro('jsonICalResponse', function($events){
-            $extension = request()->route()->parameter('extension')
-                ?? request()->header('accept')
-                ?? 'ical';
-
-            if (in_array($extension, ['ical', 'application/ical'])) {
+        Response::macro('jsonIcalResponse', function(
+            Collection $events,
+            EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
+        ){
+            // Could use content negotiation https://laravel.com/docs/10.x/requests#content-negotiation
+            if ($response_format === EnumApiResponseFormat::ICAL) {
                 $events_array = [];
                 foreach ($events as $event) {
                     /** @var Event $event */
                     $events_array []= iCalEvent::create(
-                        "{$event->source->name_display_short}: $event->name"
+                        "{$event->event_source->name_display_short}: $event->name"
                     )
                         ->startsAt($event->starts_at)
                         ->endsAt($event->ends_at)

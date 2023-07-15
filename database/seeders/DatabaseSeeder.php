@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Enums\EnumUserEventAttendanceStatus;
+use App\Enums\EnumEventUserAttendanceStatus;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->count($user_count)->create();
         Event::factory()->count($event_count)->create();
 
-        $this->attendance_statuses = collect(EnumUserEventAttendanceStatus::cases());
+        $this->attendance_statuses = collect(EnumEventUserAttendanceStatus::cases());
 
         // Link users to events pseudo-randomly
         User::all()->each(function (User $user) {

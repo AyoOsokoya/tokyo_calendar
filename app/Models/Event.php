@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Event
@@ -29,7 +30,8 @@ use Illuminate\Support\Carbon;
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
  * @property string $import_data_hash // If the hash changes, something in the event info has been updated
  * @property string $event_category
- * @property EventSource source
+ * @property EventSource $event_source
+ * @property Collection $users
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
@@ -73,7 +75,7 @@ class Event extends Model
         'event_status' => EnumEventStatus::class,
     ];
 
-    public function source(): BelongsTo
+    public function event_source(): BelongsTo
     {
         return $this->belongsTo(EventSource::class, 'event_source_id');
     }

@@ -5,7 +5,7 @@ namespace Database\Factories;
 
 use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
-use App\Enums\EnumUserEventAttendanceStatus;
+use App\Enums\EnumEventUserAttendanceStatus;
 use App\Models\Event;
 use App\Models\EventSource;
 use App\Models\User;
@@ -69,7 +69,7 @@ class EventFactory extends Factory
 
            $user->events()->attach(
                $event,
-               ['user_event_attendance_status' => EnumUserEventAttendanceStatus::GOING]
+               ['user_event_attendance_status' => EnumEventUserAttendanceStatus::GOING]
            );
         });
     }

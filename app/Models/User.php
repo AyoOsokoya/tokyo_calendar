@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Enums\EnumUserEventAttendanceStatus;
+use App\Enums\EnumEventUserAttendanceStatus;
 use App\Enums\EnumUserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -25,6 +26,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $user_type
  * @property string $email
  * @property string $email_verified_at
+ * @property EventUser $pivot
+ * @property Collection $events
  * @property string $password
  */
 class User extends Authenticatable
@@ -74,7 +77,7 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function attendEvent(Event $event, Carbon $starts_at, Carbon $ends_at, EnumUserEventAttendanceStatus $status)
+    public function attendEvent(Event $event, Carbon $starts_at, Carbon $ends_at, EnumEventUserAttendanceStatus $status)
     {
         // if an attendance is set up already
         // modify

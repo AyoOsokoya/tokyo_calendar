@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Enums;
 
-enum EnumUserEventAttendanceStatus: string
+enum EnumEventUserAttendanceStatus: string
 {
     case GOING = 'going'; // Definitely
     case MAYBE = 'maybe'; // just wanna be notified
@@ -13,7 +13,7 @@ enum EnumUserEventAttendanceStatus: string
     /*
         There are five participation statuses:
         These should be passed to the calendar
-        The current Enum should be used internally  or just used ParticiPationStatus
+        The current Enum should be used internally  or just used ParticipationStatus
             going -> accepted
             maybe -> tentative
             not_interested -> declined
