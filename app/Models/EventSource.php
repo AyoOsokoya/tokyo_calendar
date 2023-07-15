@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\EventSource
@@ -23,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @property string $base_url
  * @property string $email
  * @property string $phone_number
+ * @property Collection $events
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at

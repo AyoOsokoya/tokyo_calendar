@@ -23,9 +23,14 @@ class EventController extends BaseController
         // $user = Auth::user();
         $user = User::first();
 
-        return response()->jsonIcalResponse($user->events()->get(), $response_format);
-    }
+        $events = $user->events()
+            ->with('event_source')
+            ->with('users')
+            ->orderBy('id')
+            ->get();
 
+        return response()->jsonIcalResponse($events, $response_format);
+    }
     public function allEvents(
         ?EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
     ) : JsonResponse|Response {

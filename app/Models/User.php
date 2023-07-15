@@ -72,16 +72,19 @@ class User extends Authenticatable
 
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class)
-            ->withPivot(['user_id', 'event_id', 'starts_at', 'ends_at', 'user_event_attendance_status'])
-            ->withTimestamps();
+        return $this->belongsToMany(Event::class);
+//            ->withPivot([
+//                'user_id',
+//                'event_id',
+//                'starts_at',
+//                'ends_at',
+//                'user_event_attendance_status'
+//            ])
+            // ->withTimestamps();
     }
 
     public function attendEvent(Event $event, Carbon $starts_at, Carbon $ends_at, EnumEventUserAttendanceStatus $status)
     {
-        // if an attendance is set up already
-        // modify
-        // else create a new one
         // For now, just attend the event for 3 hours we need a more complicated event schedule model
         // check starts at and $ends at are between event times and now
         $this->events()->attach(

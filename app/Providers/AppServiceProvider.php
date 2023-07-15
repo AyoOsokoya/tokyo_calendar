@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Providers;
 
 use App\Enums\EnumApiResponseFormat;
+use App\Http\Resources\EventResource;
 use App\Models\Event;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             // Could use content negotiation https://laravel.com/docs/10.x/requests#content-negotiation
             if ($response_format === EnumApiResponseFormat::ICAL) {
                 $events_array = [];
+                // TODO: use EventResource toIcalArray
                 foreach ($events as $event) {
                     /** @var Event $event */
                     $events_array []= iCalEvent::create(
@@ -55,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
                         'Content-Type' => 'text/plain'
                     ]);
             } else {
-               return response()->json($events);
+                return response()->json(EventResource::collection($events));
             }
         });
     }
