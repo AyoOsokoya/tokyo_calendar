@@ -61,14 +61,14 @@ class EventSourceSeeder extends Seeder
                 'command_parameters' => '',
                 'base_url' => 'https://www.tokyoartbeat.com/en/events/orderBy/latest'
             ],
-//            [
-//                'name_display' => 'SavvyTokyo',
-//                'name_importer' => 'SavvyTokyo',
-//                'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
-//                'command_name' => '',
-//                'command_parameters' => '',
-//                'base_url' => 'https://savvytokyo.com/'
-//            ],
+            //[
+            //    'name_display' => 'SavvyTokyo',
+            //    'name_importer' => 'SavvyTokyo',
+            //    'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
+            //    'command_name' => '',
+            //    'command_parameters' => '',
+            //    'base_url' => 'https://savvytokyo.com/'
+            //],
             // [
             //     'name_display' => 'Timeout Japan',
             //     'name_importer' => 'timeout',
