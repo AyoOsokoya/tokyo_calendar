@@ -6,6 +6,7 @@ namespace Database\Factories;
 use App\Enums\EnumUserType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 /**
@@ -13,6 +14,8 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    protected $model = User::class;
+
     /**
      * Define the model's default state.
      *
@@ -25,7 +28,7 @@ class UserFactory extends Factory
             'name_last' => fake()->lastName(),
             'name_middle' => fake()->firstName(),
             'name_handle' => fake()->userName(),
-            'age' => (fake()->randomNumber() % 70) + 20,
+            'date_of_birth' => Carbon::now()->subYears(rand(12, 80)),
             'user_type' => EnumUserType::NORMAL,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

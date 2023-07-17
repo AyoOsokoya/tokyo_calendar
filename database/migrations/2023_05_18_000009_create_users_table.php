@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('name_last')->nullable();
             $table->string('name_middle')->nullable();
             $table->string('name_handle');
-            $table->integer('age')->nullable();
+            $table->datetime('date_of_birth')->nullable();
             $table->string('user_type');
             $table->string('email')->unique();
             $table->dateTime('email_verified_at')->nullable();

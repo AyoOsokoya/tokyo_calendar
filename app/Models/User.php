@@ -21,7 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name_first
  * @property string $name_last
  * @property string $name_middle
- * @property string $name_handle
+ * @property string $name_handle // nickname
  * @property integer $age
  * @property string $user_type
  * @property string $email
@@ -72,15 +72,15 @@ class User extends Authenticatable
 
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class);
-//            ->withPivot([
-//                'user_id',
-//                'event_id',
-//                'starts_at',
-//                'ends_at',
-//                'user_event_attendance_status'
-//            ])
-            // ->withTimestamps();
+        return $this->belongsToMany(Event::class)
+            ->withPivot([
+                'user_id',
+                'event_id',
+                'starts_at',
+                'ends_at',
+                'user_event_attendance_status'
+            ])
+             ->withTimestamps();
     }
 
     public function attendEvent(Event $event, Carbon $starts_at, Carbon $ends_at, EnumEventUserAttendanceStatus $status)
