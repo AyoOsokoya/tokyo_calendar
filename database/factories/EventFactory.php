@@ -55,8 +55,8 @@ class EventFactory extends Factory
             } else {
                 $event_source = EventSource::factory()->create();
             }
-            $event->import_data_hash = $event->createImportDataHash();
 
+            $event->import_data_hash = $event->createImportDataHash();
             $event->event_source_id = $event_source->id;
             $event->save();
         });

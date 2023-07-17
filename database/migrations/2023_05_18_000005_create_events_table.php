@@ -27,10 +27,10 @@ return new class extends Migration {
             // Event data
             $table->integer('event_source_id')->index();
             $table->string('import_unique_id')->unique()->index();
-            $table->string('import_data_hash');
+            $table->string('import_data_hash')->index();
 
-            $table->string('event_status');
-            $table->string('event_category');
+            $table->string('event_status')->index();
+            $table->string('event_category')->index();
             $table->string('url')->nullable();
             $table->datetimes();
             $table->softDeletesDatetime();
