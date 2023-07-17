@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Domains\Events\Actions\CreateImportDataHashAction;
+use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,13 +25,12 @@ use Illuminate\Support\Collection;
  * @property string $address
  * @property Carbon $starts_at
  * @property Carbon $ends_at
- * @property string $gallery
  * @property string $url
- * @property string $event_status
+ * @property EnumEventStatus $event_status
  * @property integer $event_source_id
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
  * @property string $import_data_hash // If the hash changes, something in the event info has been updated
- * @property string $event_category
+ * @property EnumEventCategories $event_category
  * @property EventSource $event_source
  * @property Collection $users
  * @property Carbon $created_at
@@ -83,10 +84,5 @@ class Event extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withTimestamps();
-    }
-
-    public function createImportDataHash(): string
-    {
-        return md5($this->name . $this->description . $this->starts_at . $this->address);
     }
 }

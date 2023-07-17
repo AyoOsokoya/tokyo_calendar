@@ -1,13 +1,11 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Console\Commands;
 
-use App\Enums\EnumEventCategories;
-use App\Enums\EnumEventStatus;
-use App\Models\Event;
+use App\Domains\Events\Actions\ImportEventWithoutDuplicating;
 use App\Models\EventSource;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +17,7 @@ class ImportEvents extends Command
      * @var string
      */
     protected $signature = 'app:import-events';
-    // protected $signature = 'app:import-events {event_source} {events_json_file}';
+    // protected $signature = 'app:import-events {import_date} {event_source} {events_json_file}';
 
     /**
      * The console command description.
@@ -51,38 +49,7 @@ class ImportEvents extends Command
     public function import_events(Collection $events_data, EventSource $event_source): void
     {
         $events_data->each(function ($event_data) use ($event_source) {
-            /** @var Event $import_event */
-            $import_event = Event::make([
-                'name' => $event_data['name'],
-                'description' => $event_data['description'],
-                'starts_at' => Carbon::parse($event_data['starts_at']),
-                'ends_at' => Carbon::parse($event_data['ends_at']),
-                'import_unique_id' => $event_data['unique_identifier'],
-                'event_source_id' => $event_source->id,
-                'event_category' => EnumEventCategories::MUSIC,
-                'event_status' => EnumEventStatus::ACTIVE,
-                'url' => $event_data['url'],
-            ]);
-
-            $event_already_exists = Event::where('import_unique_id', $import_event->import_unique_id)->first();
-            if ($event_already_exists) {
-                if ($import_event->createImportDataHash() === $event_already_exists->createImportDataHash()) {
-                    // echo "Event hash matches \n";
-                    return;
-                }
-                else {
-                    // update event
-                    echo "Updated\n";
-                    $import_event->id = $event_already_exists->id;
-                    $import_event->import_data_hash = $import_event->createImportDataHash();
-                    $import_event->update();
-                    return;
-                }
-            }
-            // Create new event
-            $import_event->refresh();
-            $import_event->import_data_hash = $import_event->createImportDataHash();
-            $import_event->save();
+            ImportEventWithoutDuplicating::make($event_data, $event_source)->execute();
         });
     }
 }
