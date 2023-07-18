@@ -14,8 +14,9 @@ class ImportEventWithoutDuplicating
     private Event $import_event;
     private EventSource $event_source;
 
-    private function __construct($import_event_data, EventSource $event_source)
+    private function __construct(array $import_event_data, EventSource $event_source)
     {
+        // TODO: Don't import past events
         $this->event_source = $event_source;
         $this->import_event = Event::make([
             'name' => $import_event_data['name'],
@@ -35,7 +36,7 @@ class ImportEventWithoutDuplicating
         return new ImportEventWithoutDuplicating($import_event_data, $event_source);
     }
 
-    public function execute(): void
+    public function execute(): Event
     {
         $import_event_data_hash
             = CreateImportDataHashAction::make($this->import_event)->execute();
@@ -44,22 +45,25 @@ class ImportEventWithoutDuplicating
 
         if ($existing_event_in_database) {
             if ($import_event_data_hash === $existing_event_in_database->import_data_hash) {
-                return;
+                return $existing_event_in_database;
             } else {
                 $this->import_event->id = $existing_event_in_database->id;
                 $this->import_event->import_data_hash = $import_event_data_hash;
                 $this->import_event->update();
-                return;
+                $this->import_event->refresh();
+                return $this->import_event;
             }
         }
-        $this->createNewEvent();
+        return $this->createNewEvent();
     }
 
-    private function createNewEvent(): void
+    private function createNewEvent(): Event
     {
         $this->import_event->refresh();
         $this->import_event->import_data_hash
             = CreateImportDataHashAction::make($this->import_event)->execute();
         $this->import_event->save();
+        $this->import_event->refresh();
+        return $this->import_event;
     }
 }
