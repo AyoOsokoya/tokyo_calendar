@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
@@ -7,11 +7,9 @@ use App\Enums\EnumApiResponseFormat;
 use App\Enums\EnumEventUserAttendanceStatus;
 use App\Models\Event;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
 
 class EventController extends BaseController
 {

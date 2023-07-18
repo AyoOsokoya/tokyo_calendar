@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class EventSourceFactory extends Factory
 {
+    protected $model = EventSource::class;
+
     /**
      * Define the model's default state.
      *

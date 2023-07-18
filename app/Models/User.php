@@ -1,12 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Domains\Users\Models;
+namespace App\Models;
 
-use App\Domains\Events\Models\Event;
 use App\Enums\EnumEventUserAttendanceStatus;
 use App\Enums\EnumUserType;
-use App\Models\EventUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
