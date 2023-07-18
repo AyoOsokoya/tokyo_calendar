@@ -5,7 +5,7 @@ namespace App\Domains\Events\Actions;
 
 use App\Models\Event;
 
-class CreateImportDataHashAction
+class EventActionCreateImportDataHash
 {
     private Event $event;
 
@@ -14,9 +14,9 @@ class CreateImportDataHashAction
         $this->event = $event;
     }
 
-    public static function make(Event $event): CreateImportDataHashAction
+    public static function make(Event $event): EventActionCreateImportDataHash
     {
-        return new CreateImportDataHashAction($event);
+        return new EventActionCreateImportDataHash($event);
     }
 
     public function execute(): string

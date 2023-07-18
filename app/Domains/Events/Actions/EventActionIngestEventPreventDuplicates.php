@@ -9,14 +9,15 @@ use App\Models\Event;
 use App\Models\EventSource;
 use Illuminate\Support\Carbon;
 
-class ImportEventWithoutDuplicating
+class EventActionIngestEventPreventDuplicates
 {
     private Event $import_event;
     private EventSource $event_source;
 
     private function __construct(array $import_event_data, EventSource $event_source)
     {
-        // TODO: Don't import past events
+        // TODO: Don't import or evaluate past events
+        // TODO: Use a validator https://laravel.com/docs/10.x/validation#manually-creating-validators
         $this->event_source = $event_source;
         $this->import_event = Event::make([
             'name' => $import_event_data['name'],
@@ -28,18 +29,19 @@ class ImportEventWithoutDuplicating
             'event_category' => EnumEventCategories::MUSIC,
             'event_status' => EnumEventStatus::ACTIVE,
             'url' => $import_event_data['url'],
+            'url_image' => $import_event_data['image_url'],
         ]);
     }
 
-    public static function make(array $import_event_data, EventSource $event_source): ImportEventWithoutDuplicating
+    public static function make(array $import_event_data, EventSource $event_source): EventActionIngestEventPreventDuplicates
     {
-        return new ImportEventWithoutDuplicating($import_event_data, $event_source);
+        return new EventActionIngestEventPreventDuplicates($import_event_data, $event_source);
     }
 
     public function execute(): Event
     {
         $import_event_data_hash
-            = CreateImportDataHashAction::make($this->import_event)->execute();
+            = EventActionCreateImportDataHash::make($this->import_event)->execute();
         $existing_event_in_database
             = Event::where('import_unique_id', $this->import_event->import_unique_id)->first();
 
@@ -61,7 +63,7 @@ class ImportEventWithoutDuplicating
     {
         $this->import_event->refresh();
         $this->import_event->import_data_hash
-            = CreateImportDataHashAction::make($this->import_event)->execute();
+            = EventActionCreateImportDataHash::make($this->import_event)->execute();
         $this->import_event->save();
         $this->import_event->refresh();
         return $this->import_event;

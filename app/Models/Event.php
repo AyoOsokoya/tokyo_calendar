@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Domains\Events\Actions\CreateImportDataHashAction;
+use App\Domains\Events\Actions\EventActionCreateImportDataHash;
 use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +26,7 @@ use Illuminate\Support\Collection;
  * @property Carbon $starts_at
  * @property Carbon $ends_at
  * @property string $url
+ * @property string $url_image
  * @property EnumEventStatus $event_status
  * @property integer $event_source_id
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
@@ -57,6 +58,7 @@ class Event extends Model
         'starts_at',
         'ends_at',
         'url',
+        'url_image',
         'event_status',
         'event_source_id',
         'import_unique_id',

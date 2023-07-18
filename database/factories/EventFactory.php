@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
+use App\Domains\Events\Actions\EventActionCreateImportDataHash;
 use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
 use App\Enums\EnumEventUserAttendanceStatus;
@@ -39,6 +40,8 @@ class EventFactory extends Factory
             'ends_at' => $eventStart->addHours(rand(1, 7)),
             'event_status' => EnumEventStatus::ACTIVE,
             'event_category' => collect(EnumEventCategories::cases())->random(),
+            'url' => $url,
+            'url_image' => fake()->imageUrl(),
             'event_source_id' => NULL,
             'import_unique_id' => md5($url . $eventStart->toString()),
             'import_data_hash' => ''
@@ -56,7 +59,7 @@ class EventFactory extends Factory
                 $event_source = EventSource::factory()->create();
             }
 
-            $event->import_data_hash = $event->createImportDataHash();
+            $event->import_data_hash = EventActionCreateImportDataHash::make($event)->execute();
             $event->event_source_id = $event_source->id;
             $event->save();
         });
