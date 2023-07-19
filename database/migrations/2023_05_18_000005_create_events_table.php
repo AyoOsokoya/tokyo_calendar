@@ -32,6 +32,7 @@ return new class extends Migration {
             $table->string('event_status')->index();
             $table->string('event_category')->index();
             $table->string('url')->nullable();
+            $table->string('url_image')->nullable();
             $table->datetimes();
             $table->softDeletesDatetime();
         });
