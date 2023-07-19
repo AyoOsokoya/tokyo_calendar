@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domains\Events\Actions;
+namespace Tests\Unit\Domains\Events\Actions;
 
-use App\Domains\Events\Actions\ImportEventWithoutDuplicating;
+use App\Domains\Events\Actions\EventActionIngestEventPreventDuplicates;
 use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
 use App\Models\Event;
@@ -12,7 +12,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\TestCase;
 
-class ImportEventWithoutDuplicatingTest extends TestCase
+// EventActionIngestEventPreventDuplicatesTest
+class EventActionIngestEventPreventDuplicatesTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -25,13 +26,18 @@ class ImportEventWithoutDuplicatingTest extends TestCase
         $this->event_data = [
             'name' => 'Test Event',
             'description' => 'Loreum Ipsum dolor sit amet',
+            'longitude' => null,
+            'latitude' => null,
+            'address' => '',
             'starts_at' => Carbon::now(),
             'ends_at' => Carbon::now()->addHours(3),
-            'import_unique_id' => 'https://www.events.com/event/123@#1234567',
-            'event_source_id' => $this->event_source->id,
-            'event_category' => EnumEventCategories::ART,
             'event_status' => EnumEventStatus::ACTIVE,
-            'url' => 'https://www.events.com/event/123'
+            'event_category' => EnumEventCategories::ART,
+            'url' => 'https://www.events.com/event/123',
+            'url_image' => 'https://images.events.com/event/123.jpg',
+            'event_source_id' => $this->event_source->id,
+            'import_unique_id' => 'https://www.events.com/event/123@#1234567',
+            'import_data_hash' => ''
         ];
     }
 
@@ -44,7 +50,7 @@ class ImportEventWithoutDuplicatingTest extends TestCase
             "Events count should be 0 for an empty database"
         );
 
-        ImportEventWithoutDuplicating::make(
+        EventActionIngestEventPreventDuplicates::make(
             $this->event_data,
             $this->event_source,
         )->execute();
@@ -61,12 +67,12 @@ class ImportEventWithoutDuplicatingTest extends TestCase
     {
         $duplicate_event_data = $this->event_data;
 
-        ImportEventWithoutDuplicating::make(
+        EventActionIngestEventPreventDuplicates::make(
             $this->event_data,
             $this->event_source,
         )->execute();
 
-        ImportEventWithoutDuplicating::make(
+        EventActionIngestEventPreventDuplicates::make(
             $duplicate_event_data,
             $this->event_source,
         )->execute();
@@ -85,7 +91,7 @@ class ImportEventWithoutDuplicatingTest extends TestCase
         $update_event_name = 'Updated name for event';
         $updated_event_data['name'] = $update_event_name;
 
-        $updated_event = ImportEventWithoutDuplicating::make(
+        $updated_event = EventActionIngestEventPreventDuplicates::make(
             $updated_event_data,
             $this->event_source,
         )->execute();
