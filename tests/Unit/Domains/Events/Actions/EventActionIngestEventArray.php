@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Tests\Unit\Domains\Events\Actions;
 
-use App\Domains\Events\Actions\EventActionIngestEventPreventDuplicates;
+use App\Domains\Events\Actions\EventActionIngestEventArrayData;
 use App\Enums\EnumEventCategories;
 use App\Enums\EnumEventStatus;
 use App\Models\Event;
@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 use PHPUnit\Framework\TestCase;
 
 // EventActionIngestEventPreventDuplicatesTest
-class EventActionIngestEventPreventDuplicatesTest extends TestCase
+class EventActionIngestEventArray extends TestCase
 {
     use RefreshDatabase;
 
@@ -50,7 +50,7 @@ class EventActionIngestEventPreventDuplicatesTest extends TestCase
             "Events count should be 0 for an empty database"
         );
 
-        EventActionIngestEventPreventDuplicates::make(
+        EventActionIngestEventArrayData::make(
             $this->event_data,
             $this->event_source,
         )->execute();
@@ -67,12 +67,12 @@ class EventActionIngestEventPreventDuplicatesTest extends TestCase
     {
         $duplicate_event_data = $this->event_data;
 
-        EventActionIngestEventPreventDuplicates::make(
+        EventActionIngestEventArrayData::make(
             $this->event_data,
             $this->event_source,
         )->execute();
 
-        EventActionIngestEventPreventDuplicates::make(
+        EventActionIngestEventArrayData::make(
             $duplicate_event_data,
             $this->event_source,
         )->execute();
@@ -91,7 +91,7 @@ class EventActionIngestEventPreventDuplicatesTest extends TestCase
         $update_event_name = 'Updated name for event';
         $updated_event_data['name'] = $update_event_name;
 
-        $updated_event = EventActionIngestEventPreventDuplicates::make(
+        $updated_event = EventActionIngestEventArrayData::make(
             $updated_event_data,
             $this->event_source,
         )->execute();

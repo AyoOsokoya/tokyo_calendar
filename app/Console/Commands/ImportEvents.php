@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Console\Commands;
 
-use App\Domains\Events\Actions\EventActionIngestEventPreventDuplicates;
+use App\Domains\Events\Actions\EventActionIngestEventArrayData;
 use App\Models\EventSource;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -49,7 +49,7 @@ class ImportEvents extends Command
     public function import_events(Collection $events_data, EventSource $event_source): void
     {
         $events_data->each(function ($event_data) use ($event_source) {
-            EventActionIngestEventPreventDuplicates::make($event_data, $event_source)->execute();
+            EventActionIngestEventArrayData::make($event_data, $event_source)->execute();
         });
     }
 }

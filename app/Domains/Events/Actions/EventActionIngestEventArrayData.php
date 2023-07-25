@@ -9,14 +9,14 @@ use App\Models\Event;
 use App\Models\EventSource;
 use Illuminate\Support\Carbon;
 
-class EventActionIngestEventPreventDuplicates
+class EventActionIngestEventArrayData
 {
     private Event $import_event;
     private EventSource $event_source;
 
     private function __construct(array $import_event_data, EventSource $event_source)
     {
-        // TODO: Don't import or evaluate past events
+        // TODO: Don't import or evaluate past events ?
         // TODO: Use a validator https://laravel.com/docs/10.x/validation#manually-creating-validators
         $this->event_source = $event_source;
         $this->import_event = Event::make([
@@ -33,22 +33,26 @@ class EventActionIngestEventPreventDuplicates
         ]);
     }
 
-    public static function make(array $import_event_data, EventSource $event_source): EventActionIngestEventPreventDuplicates
+    public static function make(array $import_event_data, EventSource $event_source): EventActionIngestEventArrayData
     {
-        return new EventActionIngestEventPreventDuplicates($import_event_data, $event_source);
+        return new EventActionIngestEventArrayData($import_event_data, $event_source);
     }
 
     public function execute(): Event
     {
+        // TODO: Could be EventActionFindIfAlreadyImported($this->import_event) : Event|null
         $import_event_data_hash
             = EventActionCreateImportDataHash::make($this->import_event)->execute();
         $existing_event_in_database
             = Event::where('import_unique_id', $this->import_event->import_unique_id)->first();
 
+        // TODO: EventActionSaveOrUpdateEvent(Event $existing_event, Event $new_event): void
         if ($existing_event_in_database) {
             if ($import_event_data_hash === $existing_event_in_database->import_data_hash) {
+                // Event exists and the remote data is the same
                 return $existing_event_in_database;
             } else {
+                // Event exists but the imported data is different (updated)
                 $this->import_event->id = $existing_event_in_database->id;
                 $this->import_event->import_data_hash = $import_event_data_hash;
                 $this->import_event->update();
