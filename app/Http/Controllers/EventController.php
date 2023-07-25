@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Carbon;
 
 class EventController extends BaseController
 {
@@ -32,7 +33,8 @@ class EventController extends BaseController
     public function allEvents(
         ?EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
     ) : JsonResponse|Response {
-        $events = Event::with('source')
+        $events = Event::with('event_source')
+            ->whereDate('starts_at', '>=', Carbon::now())
             ->orderBy('starts_at')
             ->get();
 
