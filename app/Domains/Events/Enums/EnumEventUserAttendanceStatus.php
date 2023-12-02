@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Enums;
+namespace App\Domains\Events\Enums;
 
 enum EnumEventUserAttendanceStatus: string
 {

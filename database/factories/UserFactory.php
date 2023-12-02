@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Enums\EnumUserType;
+use App\Domains\Users\Enums\EnumUserType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'name_middle' => fake()->firstName(),
             'name_handle' => fake()->userName(),
             'date_of_birth' => Carbon::now()->subYears(rand(12, 80)),
-            'user_type' => EnumUserType::NORMAL,
+            'user_type' => EnumUserType::guest,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Str::random(32),

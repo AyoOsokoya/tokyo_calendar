@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Domains\Events\Actions;
 
-use App\Enums\EnumEventCategories;
-use App\Enums\EnumEventStatus;
+use App\Domains\Events\Enums\EnumEventCategories;
+use App\Domains\Events\Enums\EnumEventStatus;
 use App\Models\Event;
 use App\Models\EventSource;
 use Illuminate\Support\Carbon;

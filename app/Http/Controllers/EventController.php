@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Enums\EnumApiResponseFormat;
-use App\Enums\EnumEventUserAttendanceStatus;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -34,6 +34,7 @@ class EventController extends BaseController
         ?EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
     ) : JsonResponse|Response {
         $events = Event::with('event_source')
+            // ->where('event_source_id', '!=', '2')
             ->whereDate('starts_at', '>=', Carbon::now())
             ->orderBy('starts_at')
             ->get();

@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Enums\EnumEventSourceDataType;
+use App\Domains\Events\Enums\EnumEventSourceDataType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;

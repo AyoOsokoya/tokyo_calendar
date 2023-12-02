@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Enums\EnumEventSourceDataType;
+use App\Domains\Events\Enums\EnumEventSourceDataType;
 use App\Models\EventSource;
 use Illuminate\Database\Seeder;
 

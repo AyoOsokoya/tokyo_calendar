@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\EnumEventUserAttendanceStatus;
+use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Database\Seeder;

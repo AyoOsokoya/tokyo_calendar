@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Tests\Unit\Domains\Events\Actions;
 
 use App\Domains\Events\Actions\EventActionIngestEventArrayData;
-use App\Enums\EnumEventCategories;
-use App\Enums\EnumEventStatus;
+use App\Domains\Events\Enums\EnumEventCategories;
+use App\Domains\Events\Enums\EnumEventStatus;
 use App\Models\Event;
 use App\Models\EventSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;

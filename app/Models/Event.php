@@ -3,9 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Domains\Events\Actions\EventActionCreateImportDataHash;
-use App\Enums\EnumEventCategories;
-use App\Enums\EnumEventStatus;
+use App\Domains\Events\Enums\EnumEventCategories;
+use App\Domains\Events\Enums\EnumEventStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
