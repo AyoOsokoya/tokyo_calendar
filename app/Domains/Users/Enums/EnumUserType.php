@@ -5,6 +5,8 @@ namespace App\Domains\Users\Enums;
 
 enum EnumUserType: string
 {
-    case CREATOR = 'creator';
-    case GUEST = 'guest';
+    case ADMIN = 'admin';
+    case CREATOR = 'creator'; // creates large scale paid events
+    case STANDARD = 'standard';
+    case STAFF = 'staff';
 }

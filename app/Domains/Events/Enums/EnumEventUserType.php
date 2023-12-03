@@ -5,7 +5,6 @@ namespace App\Domains\Events\Enums;
 
 enum EnumEventUserType: string
 {
-    case ATTENDEE = 'attendee';
     case CREATOR = 'creator';
-
+    case GUEST = 'guest';
 }
