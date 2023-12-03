@@ -72,6 +72,7 @@ class GetEventImage extends Command
     {
         // Bluenote gives invalid certificate error and also prevents hotlinking to images
         // It will return a 403. It might be better to get images using Scrapy
+        // file_get_contents($url) will simply crash out
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
