@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
+use App\Domains\Events\Models\Event;
 use App\Enums\EnumApiResponseFormat;
-use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;

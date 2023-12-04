@@ -27,13 +27,13 @@ Route::prefix('/v1')
         [EventController::class, 'userEventsByAttendanceStatus']
     );
 
-    // Route::get('/user/events/now/', [EventController::class, '']);
-    // Route::get('/user/events/recommended/', [EventController::class, '']);
-    // Route::get('/user/events/weekend/', [EventController::class, '']);
-    // Route::get('/user/events/history/', [EventController::class, '']);
-    // Route::get('/user/events/soon/', [EventController::class, '']);
-    // Route::get('/user/events/interest/soon/', [EventController::class, '']);
-    // Route::get('/user/events/curious/', [EventController::class, '']);
+    // /user/events/now
+    // /user/events/recommended
+    // /user/events/weekend
+    // /user/events/history
+    // /user/events/soon
+    // /user/events/interest/soon
+    // /user/events/curious/
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

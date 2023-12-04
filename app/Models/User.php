@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
+use App\Domains\Events\Models\Event;
+use App\Domains\Events\Models\EventUser;
 use App\Domains\Users\Enums\EnumUserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

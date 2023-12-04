@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Database\Factories;
 
 use App\Domains\Events\Enums\EnumEventSourceDataType;
-use App\Models\EventSource;
+use App\Domains\Events\Models\EventSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

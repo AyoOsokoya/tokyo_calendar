@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Models;
+namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventSourceDataType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

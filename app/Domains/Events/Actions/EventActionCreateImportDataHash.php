@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Domains\Events\Actions;
 
-use App\Models\Event;
+use App\Domains\Events\Models\Event;
 
 class EventActionCreateImportDataHash
 {

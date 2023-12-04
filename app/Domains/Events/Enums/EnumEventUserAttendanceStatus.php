@@ -5,7 +5,8 @@ namespace App\Domains\Events\Enums;
 
 enum EnumEventUserAttendanceStatus: string
 {
-    case GOING = 'going'; // Definitely
+    case INVITED = 'invited';
+    case GOING = 'going';
     case MAYBE = 'maybe'; // just wanna be notified
     case NOT_INTERESTED = 'not_interested'; // Already got plans or just don't wanna go
     // Spatie iCal has a list of 5 https://github.com/spatie/icalendar-generator probably a good idea to use

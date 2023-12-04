@@ -1,9 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Models;
+namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property integer $user_id
  * @property User $user
  * @property integer $event_id
+ * @property integer $inviter_id
  * @property Event $event
  * @property EnumEventUserAttendanceStatus $user_event_attendance_status
  * @property Carbon $starts_at // for long-running events, the attendance can be set separately from the event start/end
@@ -36,6 +38,7 @@ class EventUser extends Model
     protected $fillable = [
         'user_id',
         'event_id',
+        'inviter_id',
         'date_attend',
         'user_event_attendance_status',
     ];

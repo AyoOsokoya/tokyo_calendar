@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
-use App\Models\Event;
+use App\Domains\Events\Models\Event;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;

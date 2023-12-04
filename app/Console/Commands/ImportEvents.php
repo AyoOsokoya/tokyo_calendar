@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace App\Console\Commands;
 
 use App\Domains\Events\Actions\EventActionIngestEventArrayData;
-use App\Models\EventSource;
+use App\Domains\Events\Models\EventSource;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;

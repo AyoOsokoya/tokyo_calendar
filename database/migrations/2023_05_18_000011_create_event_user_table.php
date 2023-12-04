@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-use App\Models\EventUser;
+use App\Domains\Events\Models\EventUser;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

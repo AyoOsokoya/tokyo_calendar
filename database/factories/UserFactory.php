@@ -47,4 +47,11 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function userType(EnumUserType $user_type): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_type' => $user_type,
+        ]);
+    }
 }

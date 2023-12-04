@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Event;
+use App\Domains\Events\Models\Event;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use SplFileInfo;
 
 class GetEventImage extends Command
 {

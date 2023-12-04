@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-use App\Models\EventSource;
+use App\Domains\Events\Models\EventSource;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

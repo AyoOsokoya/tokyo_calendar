@@ -3,9 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Providers;
 
+use App\Domains\Events\Models\Event;
 use App\Enums\EnumApiResponseFormat;
 use App\Http\Resources\EventResource;
-use App\Models\Event;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;

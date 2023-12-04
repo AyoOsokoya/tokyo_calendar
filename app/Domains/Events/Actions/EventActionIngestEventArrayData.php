@@ -5,8 +5,8 @@ namespace App\Domains\Events\Actions;
 
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
-use App\Models\Event;
-use App\Models\EventSource;
+use App\Domains\Events\Models\Event;
+use App\Domains\Events\Models\EventSource;
 use Illuminate\Support\Carbon;
 
 class EventActionIngestEventArrayData
