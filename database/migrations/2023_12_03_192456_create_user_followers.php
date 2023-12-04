@@ -6,16 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    private string $table_name;
+
+    public function __construct()
+    {
+        $this->table_name = 'user_followers';
+    }
     public function up(): void
     {
-        Schema::create('user_followers', function (Blueprint $table) {
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('follower_id')->index();
+            $table->string('follow_status')->index(); // request / accepted / blocked
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('user_followers');
+        Schema::dropIfExists($this->table_name);
     }
 };
