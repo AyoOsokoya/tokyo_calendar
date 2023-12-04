@@ -7,12 +7,16 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+    private string $table_name;
+
+    public function __construct()
+    {
+        $this->table_name = app(Event::class)->getTable();
+    }
+
     public function up(): void
     {
-        Schema::create(app(Event::class)->getTable(), function (Blueprint $table) { // change to use class table_name
+        Schema::create($this->table_name, function (Blueprint $table) { // change to use class table_name
             $table->id();
             // Descriptors
             $table->text('name'); // some names are  very long
@@ -38,11 +42,8 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists(app(Event::class)->getTable());
+        Schema::dropIfExists($this->table_name);
     }
 };

@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+    private string $table_name;
+
+    public function __construct()
+    {
+        $this->table_name = app(User::class)->getTable();
+    }
+
     public function up(): void
     {
-        Schema::create(app(User::class)->getTable(), function (Blueprint $table) {
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
             $table->string('name_first');
             $table->string('name_last')->nullable();
@@ -30,11 +34,8 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists(app(User::class)->getTable());
+        Schema::dropIfExists($this->table_name);
     }
 };

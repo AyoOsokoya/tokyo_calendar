@@ -7,16 +7,20 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+
+    private string $table_name;
+
+    public function __construct()
+    {
+        $this->table_name = app(EventUser::class)->getTable();
+    }
     public function up(): void
     {
-        Schema::create(app(EventUser::class)->getTable(), function (Blueprint $table) {
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->primary(['user_id', 'event_id']);
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('event_id')->index();
-            $table->unsignedInteger('event_id')->index();
+            $table->unsignedInteger('inviter_id')->index()->nullable();
             $table->string('relation_type')->index();
             $table->dateTime('starts_at')->index()->nullable();
             $table->dateTime('ends_at')->index()->nullable();
@@ -26,11 +30,8 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists(app(EventUser::class)->getTable());
+        Schema::dropIfExists($this->table_name);
     }
 };
