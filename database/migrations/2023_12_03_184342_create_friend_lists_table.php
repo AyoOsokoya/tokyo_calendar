@@ -1,6 +1,7 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
+use App\Domains\Users\Models\UserFriendList;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,7 +11,7 @@ return new class extends Migration {
 
     public function __construct()
     {
-        $this->table_name = 'friend_lists';
+        $this->table_name = app(UserFriendList::class)->getTable();
     }
 
     public function up(): void

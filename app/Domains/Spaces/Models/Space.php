@@ -22,11 +22,11 @@ use Illuminate\Support\Collection;
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
  */
-class Spaces extends Model
+class Space extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'events';
+    protected $table = 'spaces';
 
     /**
      * The attributes that are mass assignable.

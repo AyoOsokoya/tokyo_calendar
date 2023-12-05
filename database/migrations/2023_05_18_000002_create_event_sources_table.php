@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use App\Domains\Events\Models\EventSource;
 use Illuminate\Database\Migrations\Migration;

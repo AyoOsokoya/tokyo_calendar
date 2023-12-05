@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use App\Domains\Events\Models\EventUser;
 use Illuminate\Database\Migrations\Migration;
@@ -14,6 +14,7 @@ return new class extends Migration {
     {
         $this->table_name = app(EventUser::class)->getTable();
     }
+
     public function up(): void
     {
         Schema::create($this->table_name, function (Blueprint $table) {

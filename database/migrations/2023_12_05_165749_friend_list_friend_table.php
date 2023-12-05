@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Domains\Users\Models\UserFriend;
+use App\Domains\Users\Models\FriendListUser;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +11,15 @@ return new class extends Migration {
 
     public function __construct()
     {
-        $this->table_name = app(UserFriend::class)->getTable();
+        $this->table_name = app(FriendListUser::class)->getTable();
     }
 
     public function up(): void
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->index();
-            $table->integer('friend_id')->index();
-            $table->string('user_friend_status')->index();
+            $table->unsignedBigInteger('friend_list_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
             $table->datetimes();
             $table->softDeletesDatetime();
         });
