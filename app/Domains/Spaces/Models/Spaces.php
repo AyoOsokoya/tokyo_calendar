@@ -22,7 +22,7 @@ use Illuminate\Support\Collection;
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
  */
-class Event extends Model
+class Spaces extends Model
 {
     use HasFactory, SoftDeletes;
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Domains\Spaces\Models\Spaces;
 
 // TODO: Figure out how to store addresses in the database.
 /*
@@ -17,7 +18,7 @@ return new class extends Migration {
 
     public function __construct()
     {
-        $this->table_name = 'spaces';
+        $this->table_name = app(Spaces::class)->getTable();
     }
     // Address format from
     // https://softwareengineering.stackexchange.com/questions/357900/whats-a-universal-way-to-store-a-geographical-address-location-in-a-database
