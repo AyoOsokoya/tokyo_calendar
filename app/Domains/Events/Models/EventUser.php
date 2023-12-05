@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
-use App\Models\User;
+use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

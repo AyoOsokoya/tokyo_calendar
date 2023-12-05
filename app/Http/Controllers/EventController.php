@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
+use App\Domains\Users\Models\User;
 use App\Enums\EnumApiResponseFormat;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;

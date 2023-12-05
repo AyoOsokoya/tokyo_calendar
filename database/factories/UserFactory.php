@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Database\Factories;
 
 use App\Domains\Users\Enums\EnumUserType;
-use App\Models\User;
+use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;

@@ -9,7 +9,7 @@ use App\Domains\Events\Enums\EnumEventStatus;
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventSource;
-use App\Models\User;
+use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 

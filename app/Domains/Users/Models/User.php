@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Models;
+namespace App\Domains\Users\Models;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
