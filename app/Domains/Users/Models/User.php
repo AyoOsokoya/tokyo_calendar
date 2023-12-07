@@ -85,6 +85,67 @@ class User extends Authenticatable
              ->withTimestamps();
     }
 
+    public function friends(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_friends',
+            'user_id',
+            'friend_id'
+            )->withPivot([
+                'user_id',
+                'friend_id',
+                'user_friend_status'
+            ])
+            ->withTimestamps();
+    }
+
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_followers',
+            'follower_id',
+            'user_id'
+            )->withPivot([
+                'user_id',
+                'friend_id',
+                'follow_status'
+            ])
+            ->withTimestamps();
+    }
+
+    public function spaces(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_spaces',
+            'user_id',
+            'space_id'
+            )->withPivot([
+                'user_id',
+                'space_id',
+                'user_space_status'
+            ])
+            ->withTimestamps();
+    }
+
+    public function lists(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_lists',
+            'user_id',
+            'list_id'
+            )->withPivot([
+                'user_id',
+                'list_id',
+                'user_list_status'
+            ])
+            ->withTimestamps();
+    }
+
+    // TODO: Move to action
     public function attendEvent(Event $event, Carbon $starts_at, Carbon $ends_at, EnumEventUserAttendanceStatus $status)
     {
         // For now, just attend the event for 3 hours we need a more complicated event schedule model
