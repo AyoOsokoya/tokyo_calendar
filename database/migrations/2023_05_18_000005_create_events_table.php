@@ -16,7 +16,7 @@ return new class extends Migration {
 
     public function up(): void
     {
-        Schema::create($this->table_name, function (Blueprint $table) { // change to use class table_name
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
             // Descriptors
             $table->text('name'); // some names are  very long

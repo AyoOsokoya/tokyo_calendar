@@ -21,9 +21,9 @@ return new class extends Migration {
     {
         $this->table_name = app(Space::class)->getTable();
     }
+
     // Address format from
     // https://softwareengineering.stackexchange.com/questions/357900/whats-a-universal-way-to-store-a-geographical-address-location-in-a-database
-
     // https://github.com/google/libaddressinput consider this for validating addresses
 
     public function up(): void
@@ -52,7 +52,6 @@ return new class extends Migration {
             $table->datetimes();
             $table->softDeletesDatetime();
         });
-
     }
 
     public function down(): void

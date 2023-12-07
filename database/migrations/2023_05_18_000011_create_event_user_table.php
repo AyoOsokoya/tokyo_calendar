@@ -18,6 +18,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create($this->table_name, function (Blueprint $table) {
+            $table->id();
             $table->primary(['user_id', 'event_id']);
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('event_id')->index();
