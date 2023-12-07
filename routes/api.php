@@ -44,9 +44,11 @@ Route::prefix('/v1')->group(function () {
             // /view/{list_id}
             // /delete/{list_id}
             // /list/share_event/{list_id}/{event_id}
+
+            // join list
+            // unjoin list
         });
         Route::get('lists', function () {
-            return response()->json(['message' => 'Hello World!']);
         });
     });
 
@@ -55,7 +57,10 @@ Route::prefix('/v1')->group(function () {
         // /update/{space_id}
         // /view/{space_id}
         // /delete/{space_id}
-        // /user/remove/{space_id}
+
+        // public spaces (user can follow and unfollow)
+        // Private Spaces (listed but requires an invite)
+        // Hidden Spaces (unlisted but requires an invite)
     });
 
     Route::prefix('/event')->group(function () {
@@ -66,7 +71,6 @@ Route::prefix('/v1')->group(function () {
     });
 
     Route::get('/events', function () {
-        return response()->json(['message' => 'Hello World!']);
         // now, recommended, weekend, history, soon, interest, curious
         // by category etc
         // search
@@ -82,6 +86,7 @@ Route::prefix('/v1')->group(function () {
         // /user/invite/{community_id}
         // /user/remove/{community_id}
     });
+
     Route::get('/communities', function () {
         return response()->json(['message' => 'Hello World!']);
     });
