@@ -1,12 +1,14 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Domains\Users\Models;
 
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventUser;
+use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserType;
+use App\Domains\Users\Models\UserRelationshipToUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -82,36 +84,45 @@ class User extends Authenticatable
                 'ends_at',
                 'user_event_attendance_status'
             ])
-             ->withTimestamps();
+            ->withTimestamps();
     }
 
     public function friends(): BelongsToMany
     {
+        $table_name = app(UserRelationshipToUser::class);
+
         return $this->belongsToMany(
             User::class,
-            'user_friends',
+            $table_name,
             'user_id',
-            'friend_id'
-            )->withPivot([
-                'user_id',
-                'friend_id',
-                'user_friend_status'
-            ])
-            ->withTimestamps();
+            'relation_id'
+        )->wherePivot(
+            'relationship_status',
+            EnumUserRelationshipStatus::MUTUAL_FOLLOW
+        )->withPivot([
+            'user_id',
+            'relation_id',
+            'relationship_status'
+        ])->withTimestamps();
     }
 
     public function followers(): BelongsToMany
     {
+        $table_name = app(UserRelationshipToUser::class);
+
         return $this->belongsToMany(
             User::class,
-            'user_followers',
-            'follower_id',
-            'user_id'
-            )->withPivot([
-                'user_id',
-                'friend_id',
-                'follow_status'
-            ])
+            $table_name,
+            'user_id',
+            'relation_id'
+        )->wherePivot(
+            'relationship_status',
+            EnumUserRelationshipStatus::FOLLOW
+        )->withPivot([
+            'user_id',
+            'relation_id',
+            'relationship_status'
+        ])
             ->withTimestamps();
     }
 
@@ -122,11 +133,11 @@ class User extends Authenticatable
             'user_spaces',
             'user_id',
             'space_id'
-            )->withPivot([
-                'user_id',
-                'space_id',
-                'user_space_status'
-            ])
+        )->withPivot([
+            'user_id',
+            'space_id',
+            'user_space_status'
+        ])
             ->withTimestamps();
     }
 
@@ -137,11 +148,11 @@ class User extends Authenticatable
             'user_lists',
             'user_id',
             'list_id'
-            )->withPivot([
-                'user_id',
-                'list_id',
-                'user_list_status'
-            ])
+        )->withPivot([
+            'user_id',
+            'list_id',
+            'user_list_status'
+        ])
             ->withTimestamps();
     }
 
