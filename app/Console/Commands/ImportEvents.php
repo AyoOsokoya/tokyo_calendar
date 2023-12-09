@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Console\Commands;
 
-use App\Domains\Events\Actions\EventActionIngestEventArrayData;
 use App\Domains\Events\Models\EventSource;
+use App\Domains\Import\Actions\EventActionIngestEventArrayData;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;

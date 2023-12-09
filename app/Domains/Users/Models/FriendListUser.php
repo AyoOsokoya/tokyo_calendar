@@ -8,5 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class FriendListUser extends Model
 {
     use HasFactory;
-    protected $table = 'friend_list_users';
 }
