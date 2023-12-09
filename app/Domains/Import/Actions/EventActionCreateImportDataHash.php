@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Domains\Events\Actions;
+namespace App\Domains\Import\Actions;
 
 use App\Domains\Events\Models\Event;
 
