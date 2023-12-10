@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Users\Enums;
 
-enum EnumUserSpaceRelationshipType: string
+enum EnumUserSpaceRoleType: string
 {
     case OWNER = 'owner'; // admin of the space
     case ADMIN = 'admin'; // can edit the space & space events
