@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Events\Actions;
 
-// TODO: Implement
 use App\Domains\Events\Models\Event;
 
 class EventActionCreate
@@ -15,12 +14,12 @@ class EventActionCreate
         $this->event_data = $event_data;
     }
 
-    public static function make(array $event_data)
+    public static function make(array $event_data): EventActionCreate
     {
         return new EventActionCreate($event_data);
     }
 
-    public function execute()
+    public function execute(): void
     {
         Event::create($this->event_data);
     }
