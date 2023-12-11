@@ -17,7 +17,15 @@ return new class extends Migration
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('country'); // iso 3166-1 alpha-3
+            $table->string('city');
+            $table->string('street_address');
+            $table->string('post_code');
+            $table->string('state_province');
+            $table->string('other');
+            
+            $table->datetimes();
+            $table->softDeletesDatetime();
         });
     }
 
