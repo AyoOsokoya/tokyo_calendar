@@ -6,7 +6,9 @@ namespace App\Domains\Users\Models;
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventUser;
+use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
+use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserType;
 use App\Domains\Users\Models\UserRelationshipToUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -152,8 +154,37 @@ class User extends Authenticatable
             'user_id',
             'list_id',
             'user_list_status'
-        ])
-            ->withTimestamps();
+        ])->withTimestamps();
+    }
+
+    public function isSpaceAdmin(Space $space): bool
+    {
+        return $this->spaces()
+            ->wherePivot(
+                'user_space_role_type',
+                EnumUserSpaceRoleType::ADMIN
+            )->wherePivot(
+                'space_id', $space->id
+            )->exists();
+    }
+
+    public function isSpaceStaff(Space $space): bool
+    {
+        return $this->spaces()
+            ->wherePivot(
+                'user_space_role_type',
+                EnumUserSpaceRoleType::STAFF
+            )->wherePivot(
+                'space_id', $space->id
+            )->exists();
+    }
+
+    public function isConnectedToSpace(Space $space): bool
+    {
+        return $this->spaces()
+            ->wherePivot(
+                'space_id', $space->id
+            )->exists();
     }
 
     // TODO: Move to action

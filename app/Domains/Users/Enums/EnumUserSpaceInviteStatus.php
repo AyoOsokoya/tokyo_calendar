@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domains\Spaces\Enums;
+namespace App\Domains\Users\Enums;
 
-enum EnumSpaceInviteStatus: string
+enum EnumUserSpaceInviteStatus: string
 {
     case PENDING = 'pending'; // invite was sent but not yet accepted or declined
     case ACCEPTED = 'accepted'; // invite was accepted by the invitee

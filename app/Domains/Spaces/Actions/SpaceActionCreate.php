@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Spaces\Actions;
 
-use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Models\User;

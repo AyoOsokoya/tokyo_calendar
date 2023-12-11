@@ -30,10 +30,13 @@ class SpaceActionDelete
         //     throw new \Exception('You are not allowed to delete this space.');
         // }
 
-        // If this user relationship to space is Admin
-            // Remove all users from space
-            // Cancel all events from the space
+        if ($this->user->isSpaceAdmin($this->space)) {
+            $this->space->users()->detach();
+            $this->space->events()->delete();
+            $this->space->delete();
+        } else {
+            throw new \Exception('You are not allowed to delete this space.');
+        }
 
-        $this->space->delete();
     }
 }

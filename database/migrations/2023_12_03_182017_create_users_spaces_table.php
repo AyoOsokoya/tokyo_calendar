@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->integer('user_id')->index();
             $table->integer('space_id')->index();
             $table->string('user_space_role_type')->index();
+            $table->string('user_space_invite_status')->index();
             $table->datetimes();
             $table->softDeletesDatetime();
         });
