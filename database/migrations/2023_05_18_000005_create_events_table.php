@@ -21,13 +21,13 @@ return new class extends Migration {
             // Descriptors
             $table->text('name'); // some names are  very long
             $table->text('description')->nullable();
-            // Location
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
-            $table->text('address')->nullable();
+
+            $table->unsignedBigInteger('space_id')->nullable();
+
             // Date and Time
             $table->dateTime('starts_at')->index();
             $table->dateTime('ends_at')->index();
+
             // Event data
             $table->integer('event_source_id')->index();
             $table->string('import_unique_id')->unique()->index();
@@ -35,8 +35,10 @@ return new class extends Migration {
 
             $table->string('event_status')->index();
             $table->string('event_category')->index();
+            $table->json('gallery_json')->nullable();
             $table->string('url')->nullable();
             $table->string('url_image')->nullable();
+
             $table->datetimes();
             $table->softDeletesDatetime();
         });
