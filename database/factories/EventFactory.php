@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Domains\Events\Actions\EventActionCreateImportDataHash;
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
 use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventSource;
+use App\Domains\Import\Actions\EventActionCreateImportDataHash;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
