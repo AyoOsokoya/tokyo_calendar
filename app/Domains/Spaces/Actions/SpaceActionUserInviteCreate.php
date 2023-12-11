@@ -40,7 +40,7 @@ class SpaceActionUserInviteCreate
     public function execute()
     {
         if ($this->user->isSpaceAdmin($this->space) || $this->user->isSpaceStaff($this->space)) {
-            $this->space->users()->updateExistingPivot(
+            $this->space->users()->attach(
                 $this->invited_user->id,
                 [
                     'user_space_invite_status' => $this->invite_status->value,
