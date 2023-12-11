@@ -87,4 +87,14 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    public function space(): BelongsTo
+    {
+        return $this->belongsTo(Location::class, 'space_id');
+    }
 }
