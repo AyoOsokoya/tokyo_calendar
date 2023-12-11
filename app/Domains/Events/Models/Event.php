@@ -5,6 +5,7 @@ namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
+use App\Domains\Location\Models\Location;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -52,18 +53,17 @@ class Event extends Model
     protected $fillable = [
         'name',
         'description',
-        'address',
-        'latitude',
-        'longitude',
+        'location_id',
+        'space_id',
         'starts_at',
         'ends_at',
-        'url',
-        'url_image',
-        'event_status',
         'event_source_id',
         'import_unique_id',
         'import_data_hash',
-        'event_category'
+        'event_status',
+        'event_category',
+        'url',
+        'url_image',
     ];
 
     /**
