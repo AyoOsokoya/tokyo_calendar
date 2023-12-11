@@ -8,6 +8,7 @@ use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventUser;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
+use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserType;
 use App\Domains\Users\Models\UserRelationshipToUser;
@@ -187,18 +188,14 @@ class User extends Authenticatable
             )->exists();
     }
 
-    // TODO: Move to action
-    public function attendEvent(Event $event, Carbon $starts_at, Carbon $ends_at, EnumEventUserAttendanceStatus $status)
+    private function hasInviteToSpace(Space $space)
     {
-        // For now, just attend the event for 3 hours we need a more complicated event schedule model
-        // check starts at and $ends at are between event times and now
-        $this->events()->attach(
-            $event,
-            [
-                'user_event_attendance_status' => $status,
-                'starts_at' => $starts_at,
-                'ends_at' => $starts_at->addHours(3)
-            ]
-        );
+        return $this->spaces()
+            ->wherePivot('space_id', $space->id)
+            ->wherePivot('user_id', $this->id)
+            ->wherePivotNotIn(
+                'user_space_invite_status',
+                [EnumUserSpaceInviteStatus::CANCELLED]
+            )->exists();
     }
 }

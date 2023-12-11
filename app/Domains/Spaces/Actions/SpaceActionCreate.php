@@ -9,11 +9,11 @@ use App\Domains\Users\Models\User;
 
 class SpaceActionCreate
 {
-    private array $space;
+    private array $space_data;
     private User $user;
     private function __construct($space, $user)
     {
-        $this->space = $space;
+        $this->space_data = $space;
         $this->user = $user;
     }
 
@@ -25,13 +25,13 @@ class SpaceActionCreate
     public function execute(): void
     {
         $space = Space::create([
-           'name' => $this->space['name'],
-            'description' => $this->space['description'],
-            'socials_json' => $this->space['socials_json'],
-            'schedule_text' => $this->space['schedule_text'],
-            'gallery_json' => $this->space['gallery_json'],
-            'url' => $this->space['url'],
-            'space_activity_status' => $this->space['space_activity_status'],
+           'name' => $this->space_data['name'],
+            'description' => $this->space_data['description'],
+            'socials_json' => $this->space_data['socials_json'],
+            'schedule_text' => $this->space_data['schedule_text'],
+            'gallery_json' => $this->space_data['gallery_json'],
+            'url' => $this->space_data['url'],
+            'space_activity_status' => $this->space_data['space_activity_status'],
         ]);
 
         $this->user->spaces()->attach(

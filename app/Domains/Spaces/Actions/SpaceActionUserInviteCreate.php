@@ -27,11 +27,11 @@ class SpaceActionUserInviteCreate
     }
 
     public static function make(
-        array                     $space,
-        User                      $user,
-        User                      $invited_user,
+        array $space,
+        User $user,
+        User $invited_user,
         EnumUserSpaceInviteStatus $invite_status,
-        EnumUserSpaceRoleType     $role_type
+        EnumUserSpaceRoleType $role_type
     ): SpaceActionUserInviteCreate
     {
         return new SpaceActionUserInviteCreate($space, $user, $invited_user, $invite_status, $role_type);
@@ -50,16 +50,5 @@ class SpaceActionUserInviteCreate
         } else {
             throw new \Exception('You are not allowed to update this space.');
         }
-    }
-
-    private function hasInviteToSpace()
-    {
-        return $this->invited_user->spaces()
-            ->wherePivot('space_id', $this->space->id)
-            ->wherePivot('user_id', $this->invited_user->id)
-            ->wherePivotNotIn(
-                'user_space_invite_status',
-                [EnumUserSpaceInviteStatus::CANCELLED]
-            )->exists();
     }
 }
