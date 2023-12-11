@@ -24,15 +24,7 @@ class SpaceActionCreate
 
     public function execute(): void
     {
-        $space = Space::create([
-           'name' => $this->space_data['name'],
-            'description' => $this->space_data['description'],
-            'socials_json' => $this->space_data['socials_json'],
-            'schedule_text' => $this->space_data['schedule_text'],
-            'gallery_json' => $this->space_data['gallery_json'],
-            'url' => $this->space_data['url'],
-            'space_activity_status' => $this->space_data['space_activity_status'],
-        ]);
+        $space = Space::create($this->space_data);
 
         $this->user->spaces()->attach(
             $space,
