@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Users\Models;
 
-use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventUser;
 use App\Domains\Spaces\Models\Space;
@@ -11,13 +10,11 @@ use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserType;
-use App\Domains\Users\Models\UserRelationshipToUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -125,8 +122,25 @@ class User extends Authenticatable
             'user_id',
             'relation_id',
             'relationship_status'
-        ])
-            ->withTimestamps();
+        ])->withTimestamps();
+    }
+
+    public function relatedUsers(): BelongsToMany
+    {
+        $table_name = app(UserRelationshipToUser::class);
+
+        return $this->belongsToMany(
+            User::class,
+            $table_name,
+            'user_id',
+            'relation_id'
+        )->wherePivot(
+            'relationship_status',
+        )->withPivot([
+            'user_id',
+            'relation_id',
+            'relationship_status'
+        ])->withTimestamps();
     }
 
     public function spaces(): BelongsToMany
@@ -140,8 +154,7 @@ class User extends Authenticatable
             'user_id',
             'space_id',
             'user_space_status'
-        ])
-            ->withTimestamps();
+        ])->withTimestamps();
     }
 
     public function lists(): BelongsToMany
