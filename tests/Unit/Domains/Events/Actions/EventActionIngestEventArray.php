@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Tests\Unit\Domains\Events\Actions;
 
-use App\Domains\Events\Actions\EventActionIngestEventArrayData;
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
 use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventSource;
+use App\Domains\Import\Actions\EventActionIngestEventArrayData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\TestCase;
