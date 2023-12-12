@@ -5,7 +5,9 @@ namespace App\Domains\Spaces\Models;
 
 use App\Domains\Events\Models\Event;
 use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
+use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
 use App\Domains\Users\Models\User;
+use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,11 +23,13 @@ use Illuminate\Support\Carbon;
  * @property array $socials_json
  * @property string $schedule_text
  * @property array $gallery_json
- * @property string $url
+ * @property string $website_url
  * @property EnumSpaceActivityStatus $space_activity_status
+ * @property EnumSpaceVerificationStatus $space_verification_status
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
+ * @mixin Eloquent
  */
 class Space extends Model
 {
@@ -44,9 +48,9 @@ class Space extends Model
         'socials_json',
         'schedule_text',
         'gallery_json',
-        'url',
+        'website_url',
         'space_activity_status',
-        'parent_space_id'
+        'space_verification_status',
     ];
 
     /**
@@ -60,8 +64,9 @@ class Space extends Model
         'socials_json' => 'array',
         'schedule_text' => 'string',
         'gallery_json' => 'array',
-        'url' => 'string',
+        'website_url' => 'string',
         'space_activity_status' => EnumSpaceActivityStatus::class,
+        'space_verification_status' => EnumSpaceVerificationStatus::class,
     ];
 
     public function users(): BelongsToMany

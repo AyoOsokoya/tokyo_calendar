@@ -35,8 +35,9 @@ return new class extends Migration {
             $table->json('socials_json')->nullable();
             $table->string('schedule_text')->nullable();
             $table->json('gallery_json')->nullable();
-            $table->string('url')->nullable();
+            $table->string('website_url')->nullable();
             $table->string('space_activity_status')->index();
+            $table->string('space_verification_status')->index();
 
             $table->datetimes();
             $table->softDeletesDatetime();
