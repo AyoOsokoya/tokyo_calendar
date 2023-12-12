@@ -23,7 +23,11 @@ return new class extends Migration
             $table->string('post_code');
             $table->string('state_province');
             $table->string('other');
-            
+
+            // TODO: consider using spacialIndex for coordinates
+            $table->double('longitude');
+            $table->double('latitude');
+
             $table->datetimes();
             $table->softDeletesDatetime();
         });
