@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('user_id')->index();
             $table->integer('relation_id')->index();
-            $table->string('relationship_status')->index(); // FOLLOW, UNFOLLOW // later BLOCKED, MUTUAL, MUTED
+            $table->string('user_relationship_status')->index(); // FOLLOW, UNFOLLOW // later BLOCKED, MUTUAL, MUTED
             $table->datetimes();
             $table->softDeletesDatetime();
         });
