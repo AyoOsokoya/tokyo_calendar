@@ -27,17 +27,16 @@ return new class extends Migration {
             // Date and Time
             $table->dateTime('starts_at')->index();
             $table->dateTime('ends_at')->index();
+            $table->string('event_status')->index();
+            $table->json('gallery_json')->nullable();
+            $table->string('url')->nullable();
+            $table->string('url_cover_image')->nullable();
 
-            // Event data
+            $table->string('event_category')->index();
+
             $table->integer('event_source_id')->index();
             $table->string('import_unique_id')->unique()->index();
             $table->string('import_data_hash')->index();
-
-            $table->string('event_status')->index();
-            $table->string('event_category')->index();
-            $table->json('gallery_json')->nullable();
-            $table->string('url')->nullable();
-            $table->string('url_image')->nullable();
 
             $table->datetimes();
             $table->softDeletesDatetime();

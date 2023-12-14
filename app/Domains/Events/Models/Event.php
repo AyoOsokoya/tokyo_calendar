@@ -21,20 +21,23 @@ use Illuminate\Support\Collection;
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property double $longitude
- * @property double $latitude
- * @property string $address
+ *
  * @property Carbon $starts_at
  * @property Carbon $ends_at
- * @property string $url
- * @property string $url_image
  * @property EnumEventStatus $event_status
+ * @property array $gallery_json
+ * @property string $url
+ * @property string $url_cover_image
+ *
+ * @property EnumEventCategories $event_category
+ *
  * @property integer $event_source_id
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
  * @property string $import_data_hash // If the hash changes, something in the event info has been updated
- * @property EnumEventCategories $event_category
+ *
  * @property EventSource $event_source
  * @property Collection $users
+ *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
@@ -53,17 +56,21 @@ class Event extends Model
     protected $fillable = [
         'name',
         'description',
-        'location_id',
+
         'space_id',
+
         'starts_at',
         'ends_at',
+        'event_status',
+
+        'gallery_json',
+        'event_category',
+        'url_cover_image',
+        'url',
+
         'event_source_id',
         'import_unique_id',
         'import_data_hash',
-        'event_status',
-        'event_category',
-        'url',
-        'url_image',
     ];
 
     /**
@@ -74,11 +81,12 @@ class Event extends Model
     protected $casts = [
         'ends_at' => 'datetime',
         'starts_at' => 'datetime',
-        'gps_json' => 'array',
+        'gallery_json' => 'array',
+        'event_category' => EnumEventCategories::class,
         'event_status' => EnumEventStatus::class,
     ];
 
-    public function event_source(): BelongsTo
+    public function eventSource(): BelongsTo
     {
         return $this->belongsTo(EventSource::class, 'event_source_id');
     }
@@ -86,11 +94,6 @@ class Event extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withTimestamps();
-    }
-
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class, 'location_id');
     }
 
     public function space(): BelongsTo
