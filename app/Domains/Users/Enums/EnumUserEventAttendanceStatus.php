@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Domains\Events\Enums;
+namespace App\Domains\Users\Enums;
 
-enum EnumEventUserAttendanceStatus: string
+enum EnumUserEventAttendanceStatus: string
 {
     case INVITED = 'invited';
     case GOING = 'going';

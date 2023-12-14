@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
+use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -17,7 +17,7 @@ class EventUserSeeder extends Seeder
 
     public function run(): void
     {
-        $this->attendance_statuses = collect(EnumEventUserAttendanceStatus::cases());
+        $this->attendance_statuses = collect(EnumUserEventAttendanceStatus::cases());
 
         // Link users to events pseudo-randomly
         User::all()->each(function (User $user) {

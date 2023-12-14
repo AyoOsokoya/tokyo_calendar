@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Domains\Events\Models;
+namespace App\Domains\Users\Models;
 
-use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
+use App\Domains\Events\Models\Event;
+use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Enums\EnumUserEventRoleType;
-use App\Domains\Users\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +18,7 @@ use Illuminate\Support\Carbon;
  * @property integer $user_id
  * @property integer $event_id
  * @property integer $inviter_id
- * @property EnumEventUserAttendanceStatus $user_event_attendance_status
+ * @property EnumUserEventAttendanceStatus $user_event_attendance_status
  * @property EnumUserEventRoleType $user_event_role_type
  * @property User $user
  * @property Event $event
@@ -46,7 +46,7 @@ class UserEvent extends Model
     ];
 
     protected $casts = [
-        'user_event_attendance_status' => EnumEventUserAttendanceStatus::class,
+        'user_event_attendance_status' => EnumUserEventAttendanceStatus::class,
         'user_event_role_type' => EnumUserEventRoleType::class,
     ];
 }

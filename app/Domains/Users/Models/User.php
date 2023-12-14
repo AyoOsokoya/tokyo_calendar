@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Domains\Users\Models;
 
 use App\Domains\Events\Models\Event;
-use App\Domains\Events\Models\UserEvent;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;

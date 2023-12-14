@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Domains\Events\Enums\EnumEventUserAttendanceStatus;
 use App\Domains\Events\Models\Event;
+use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Models\User;
 use App\Enums\EnumApiResponseFormat;
 use Illuminate\Http\JsonResponse;
@@ -78,8 +78,8 @@ class EventController extends BaseController
     }
 
     public function userEventsByAttendanceStatus(
-        EnumEventUserAttendanceStatus $attendance_status,
-        ?EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
+        EnumUserEventAttendanceStatus $attendance_status,
+        ?EnumApiResponseFormat        $response_format = EnumApiResponseFormat::JSON
     ): JsonResponse|Response
     {
         // $user = Auth::user();
