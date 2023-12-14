@@ -17,6 +17,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Domains\Users\Models\UserTableEnum as t;
+
 /**
  * @package App\Models\User
  *
@@ -48,9 +50,11 @@ class User extends Authenticatable
         'name_last',
         'name_middle',
         'name_handle',
-        'age',
+        'avatar',
+        'date_of_birth',
         'user_type',
-        'email',
+        'email_verified_at',
+        'password',
     ];
 
     /**
@@ -77,11 +81,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class)
             ->withPivot([
+                'inviter_id',
                 'user_id',
                 'event_id',
-                'starts_at',
-                'ends_at',
-                'user_event_attendance_status'
+                'user_event_role_type',
+                'user_event_attendance_status',
             ])
             ->withTimestamps();
     }
@@ -156,20 +160,6 @@ class User extends Authenticatable
         ])->withTimestamps();
     }
 
-    public function lists(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            User::class,
-            'user_lists',
-            'user_id',
-            'list_id'
-        )->withPivot([
-            'user_id',
-            'list_id',
-            'user_list_status'
-        ])->withTimestamps();
-    }
-
     public function isSpaceAdmin(Space $space): bool
     {
         return $this->spaces()
@@ -200,7 +190,7 @@ class User extends Authenticatable
             )->exists();
     }
 
-    private function hasInviteToSpace(Space $space)
+    private function hasSpaceInvite(Space $space)
     {
         return $this->spaces()
             ->wherePivot('space_id', $space->id)

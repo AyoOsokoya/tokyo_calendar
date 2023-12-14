@@ -18,7 +18,6 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create($this->table_name, function (Blueprint $table) {
-            $table->primary(['user_id', 'event_id']);
             $table->unsignedInteger('inviter_id')->index();
             $table->unsignedInteger('event_id')->index();
             $table->unsignedInteger('user_id')->index();
