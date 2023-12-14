@@ -17,8 +17,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Domains\Users\Models\UserTableEnum as t;
-
 /**
  * @package App\Models\User
  *

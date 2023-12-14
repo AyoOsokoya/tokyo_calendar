@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Domains\Users\Models\UserFriendList;
+use App\Domains\Users\Models\Archive\UserFriendList;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

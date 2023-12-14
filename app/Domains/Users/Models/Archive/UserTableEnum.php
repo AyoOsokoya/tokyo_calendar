@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domains\Users\Models;
+namespace App\Domains\Users\Models\Archive;
 
 enum UserTableEnum: string
 {
