@@ -17,9 +17,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create($this->table_name, function (Blueprint $table) {
-            $table->id();
             $table->integer('user_id')->index();
             $table->integer('space_id')->index();
+            $table->primary(['user_id', 'space_id']);
             $table->string('user_space_role_type')->index();
             $table->string('user_space_invite_status')->index();
             $table->datetimes();
