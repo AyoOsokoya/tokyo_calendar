@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Domains\Users\Models;
 
 use App\Domains\Events\Models\Event;
-use App\Domains\Events\Models\EventUser;
+use App\Domains\Events\Models\UserEvent;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
@@ -30,7 +30,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $user_type
  * @property string $email
  * @property string $email_verified_at
- * @property EventUser $pivot
+ * @property UserEvent $pivot
  * @property Collection $events
  * @property string $password
  */
