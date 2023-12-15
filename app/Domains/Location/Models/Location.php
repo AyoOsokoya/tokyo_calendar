@@ -32,18 +32,18 @@ class Location extends Model
     protected $fillable = [
         _::country,
         _::city,
+        _::state,
         _::street_address,
         _::post_code,
-        _::state_province,
         _::other,
     ];
 
     protected $casts = [
         _::country => 'string',
         _::city => 'string',
+        _::state => 'string',
         _::street_address => 'string',
         _::post_code => 'string',
-        _::state_province => 'string',
         _::other => 'string',
     ];
 

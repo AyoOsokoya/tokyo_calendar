@@ -18,8 +18,8 @@ use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 use App\Domains\Users\Models\Tables\TableUser as _;
-use App\Domains\Users\Models\Tables\TableUserEvent as UE;
-use App\Domains\Users\Models\Tables\TableUserSpace as US;
+use App\Domains\Users\Models\Tables\TableUserEvent as ue;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
 use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as UR;
 
 /**
@@ -84,11 +84,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class)
             ->withPivot([
-                UE::inviter_id,
-                UE::user_id,
-                UE::event_id,
-                UE::user_event_role_type,
-                UE::user_event_attendance_status,
+                ue::inviter_id,
+                ue::user_id,
+                ue::event_id,
+                ue::user_event_role_type,
+                ue::user_event_attendance_status,
             ])
             ->withTimestamps();
     }
@@ -154,12 +154,12 @@ class User extends Authenticatable
         return $this->belongsToMany(
             User::class,
             'user_spaces',
-            US::user_id,
-            US::space_id
+            us::user_id,
+            us::space_id
         )->withPivot([
-            US::user_id,
-            US::space_id,
-            US::user_space_invite_status
+            us::user_id,
+            us::space_id,
+            us::user_space_invite_status
         ])->withTimestamps();
     }
 
@@ -167,7 +167,7 @@ class User extends Authenticatable
     {
         return $this->spaces()
             ->wherePivot(
-                'user_space_role_type',
+                us::user_space_role_type,
                 EnumUserSpaceRoleType::ADMIN
             )->wherePivot(
                 'space_id', $space->id
@@ -178,7 +178,7 @@ class User extends Authenticatable
     {
         return $this->spaces()
             ->wherePivot(
-                'user_space_role_type',
+                us::user_space_role_type,
                 EnumUserSpaceRoleType::STAFF
             )->wherePivot(
                 'space_id', $space->id
@@ -199,7 +199,7 @@ class User extends Authenticatable
             ->wherePivot('space_id', $space->id)
             ->wherePivot('user_id', $this->id)
             ->wherePivotNotIn(
-                US::user_space_invite_status,
+                us::user_space_invite_status,
                 [EnumUserSpaceInviteStatus::CANCELLED]
             )->exists();
     }

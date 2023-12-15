@@ -89,7 +89,7 @@ class Event extends Model
 
     public function eventSource(): BelongsTo
     {
-        return $this->belongsTo(EventSource::class, 'event_source_id');
+        return $this->belongsTo(EventSource::class, _::event_source_id);
     }
 
     public function users(): BelongsToMany
@@ -99,6 +99,6 @@ class Event extends Model
 
     public function space(): BelongsTo
     {
-        return $this->belongsTo(Location::class, 'space_id');
+        return $this->belongsTo(Location::class, _::space_id);
     }
 }

@@ -58,7 +58,7 @@ class EventSource extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'event_source_data_type' => EnumEventSourceDataType::class
+        _::event_source_data_type => EnumEventSourceDataType::class
     ];
 
     // haveManyEvents
