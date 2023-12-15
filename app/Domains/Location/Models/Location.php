@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-// TODO: Implement
+use App\Domains\Location\Models\Tables\TableLocation as _;
 
 /**
  * @package App\Domains\Location\Models
@@ -31,21 +30,21 @@ class Location extends Model
     protected $table = 'locations';
 
     protected $fillable = [
-        'country',
-        'city',
-        'street_address',
-        'post_code',
-        'state_province',
-        'other',
+        _::country,
+        _::city,
+        _::street_address,
+        _::post_code,
+        _::state_province,
+        _::other,
     ];
 
     protected $casts = [
-        'country' => 'string',
-        'city' => 'string',
-        'street_address' => 'string',
-        'post_code' => 'string',
-        'state_province' => 'string',
-        'other' => 'string',
+        _::country => 'string',
+        _::city => 'string',
+        _::street_address => 'string',
+        _::post_code => 'string',
+        _::state_province => 'string',
+        _::other => 'string',
     ];
 
     public function spaces(): HasMany

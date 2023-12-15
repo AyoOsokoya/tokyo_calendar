@@ -5,38 +5,32 @@ use App\Domains\Events\Models\Event;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Domains\Events\Models\Tables\TableEvent as _;
 
 return new class extends Migration {
-    private string $table_name;
-
-    public function __construct()
-    {
-        $this->table_name = app(Event::class)->getTable();
-    }
-
     public function up(): void
     {
-        Schema::create($this->table_name, function (Blueprint $table) {
+        Schema::create(_::table_name, function (Blueprint $table) {
             $table->id();
             // Descriptors
-            $table->text('name'); // some names are  very long
-            $table->text('description')->nullable();
+            $table->text(_::name); // some names are  very long
+            $table->text(_::description)->nullable();
 
-            $table->unsignedBigInteger('space_id')->nullable();
+            $table->unsignedBigInteger(_::space_id)->nullable();
 
             // Date and Time
-            $table->dateTime('starts_at')->index();
-            $table->dateTime('ends_at')->index();
-            $table->string('event_status')->index();
-            $table->json('gallery_json')->nullable();
-            $table->string('url')->nullable();
-            $table->string('url_cover_image')->nullable();
+            $table->dateTime(_::starts_at)->index();
+            $table->dateTime(_::ends_at)->index();
+            $table->string(_::event_status)->index();
+            $table->json(_::gallery_json)->nullable();
+            $table->string(_::url)->nullable();
+            $table->string(_::url_cover_image)->nullable();
 
-            $table->string('event_category')->index();
+            $table->string(_::event_category)->index();
 
-            $table->integer('event_source_id')->index();
-            $table->string('import_unique_id')->unique()->index();
-            $table->string('import_data_hash')->index();
+            $table->integer(_::event_source_id)->index();
+            $table->string(_::import_unique_id)->unique()->index();
+            $table->string(_::import_data_hash)->index();
 
             $table->datetimes();
             $table->softDeletesDatetime();
@@ -45,6 +39,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists($this->table_name);
+        Schema::dropIfExists(_::table_name);
     }
 };

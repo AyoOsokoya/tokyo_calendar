@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
+use App\Domains\Users\Models\Tables\TableUserSpace as _;
+
 /**
  * @package App\Models\UserSpaces
  *
@@ -29,17 +31,17 @@ use Illuminate\Support\Carbon;
 class UserSpace extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'user_spaces';
+    protected $table = _::table_name;
 
     protected $fillable = [
-        'user_id',
-        'space_id',
-        'user_space_role_type',
-        'user_space_invite_status'
+        _::user_id,
+        _::space_id,
+        _::user_space_role_type,
+        _::user_space_invite_status
     ];
 
     protected $casts = [
-        'user_space_role_type' => EnumUserSpaceRoleType::class,
-        'user_space_invite_status' => EnumUserSpaceInviteStatus::class,
+        _::user_space_role_type => EnumUserSpaceRoleType::class,
+        _::user_space_invite_status => EnumUserSpaceInviteStatus::class,
     ];
 }

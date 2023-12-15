@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
+use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as _;
+
 /**
  * @package App\Models\UserRelationships
  *
@@ -24,15 +26,15 @@ use Illuminate\Support\Carbon;
 class UserRelationshipToUser extends Model
 {
     use HasFactory;
-    protected $table = 'user_friends';
+    protected $table = _::table_name;
 
     protected $fillable = [
-        'user_id',
-        'relation_id',
-        'user_relationship_status',
+        _::user_id,
+        _::relation_id,
+        _::user_relationship_to_user_status,
     ];
 
     protected $casts = [
-        'user_relationship_status' => EnumUserRelationshipStatus::class,
+        _::user_relationship_to_user_status => EnumUserRelationshipStatus::class,
     ];
 }

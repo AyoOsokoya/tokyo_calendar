@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Domains\Users\Models\Tables\TableUserEvent as _;
+
 return new class extends Migration {
 
     private string $table_name;
@@ -18,11 +20,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create($this->table_name, function (Blueprint $table) {
-            $table->unsignedInteger('inviter_id')->index();
-            $table->unsignedInteger('event_id')->index();
-            $table->unsignedInteger('user_id')->index();
-            $table->string('user_event_role_type')->index();
-            $table->string('user_event_attendance_status')->index();
+            $table->unsignedInteger(_::inviter_id)->index();
+            $table->unsignedInteger(_::event_id)->index();
+            $table->unsignedInteger(_::user_id)->index();
+            $table->string(_::user_event_role_type)->index();
+            $table->string(_::user_event_attendance_status)->index();
             $table->datetimes();
             $table->softDeletesDatetime();
         });

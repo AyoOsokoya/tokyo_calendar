@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
+use App\Domains\Users\Models\Tables\TableUserEvent as _;
+
 /**
  * App\Models\UserEvents
  *
@@ -31,22 +33,22 @@ class UserEvent extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'user_events';
+    protected $table = _::table_name;
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'inviter_id',
-        'event_id',
-        'user_id',
-        'user_event_role_type',
-        'user_event_attendance_status',
+        _::inviter_id,
+        _::event_id,
+        _::user_id,
+        _::user_event_role_type,
+        _::user_event_attendance_status,
     ];
 
     protected $casts = [
-        'user_event_attendance_status' => EnumUserEventAttendanceStatus::class,
-        'user_event_role_type' => EnumUserEventRoleType::class,
+        _::user_event_attendance_status => EnumUserEventAttendanceStatus::class,
+        _::user_event_role_type => EnumUserEventRoleType::class,
     ];
 }

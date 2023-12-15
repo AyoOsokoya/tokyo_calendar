@@ -8,6 +8,7 @@ use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Models\User;
+use App\Domains\Users\Models\Tables\TableUserSpace as US;
 
 class SpaceActionUserInviteUpdate
 {
@@ -43,8 +44,8 @@ class SpaceActionUserInviteUpdate
             $this->space->users()->updateExistingPivot(
                 $this->invited_user->id,
                 [
-                    'user_space_invite_status' => $this->invite_status->value,
-                    'user_space_role_type' => $this->role_type->value,
+                    US::user_space_invite_status => $this->invite_status->value,
+                    US::user_space_role_type => $this->role_type->value,
                 ]
             );
         }

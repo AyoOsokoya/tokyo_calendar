@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Domains\Spaces\Models\Space;
+use App\Domains\Spaces\Models\Tables\TableSpace as _;
 
 // TODO: Figure out how to store addresses in the database.
 /*
@@ -15,29 +15,22 @@ use App\Domains\Spaces\Models\Space;
  */
 
 return new class extends Migration {
-    private string $table_name;
-
-    public function __construct()
-    {
-        $this->table_name = app(Space::class)->getTable();
-    }
-
     // Address format from
     // https://softwareengineering.stackexchange.com/questions/357900/whats-a-universal-way-to-store-a-geographical-address-location-in-a-database
     // https://github.com/google/libaddressinput consider this for validating addresses
 
     public function up(): void
     {
-        Schema::create($this->table_name, function (Blueprint $table) {
+        Schema::create(_::table_name, function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->json('socials_json')->nullable();
-            $table->string('schedule_text')->nullable();
-            $table->json('gallery_json')->nullable();
-            $table->string('website_url')->nullable();
-            $table->string('space_activity_status')->index();
-            $table->string('space_verification_status')->index();
+            $table->string(_::name);
+            $table->string(_::description)->nullable();
+            $table->json(_::socials_json)->nullable();
+            $table->string(_::schedule_text)->nullable();
+            $table->json(_::gallery_json)->nullable();
+            $table->string(_::website_url)->nullable();
+            $table->string(_::space_activity_status)->index();
+            $table->string(_::space_verification_status)->index();
 
             $table->datetimes();
             $table->softDeletesDatetime();
@@ -46,6 +39,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists($this->table_name);
+        Schema::dropIfExists(_::table_name);
     }
 };

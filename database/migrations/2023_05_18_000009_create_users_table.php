@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Domains\Users\Models\Tables\TableUser as _;
+
 return new class extends Migration {
     private string $table_name;
 
@@ -18,16 +20,16 @@ return new class extends Migration {
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
-            $table->string('name_first');
-            $table->string('name_last')->nullable();
-            $table->string('name_middle')->nullable();
-            $table->string('name_handle');
-            $table->string('avatar')->nullable();
-            $table->datetime('date_of_birth')->nullable();
-            $table->string('user_type');
-            $table->string('email')->unique();
-            $table->dateTime('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string(_::name_first);
+            $table->string(_::name_last)->nullable();
+            $table->string(_::name_middle)->nullable();
+            $table->string(_::name_handle);
+            $table->string(_::avatar)->nullable();
+            $table->datetime(_::date_of_birth)->nullable();
+            $table->string(_::user_type);
+            $table->string(_::email)->unique();
+            $table->dateTime(_::email_verified_at)->nullable();
+            $table->string(_::password);
             $table->rememberToken();
             $table->datetimes();
             $table->softDeletesDatetime();

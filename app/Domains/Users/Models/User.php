@@ -17,6 +17,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Domains\Users\Models\Tables\TableUser as _;
+use App\Domains\Users\Models\Tables\TableUserEvent as UE;
+use App\Domains\Users\Models\Tables\TableUserSpace as US;
+use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as UR;
+
 /**
  * @package App\Models\User
  *
@@ -37,22 +42,22 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    protected $table = 'users';
+    protected $table = _::table_name;
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name_first',
-        'name_last',
-        'name_middle',
-        'name_handle',
-        'avatar',
-        'date_of_birth',
-        'user_type',
-        'email_verified_at',
-        'password',
+        _::name_first,
+        _::name_last,
+        _::name_middle,
+        _::name_handle,
+        _::avatar,
+        _::date_of_birth,
+        _::user_type,
+        _::email_verified_at,
+        _::password,
     ];
 
     /**
@@ -61,8 +66,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        _::password,
+        _::remember_token,
     ];
 
     /**
@@ -71,19 +76,19 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'user_type' => EnumUserType::class
+        _::email_verified_at => 'datetime',
+        _::user_type => EnumUserType::class
     ];
 
     public function events(): BelongsToMany
     {
         return $this->belongsToMany(Event::class)
             ->withPivot([
-                'inviter_id',
-                'user_id',
-                'event_id',
-                'user_event_role_type',
-                'user_event_attendance_status',
+                UE::inviter_id,
+                UE::user_id,
+                UE::event_id,
+                UE::user_event_role_type,
+                UE::user_event_attendance_status,
             ])
             ->withTimestamps();
     }
@@ -149,12 +154,12 @@ class User extends Authenticatable
         return $this->belongsToMany(
             User::class,
             'user_spaces',
-            'user_id',
-            'space_id'
+            US::user_id,
+            US::space_id
         )->withPivot([
-            'user_id',
-            'space_id',
-            'user_space_status'
+            US::user_id,
+            US::space_id,
+            US::user_space_invite_status
         ])->withTimestamps();
     }
 
@@ -194,7 +199,7 @@ class User extends Authenticatable
             ->wherePivot('space_id', $space->id)
             ->wherePivot('user_id', $this->id)
             ->wherePivotNotIn(
-                'user_space_invite_status',
+                US::user_space_invite_status,
                 [EnumUserSpaceInviteStatus::CANCELLED]
             )->exists();
     }

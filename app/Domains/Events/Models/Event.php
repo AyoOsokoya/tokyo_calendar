@@ -5,6 +5,7 @@ namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
+use App\Domains\Events\Models\Tables\TableEvent as _;
 use App\Domains\Location\Models\Location;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,7 +47,7 @@ class Event extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'events';
+    protected $table = _::table_name;
 
     /**
      * The attributes that are mass assignable.
@@ -54,23 +55,23 @@ class Event extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'description',
+        _::name,
+        _::description,
 
-        'space_id',
+        _::space_id,
 
-        'starts_at',
-        'ends_at',
-        'event_status',
+        _::starts_at,
+        _::ends_at,
+        _::event_status,
 
-        'gallery_json',
-        'event_category',
-        'url_cover_image',
-        'url',
+        _::gallery_json,
+        _::event_category,
+        _::url_cover_image,
+        _::url,
 
-        'event_source_id',
-        'import_unique_id',
-        'import_data_hash',
+        _::event_source_id,
+        _::import_unique_id,
+        _::import_data_hash,
     ];
 
     /**
@@ -79,11 +80,11 @@ class Event extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'ends_at' => 'datetime',
-        'starts_at' => 'datetime',
-        'gallery_json' => 'array',
-        'event_category' => EnumEventCategories::class,
-        'event_status' => EnumEventStatus::class,
+        _::ends_at => 'datetime',
+        _::starts_at => 'datetime',
+        _::gallery_json => 'array',
+        _::event_category => EnumEventCategories::class,
+        _::event_status => EnumEventStatus::class,
     ];
 
     public function eventSource(): BelongsTo

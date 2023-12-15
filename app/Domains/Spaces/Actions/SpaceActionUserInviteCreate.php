@@ -7,6 +7,7 @@ use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Models\User;
+use App\Domains\Users\Models\Tables\TableUserSpace as US;
 
 class SpaceActionUserInviteCreate
 {
@@ -42,8 +43,8 @@ class SpaceActionUserInviteCreate
             $this->space->users()->attach(
                 $this->invited_user->id,
                 [
-                    'user_space_invite_status' => $this->invite_status->value,
-                    'user_space_role_type' => $this->role_type->value,
+                    US::user_space_invite_status => $this->invite_status->value,
+                    US::user_space_role_type => $this->role_type->value,
                 ]
             );
         } else {

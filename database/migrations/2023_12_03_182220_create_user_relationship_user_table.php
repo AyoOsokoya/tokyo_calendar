@@ -5,6 +5,7 @@ use App\Domains\Users\Models\UserRelationshipToUser;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as _;
 
 return new class extends Migration {
     private string $table_name;
@@ -18,9 +19,9 @@ return new class extends Migration {
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->index();
-            $table->integer('relation_id')->index();
-            $table->string('user_relationship_status')->index(); // FOLLOW, UNFOLLOW // later BLOCKED, MUTUAL, MUTED
+            $table->integer(_::user_id)->index();
+            $table->integer(_::relation_id)->index();
+            $table->string(_::user_relationship_to_user_status)->index(); // FOLLOW, UNFOLLOW // later BLOCKED, MUTUAL, MUTED
             $table->datetimes();
             $table->softDeletesDatetime();
         });

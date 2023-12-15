@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use App\Domains\Events\Models\Tables\TableEventSource as _;
 
 /**
  * App\Models\EventSource
@@ -41,14 +42,14 @@ class EventSource extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name_display',
-        'name_display_short',
-        'name_importer',
-        'event_source',
-        'event_source_data_type',
-        'command_name',
-        'command_parameters',
-        'base_url',
+        _::name_display,
+        _::name_display_short,
+        _::name_importer,
+        _::event_source,
+        _::event_source_data_type,
+        _::command_name,
+        _::command_parameters,
+        _::base_url,
     ];
 
     /**
