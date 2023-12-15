@@ -7,6 +7,7 @@ use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
 use App\Domains\Events\Models\Tables\TableEvent as _;
 use App\Domains\Location\Models\Location;
+use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -99,6 +100,6 @@ class Event extends Model
 
     public function space(): BelongsTo
     {
-        return $this->belongsTo(Location::class, _::space_id);
+        return $this->belongsTo(Space::class, _::space_id);
     }
 }

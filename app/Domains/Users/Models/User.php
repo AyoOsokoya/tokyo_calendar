@@ -20,7 +20,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
-use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as UR;
+use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as ur;
 
 /**
  * @package App\Models\User
@@ -95,57 +95,51 @@ class User extends Authenticatable
 
     public function friends(): BelongsToMany
     {
-        $table_name = app(UserRelationshipToUser::class);
-
         return $this->belongsToMany(
             User::class,
-            $table_name,
-            'user_id',
-            'relation_id'
+            ur::table_name,
+            ur::user_id,
+            ur::relation_id
         )->wherePivot(
-            'relationship_status',
+            ur::user_relationship_to_user_status,
             EnumUserRelationshipStatus::MUTUAL_FOLLOW
         )->withPivot([
-            'user_id',
-            'relation_id',
-            'relationship_status'
+            ur::user_id,
+            ur::relation_id,
+            ur::user_relationship_to_user_status
         ])->withTimestamps();
     }
 
     public function followers(): BelongsToMany
     {
-        $table_name = app(UserRelationshipToUser::class);
-
         return $this->belongsToMany(
             User::class,
-            $table_name,
-            'user_id',
-            'relation_id'
+            ur::table_name,
+            ur::user_id,
+            ur::relation_id
         )->wherePivot(
-            'relationship_status',
+            ur::user_relationship_to_user_status,
             EnumUserRelationshipStatus::FOLLOW
         )->withPivot([
-            'user_id',
-            'relation_id',
-            'relationship_status'
+            ur::user_id,
+            ur::relation_id,
+            ur::user_relationship_to_user_status
         ])->withTimestamps();
     }
 
     public function relatedUsers(): BelongsToMany
     {
-        $table_name = app(UserRelationshipToUser::class);
-
         return $this->belongsToMany(
             User::class,
-            $table_name,
-            'user_id',
-            'relation_id'
+            ur::table_name,
+            ur::user_id,
+            ur::relation_id
         )->wherePivot(
-            'relationship_status',
+            ur::user_relationship_to_user_status,
         )->withPivot([
-            'user_id',
-            'relation_id',
-            'relationship_status'
+            ur::user_id,
+            ur::relation_id,
+            ur::user_relationship_to_user_status
         ])->withTimestamps();
     }
 
@@ -153,13 +147,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(
             User::class,
-            'user_spaces',
+            us::table_name,
             us::user_id,
             us::space_id
         )->withPivot([
             us::user_id,
             us::space_id,
-            us::user_space_invite_status
+            us::user_space_invite_status,
+            us::user_space_role_type,
         ])->withTimestamps();
     }
 
@@ -170,7 +165,7 @@ class User extends Authenticatable
                 us::user_space_role_type,
                 EnumUserSpaceRoleType::ADMIN
             )->wherePivot(
-                'space_id', $space->id
+                us::space_id, $space->id
             )->exists();
     }
 
@@ -181,7 +176,7 @@ class User extends Authenticatable
                 us::user_space_role_type,
                 EnumUserSpaceRoleType::STAFF
             )->wherePivot(
-                'space_id', $space->id
+                us::space_id, $space->id
             )->exists();
     }
 
@@ -189,15 +184,15 @@ class User extends Authenticatable
     {
         return $this->spaces()
             ->wherePivot(
-                'space_id', $space->id
+                us::space_id, $space->id
             )->exists();
     }
 
     private function hasSpaceInvite(Space $space)
     {
         return $this->spaces()
-            ->wherePivot('space_id', $space->id)
-            ->wherePivot('user_id', $this->id)
+            ->wherePivot(us::space_id, $space->id)
+            ->wherePivot(us::user_id, $this->id)
             ->wherePivotNotIn(
                 us::user_space_invite_status,
                 [EnumUserSpaceInviteStatus::CANCELLED]

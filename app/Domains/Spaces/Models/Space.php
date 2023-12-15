@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Domains\Spaces\Models;
 
 use App\Domains\Events\Models\Event;
+use App\Domains\Location\Models\Location;
 use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
 use App\Domains\Spaces\Models\Tables\TableSpace as _;
@@ -11,7 +12,10 @@ use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
 
 class Space extends Model
 {
@@ -45,19 +49,23 @@ class Space extends Model
     {
         return $this->belongsToMany(
             User::class,
-            'users_spaces',
-            'space_id',
-            'user_id'
+            us::table_name,
+            us::space_id,
+            us::user_id
         );
     }
 
-    public function events(): BelongsToMany
+    public function events(): HasMany
     {
-        return $this->belongsToMany(
+        return $this->hasMany(
             Event::class,
-            'events_spaces',
-            'space_id',
-            'event_id'
+        );
+    }
+
+    public function location(): HasOne
+    {
+        return $this->hasOne(
+            Location::class,
         );
     }
 }
