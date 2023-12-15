@@ -6,6 +6,7 @@ namespace Database\Factories;
 use App\Domains\Events\Enums\EnumEventSourceDataType;
 use App\Domains\Events\Models\EventSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Domains\Events\Models\Tables\TableEventSource as _;
 
 /**
  * @extends Factory<EventSource>
@@ -23,13 +24,20 @@ class EventSourceFactory extends Factory
     {
         $name_display = fake()->domainName();
         return [
-            'name_display' => $name_display,
-            'name_display_short' => $name_display,
-            'name_importer' => fake()->sha256,
-            'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
-            'command_name' => 'command_name',
-            'command_parameters' => '-r -c', // recursive, clobber
-            'base_url' => fake()->url(),
+            _::name_display => $name_display,
+            _::name_display_short => $name_display,
+            _::name_importer => fake()->sha256,
+            _::event_source_data_type => EnumEventSourceDataType::SCRAPE,
+            _::command_name => 'command_name',
+            _::command_parameters => '-r -c', // recursive, clobber
+            _::base_url => fake()->url(),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterMaking(function () {
+        })->afterCreating(function () {
+        });
     }
 }

@@ -8,7 +8,7 @@ use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
-
+use App\Domains\Users\Models\Tables\TableUser as _;
 /**
  * @extends Factory
  */
@@ -24,34 +24,38 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name_first' => fake()->firstName(),
-            'name_last' => fake()->lastName(),
-            'name_middle' => fake()->firstName(),
-            'name_handle' => fake()->userName(),
-            'avatar' => fake()->imageUrl(),
-            'date_of_birth' => Carbon::now()->subYears(rand(12, 80)),
-            'user_type' => EnumUserType::STANDARD,
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => Str::random(32),
-            'remember_token' => Str::random(10),
+            _::name_first => fake()->firstName(),
+            _::name_last => fake()->lastName(),
+            _::name_middle => fake()->lastName(),
+            _::name_handle => fake()->userName(),
+            _::avatar => fake()->imageUrl(),
+            _::date_of_birth => Carbon::now()->subYears(rand(12, 80)),
+            _::user_type => EnumUserType::STANDARD,
+            _::email => fake()->unique()->safeEmail(),
+            _::email_verified_at => now(),
+            _::password => Str::random(32),
+            _::remember_token => Str::random(10),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
+    public function configure(): static
+    {
+        return $this->afterMaking(function () {
+        })->afterCreating(function () {
+        });
+    }
+
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            _::email_verified_at => null,
         ]);
     }
 
     public function userType(EnumUserType $user_type): static
     {
         return $this->state(fn (array $attributes) => [
-            'user_type' => $user_type,
+            _::user_type => $user_type,
         ]);
     }
 }

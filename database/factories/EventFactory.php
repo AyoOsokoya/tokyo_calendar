@@ -12,6 +12,8 @@ use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
+use App\Domains\Events\Models\Tables\TableEvent as _;
+use App\Domains\Users\Models\Tables\TableUserEvent as UE;
 
 /**
  * @extends Factory
@@ -25,26 +27,33 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
-        $eventStart = Carbon::now()->addDays(rand(1, 45));
-        // Longer term, location GPS need to match the coordinates for better testing.
-        $location = fake()->localCoordinates();
+        $event_start = Carbon::now()->addDays(rand(1, 45));
 
         $url = fake()->url();
         return [
-            'name' => ucwords(fake()->words(4, true)),
-            'description' => fake()->text(),
-            'longitude' => $location['longitude'],
-            'latitude' => $location['latitude'],
-            'address' => fake()->address(),
-            'starts_at' => $eventStart,
-            'ends_at' => $eventStart->addHours(rand(1, 7)),
-            'event_status' => EnumEventStatus::ACTIVE,
-            'event_category' => collect(EnumEventCategories::cases())->random(),
-            'url' => $url,
-            'url_image' => fake()->imageUrl(),
-            'event_source_id' => NULL,
-            'import_unique_id' => md5($url . $eventStart->toString()),
-            'import_data_hash' => ''
+            _::name => ucwords(fake()->words(4, true)),
+            _::description => fake()->text(),
+            _::space_id => NULL,
+
+            _::starts_at => $event_start,
+            _::ends_at => $event_start->addHours(rand(1, 7)),
+
+            _::event_status => EnumEventStatus::ACTIVE,
+            _::event_category => collect(EnumEventCategories::cases())->random(),
+            _::gallery_json => json_encode([
+                fake()->imageUrl(),
+                fake()->imageUrl(),
+                fake()->imageUrl(),
+                fake()->imageUrl(),
+                fake()->imageUrl(),
+            ]),
+
+            _::url_cover_image => fake()->imageUrl(),
+            _::url => $url,
+
+            _::event_source_id => NULL,
+            _::import_unique_id => md5($url . $event_start->toString()),
+            _::import_data_hash => ''
         ];
     }
 
@@ -52,8 +61,7 @@ class EventFactory extends Factory
     {
         return $this->afterMaking(function (Event $event) {
             $event_sources = EventSource::all();
-            /** @var EventSource $event_source */
-            if ($event_sources->isNotEmpty()) {
+            if ($event_sources->isNotEmpty()) { /** @var EventSource $event_source */
                 $event_source = $event_sources->random();
             } else {
                 $event_source = EventSource::factory()->create();
@@ -62,6 +70,7 @@ class EventFactory extends Factory
             $event->import_data_hash = EventActionCreateImportDataHash::make($event)->execute();
             $event->event_source_id = $event_source->id;
             $event->save();
+        })->afterCreating(function () {
         });
     }
 
@@ -72,7 +81,7 @@ class EventFactory extends Factory
 
            $user->events()->attach(
                $event,
-               ['user_event_attendance_status' => EnumUserEventAttendanceStatus::GOING]
+               [UE::user_event_attendance_status => EnumUserEventAttendanceStatus::GOING]
            );
         });
     }

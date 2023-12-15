@@ -7,6 +7,7 @@ use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
+use App\Domains\Spaces\Models\Tables\TableSpace as _;
 
 class SpaceFactory extends Factory
 {
@@ -15,14 +16,14 @@ class SpaceFactory extends Factory
         $socials_name = fake()->userName();
 
         return [
-            'name' => 'Space Name ' . fake()->randomNumber(3),
-            'description' => fake()->paragraph(),
-            'socials_json' => $this->socials($socials_name)->toJson(),
-            'schedule_text' => fake()->paragraph(),
-            'gallery_json' => $this->gallery()->toJson(),
-            'website_url' => fake()->url(),
-            'space_activity_status' => EnumSpaceActivityStatus::ACTIVE,
-            'space_verification_status' => EnumSpaceVerificationStatus::VERIFIED,
+            _::name => 'Space Name ' . fake()->randomNumber(3),
+            _::description => fake()->paragraph(),
+            _::socials_json => $this->socials($socials_name)->toJson(),
+            _::schedule_text => fake()->paragraph(),
+            _::gallery_json => $this->gallery()->toJson(),
+            _::website_url => fake()->url(),
+            _::space_activity_status => EnumSpaceActivityStatus::ACTIVE,
+            _::space_verification_status => EnumSpaceVerificationStatus::VERIFIED,
         ];
     }
 
@@ -55,8 +56,8 @@ class SpaceFactory extends Factory
             'line' => 'https://line.me/',
         ])->map(function ($url, $name) use ($socials_name) {
             return [
-                'name' => $name,
-                'url' => $url . $socials_name
+                _::name => $name,
+                _::website_url => $url . $socials_name
             ];
         });
     }

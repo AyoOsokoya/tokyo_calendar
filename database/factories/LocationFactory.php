@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Domains\Location\Models\Tables\TableLocation as _;
 
 class LocationFactory extends Factory
 {
@@ -14,21 +16,21 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => '',
-            'coordinates' => '',
-            'country' => '',
-            'postcode' => '',
-            'state' => '',
-            'city' => '',
-            'street' => '',
-            'building_name_number' => '',
-            'custom' => '',
+            _::country => '',
+            _::city => '',
+            _::state => '',
+            _::street_address => '',
+            _::post_code => '',
+            _::other => '',
+            _::longitude => '',
+            _::latitude => '',
         ];
     }
 
     public function configure(): static
     {
         return $this->afterMaking(function () {
+        })->afterCreating(function () {
         });
     }
 }
