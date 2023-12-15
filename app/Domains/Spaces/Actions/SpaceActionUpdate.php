@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Spaces\Actions;
@@ -10,7 +11,9 @@ use App\Domains\Users\Models\User;
 class SpaceActionUpdate
 {
     private Space $space;
+
     private array $update;
+
     private User $user;
 
     private function __construct($space, $update, $user)

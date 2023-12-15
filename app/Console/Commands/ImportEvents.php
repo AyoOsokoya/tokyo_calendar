@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
@@ -35,11 +36,11 @@ class ImportEvents extends Command
         $event_sources = collect([
             ['id' => 1, 'name' => 'this_year_billboard_events.json'],
             ['id' => 2, 'name' => 'bluenote.json'],
-            ['id' => 3, 'name' => 'metropolis.json']
+            ['id' => 3, 'name' => 'metropolis.json'],
         ]);
 
         $event_sources->each(function ($event_source) {
-            $import = Storage::get('events/' . $event_source['name']);
+            $import = Storage::get('events/'.$event_source['name']);
             $event_data_all = collect(json_decode($import, true));
             $event_source = EventSource::find($event_source['id']);
             $this->import_events($event_data_all, $event_source);

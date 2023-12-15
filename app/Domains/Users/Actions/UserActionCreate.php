@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Users\Actions;
@@ -8,6 +9,7 @@ use App\Domains\Users\Models\User;
 class UserActionCreate
 {
     private array $user_data;
+
     private function __construct($user_data)
     {
         $this->user_data = $user_data;

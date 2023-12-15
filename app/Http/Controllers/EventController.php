@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -24,27 +25,27 @@ class EventController extends BaseController
     public function createEvent(): void
     {
         // Validate Data
-            // return appropriate error if validation fails
+        // return appropriate error if validation fails
         // Save
-            // return appropriate error if save fails
+        // return appropriate error if save fails
         // Return OK status code
     }
 
     public function updateEvent(): void
     {
         // Validate Data
-            // return appropriate error if validation fails
+        // return appropriate error if validation fails
         // Save
-            // return appropriate error if save fails
+        // return appropriate error if save fails
         // Return OK status code
     }
 
     public function deleteEvent(): void
     {
         // Check permissions
-            // self delete or admin delete is okay
+        // self delete or admin delete is okay
         // return appropriate error if delete fails
-            // Return OK status code
+        // Return OK status code
     }
 
     public function userEvents(
@@ -63,9 +64,10 @@ class EventController extends BaseController
 
         return response()->jsonIcalResponse($events, $response_format);
     }
+
     public function allEvents(
         ?EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
-    ) : JsonResponse|Response {
+    ): JsonResponse|Response {
 
         //TODO: move to scope
         $events = Event::with('event_source')
@@ -79,9 +81,8 @@ class EventController extends BaseController
 
     public function userEventsByAttendanceStatus(
         EnumUserEventAttendanceStatus $attendance_status,
-        ?EnumApiResponseFormat        $response_format = EnumApiResponseFormat::JSON
-    ): JsonResponse|Response
-    {
+        ?EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
+    ): JsonResponse|Response {
         // $user = Auth::user();
         $user = User::first();
 
@@ -93,6 +94,4 @@ class EventController extends BaseController
 
         return response()->jsonIcalResponse($events, $response_format);
     }
-
-
 }

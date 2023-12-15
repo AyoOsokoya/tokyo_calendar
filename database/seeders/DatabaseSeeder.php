@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
             EventSourceSeeder::class,
             UserSeeder::class,
             EventSeeder::class,
-            EventUserSeeder::class
+            EventUserSeeder::class,
         ]);
 
     }

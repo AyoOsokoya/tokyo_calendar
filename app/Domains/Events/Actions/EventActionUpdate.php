@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Events\Actions;
@@ -9,6 +10,7 @@ use App\Domains\Events\Models\Event;
 class EventActionUpdate
 {
     private Event $event;
+
     private array $event_data;
 
     private function __construct(Event $event, array $event_data)

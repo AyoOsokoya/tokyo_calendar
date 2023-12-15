@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Http\Resources;
 
@@ -19,10 +20,10 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-         return [
+        return [
             ...parent::toArray($request),
-            'users' => $this->whenLoaded('users'), fn() => UserResource::collection($this->users),
-            'event_source' => new EventSourceResource($this->whenLoaded('event_source'))
+            'users' => $this->whenLoaded('users'), fn () => UserResource::collection($this->users),
+            'event_source' => new EventSourceResource($this->whenLoaded('event_source')),
         ];
     }
 

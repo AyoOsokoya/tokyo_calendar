@@ -1,12 +1,13 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Database\Factories;
 
 use App\Domains\Events\Enums\EnumEventSourceDataType;
 use App\Domains\Events\Models\EventSource;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Domains\Events\Models\Tables\TableEventSource as _;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<EventSource>
@@ -23,6 +24,7 @@ class EventSourceFactory extends Factory
     public function definition(): array
     {
         $name_display = fake()->domainName();
+
         return [
             _::name_display => $name_display,
             _::name_display_short => $name_display,

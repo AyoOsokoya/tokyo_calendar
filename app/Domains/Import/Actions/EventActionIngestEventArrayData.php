@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Domains\Import\Actions;
 
@@ -12,6 +13,7 @@ use Illuminate\Support\Carbon;
 class EventActionIngestEventArrayData
 {
     private Event $import_event;
+
     private EventSource $event_source;
 
     private function __construct(array $import_event_data, EventSource $event_source)
@@ -57,9 +59,11 @@ class EventActionIngestEventArrayData
                 $this->import_event->import_data_hash = $import_event_data_hash;
                 $this->import_event->update();
                 $this->import_event->refresh();
+
                 return $this->import_event;
             }
         }
+
         return $this->createNewEvent();
     }
 
@@ -70,6 +74,7 @@ class EventActionIngestEventArrayData
             = EventActionCreateImportDataHash::make($this->import_event)->execute();
         $this->import_event->save();
         $this->import_event->refresh();
+
         return $this->import_event;
     }
 }

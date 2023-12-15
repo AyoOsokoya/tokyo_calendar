@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class UserList extends Controller
 {
     public function lists(): void
     {
         // return user list with users
     }
+
     public function userLists(): void
     {
         // return a list of all user's lists

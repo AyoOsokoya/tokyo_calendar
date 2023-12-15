@@ -1,12 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Hamcrest\Core\Set;
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ use App\Http\Controllers\EventController;
 Route::prefix('/v1')->group(function () {
     Route::get('/events/', [EventController::class, 'allEvents']);
     Route::get('/user/events/{response_format?}', [EventController::class, 'userEvents']);
-    Route::get('/user/events/attendance_status/{attendance_status}/{response_format?}', [EventController::class, 'userEventsByAttendanceStatus'] );
+    Route::get('/user/events/attendance_status/{attendance_status}/{response_format?}', [EventController::class, 'userEventsByAttendanceStatus']);
 
     Route::prefix('/user')->group(function () {
         // /events/
@@ -95,4 +95,3 @@ Route::prefix('/v1')->group(function () {
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-

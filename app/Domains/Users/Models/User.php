@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Users\Models;
@@ -9,6 +10,10 @@ use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserType;
+use App\Domains\Users\Models\Tables\TableUser as _;
+use App\Domains\Users\Models\Tables\TableUserEvent as ue;
+use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as ur;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,20 +22,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Domains\Users\Models\Tables\TableUser as _;
-use App\Domains\Users\Models\Tables\TableUserEvent as ue;
-use App\Domains\Users\Models\Tables\TableUserSpace as us;
-use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as ur;
-
 /**
- * @package App\Models\User
- *
- * @property integer $id
+ * @property int $id
  * @property string $name_first
  * @property string $name_last
  * @property string $name_middle
  * @property string $name_handle // nickname
- * @property integer $age
+ * @property int $age
  * @property string $user_type
  * @property string $email
  * @property string $email_verified_at
@@ -43,6 +41,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $table = _::table_name;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -77,7 +76,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         _::email_verified_at => 'datetime',
-        _::user_type => EnumUserType::class
+        _::user_type => EnumUserType::class,
     ];
 
     public function events(): BelongsToMany
@@ -106,7 +105,7 @@ class User extends Authenticatable
         )->withPivot([
             ur::user_id,
             ur::relation_id,
-            ur::user_relationship_to_user_status
+            ur::user_relationship_to_user_status,
         ])->withTimestamps();
     }
 
@@ -123,7 +122,7 @@ class User extends Authenticatable
         )->withPivot([
             ur::user_id,
             ur::relation_id,
-            ur::user_relationship_to_user_status
+            ur::user_relationship_to_user_status,
         ])->withTimestamps();
     }
 
@@ -139,7 +138,7 @@ class User extends Authenticatable
         )->withPivot([
             ur::user_id,
             ur::relation_id,
-            ur::user_relationship_to_user_status
+            ur::user_relationship_to_user_status,
         ])->withTimestamps();
     }
 

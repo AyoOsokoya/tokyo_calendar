@@ -1,21 +1,22 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventSourceDataType;
+use App\Domains\Events\Models\Tables\TableEventSource as _;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use App\Domains\Events\Models\Tables\TableEventSource as _;
 
 /**
  * App\Models\EventSource
  *
- * @property integer $id
+ * @property int $id
  * @property string $name_display
  * @property string $name_display_short
  * @property string $name_importer
@@ -58,7 +59,7 @@ class EventSource extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        _::event_source_data_type => EnumEventSourceDataType::class
+        _::event_source_data_type => EnumEventSourceDataType::class,
     ];
 
     // haveManyEvents

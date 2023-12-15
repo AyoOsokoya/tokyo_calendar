@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
 
 use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
+use App\Domains\Spaces\Models\Tables\TableSpace as _;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
-use App\Domains\Spaces\Models\Tables\TableSpace as _;
 
 class SpaceFactory extends Factory
 {
@@ -16,7 +17,7 @@ class SpaceFactory extends Factory
         $socials_name = fake()->userName();
 
         return [
-            _::name => 'Space Name ' . fake()->randomNumber(3),
+            _::name => 'Space Name '.fake()->randomNumber(3),
             _::description => fake()->paragraph(),
             _::socials_json => $this->socials($socials_name)->toJson(),
             _::schedule_text => fake()->paragraph(),
@@ -57,7 +58,7 @@ class SpaceFactory extends Factory
         ])->map(function ($url, $name) use ($socials_name) {
             return [
                 _::name => $name,
-                _::website_url => $url . $socials_name
+                _::website_url => $url.$socials_name,
             ];
         });
     }
@@ -74,7 +75,7 @@ class SpaceFactory extends Factory
         ])->map(function ($url) {
             return [
                 'url' => $url,
-                'title' => 'Image_title'
+                'title' => 'Image_title',
             ];
         });
     }

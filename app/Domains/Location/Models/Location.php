@@ -1,26 +1,26 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Location\Models;
 
+use App\Domains\Location\Models\Tables\TableLocation as _;
 use App\Domains\Spaces\Models\Space;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Domains\Location\Models\Tables\TableLocation as _;
 
 /**
- * @package App\Domains\Location\Models
- *
- * @property integer $id
+ * @property int $id
  * @property string $country
  * @property string $city
  * @property string $street_address
  * @property string $post_code
  * @property string $state_province
  * @property string $other
+ *
  * @mixin Eloquent
  */
 class Location extends Model

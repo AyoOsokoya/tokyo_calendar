@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Spaces\Actions;
@@ -10,7 +11,9 @@ use App\Domains\Users\Models\User;
 class SpaceActionDelete
 {
     private Space $space;
+
     private User $user;
+
     private function __construct($space, $user)
     {
         $this->space = $space;

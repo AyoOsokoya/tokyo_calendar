@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Events\Actions;
@@ -12,7 +13,7 @@ class EventActionDelete
 
     private function __construct($event)
     {
-       $this->event = $event;
+        $this->event = $event;
     }
 
     public static function make(Event $event)

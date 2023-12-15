@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
@@ -12,7 +13,6 @@ class EventSourceSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-
     public function run(): void
     {
         $sources = collect([
@@ -23,7 +23,7 @@ class EventSourceSeeder extends Seeder
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'http://www.billboard-live.com/pg/shop/show/index.php?mode=calendar&shop=1'
+                'base_url' => 'http://www.billboard-live.com/pg/shop/show/index.php?mode=calendar&shop=1',
             ],
             [
                 'name_display' => 'Bluenote Tokyo',
@@ -32,7 +32,7 @@ class EventSourceSeeder extends Seeder
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'https://reserve.bluenote.co.jp/reserve/schedule/move/2'
+                'base_url' => 'https://reserve.bluenote.co.jp/reserve/schedule/move/2',
             ],
             [
                 'name_display' => 'Metropolis Japan',
@@ -41,7 +41,7 @@ class EventSourceSeeder extends Seeder
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'https://metropolisjapan.com/events/?ical=1&tribe_display=list'
+                'base_url' => 'https://metropolisjapan.com/events/?ical=1&tribe_display=list',
             ],
             [
                 'name_display' => 'GaijinPot',
@@ -50,7 +50,7 @@ class EventSourceSeeder extends Seeder
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE,
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'https://events.gaijinpot.com/'
+                'base_url' => 'https://events.gaijinpot.com/',
             ],
             [
                 'name_display' => 'Tokyo Art Beat',
@@ -59,7 +59,7 @@ class EventSourceSeeder extends Seeder
                 'event_source_data_type' => EnumEventSourceDataType::SCRAPE, // SCRAPE
                 'command_name' => '',
                 'command_parameters' => '',
-                'base_url' => 'https://www.tokyoartbeat.com/en/events/orderBy/latest'
+                'base_url' => 'https://www.tokyoartbeat.com/en/events/orderBy/latest',
             ],
             //[
             //    'name_display' => 'SavvyTokyo',

@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Domains\Location\Models\Tables\TableLocation as _;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LocationFactory extends Factory
 {

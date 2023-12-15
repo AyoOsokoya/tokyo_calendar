@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Tests\Unit\Domains\Events\Actions;
 
@@ -18,9 +19,10 @@ class EventActionIngestEventArray extends TestCase
     use RefreshDatabase;
 
     private EventSource $event_source;
+
     private array $event_data = [];
 
-    function setUp(): void
+    public function setUp(): void
     {
         $this->event_source = EventSource::factory()->make();
         $this->event_data = [
@@ -37,17 +39,17 @@ class EventActionIngestEventArray extends TestCase
             'url_image' => 'https://images.events.com/event/123.jpg',
             'event_source_id' => $this->event_source->id,
             'import_unique_id' => 'https://www.events.com/event/123@#1234567',
-            'import_data_hash' => ''
+            'import_data_hash' => '',
         ];
     }
 
-    function testImportEvent()
+    public function testImportEvent()
     {
         $events_count_should_be_zero = Event::count();
         $this->assertEquals(
             0,
             $events_count_should_be_zero,
-            "Events count should be 0 for an empty database"
+            'Events count should be 0 for an empty database'
         );
 
         EventActionIngestEventArrayData::make(
@@ -59,11 +61,11 @@ class EventActionIngestEventArray extends TestCase
         $this->assertEquals(
             1,
             $events_count_should_be_one,
-            "Events count should be 1 after creating an event"
+            'Events count should be 1 after creating an event'
         );
     }
 
-    function testImportDuplicateEvents()
+    public function testImportDuplicateEvents()
     {
         $duplicate_event_data = $this->event_data;
 
@@ -81,11 +83,11 @@ class EventActionIngestEventArray extends TestCase
         $this->assertEquals(
             1,
             $events_count_should_be_one,
-            "Event duplication has been prevented."
+            'Event duplication has been prevented.'
         );
     }
 
-    function testUpdateEvent()
+    public function testUpdateEvent()
     {
         $updated_event_data = $this->event_data;
         $update_event_name = 'Updated name for event';
@@ -99,14 +101,14 @@ class EventActionIngestEventArray extends TestCase
         $this->assertEquals(
             $update_event_name,
             $updated_event->name,
-            "Event name updated"
+            'Event name updated'
         );
 
         $events_count_should_be_one = Event::count();
         $this->assertEquals(
             1,
             $events_count_should_be_one,
-            "There should ony be one event after an the event is updated/"
+            'There should ony be one event after an the event is updated/'
         );
     }
 }

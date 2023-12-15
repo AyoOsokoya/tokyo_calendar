@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Users\Actions;
@@ -11,7 +12,9 @@ use App\Domains\Users\Models\User;
 class UserActionEventAttendanceStatusUpdate
 {
     private User $user;
+
     private Event $event;
+
     private EnumUserEventAttendanceStatus $status;
 
     private function __construct(User $user, Event $event, EnumUserEventAttendanceStatus $status)

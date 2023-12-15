@@ -1,12 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
 use App\Domains\Events\Models\Tables\TableEvent as _;
-use App\Domains\Location\Models\Location;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,26 +20,21 @@ use Illuminate\Support\Collection;
 /**
  * App\Models\Event
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $description
- *
  * @property Carbon $starts_at
  * @property Carbon $ends_at
  * @property EnumEventStatus $event_status
  * @property array $gallery_json
  * @property string $url
  * @property string $url_cover_image
- *
  * @property EnumEventCategories $event_category
- *
- * @property integer $event_source_id
+ * @property int $event_source_id
  * @property string $import_unique_id // A unique id for identifying events when being imported (prevents duplication)
  * @property string $import_data_hash // If the hash changes, something in the event info has been updated
- *
  * @property EventSource $event_source
  * @property Collection $users
- *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at

@@ -37,7 +37,7 @@ class GetEventImage extends Command
 
             // bluenote has an invalid cert get_file_contents fails
             $image = $this->getFileIgnoreCertificates($event->url_image);
-            echo $this->nameImage($event) . "\n";
+            echo $this->nameImage($event)."\n";
             Storage::put($this->nameImage($event), $image);
         });
     }
@@ -45,6 +45,7 @@ class GetEventImage extends Command
     private function getUrlExtension($url)
     {
         $path_without_query = parse_url($url)['path'];
+
         return pathinfo($path_without_query)['extension'];
     }
 
@@ -56,12 +57,12 @@ class GetEventImage extends Command
             $event->id + 100000000000, // be careful of exceeding PHP_MAX_INT
             0,
             null,
-            "_"
+            '_'
         );
 
         $extension = $this->getUrlExtension($event->url_image);
-        if ($extension === "jpeg") {
-            $extension = "jpg";
+        if ($extension === 'jpeg') {
+            $extension = 'jpg';
         }
 
         return "{$subdirectory}/{$filename}.{$extension}";
@@ -75,14 +76,14 @@ class GetEventImage extends Command
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt( $ch, CURLOPT_AUTOREFERER, TRUE );
-        curl_setopt( $ch, CURLOPT_HEADER, 0 );
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt( $ch, CURLOPT_URL, $url );
-        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, TRUE );
+        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
-        $data = curl_exec( $ch );
-        curl_close( $ch );
+        $data = curl_exec($ch);
+        curl_close($ch);
 
         return $data;
     }

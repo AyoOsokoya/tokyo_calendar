@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Users\Actions;
@@ -8,7 +9,9 @@ use App\Domains\Users\Models\User;
 class UserActionUpdate
 {
     private User $user;
+
     private array $user_data;
+
     private function __construct($user, $user_data)
     {
         $this->user = $user;

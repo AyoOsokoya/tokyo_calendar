@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Http\Resources;
 
@@ -21,7 +22,7 @@ class EventSourceResource extends JsonResource
     {
         return [
             ...parent::toArray($request),
-            'events' => $this->whenLoaded('events', fn() => EventResource::collection($this->events))
+            'events' => $this->whenLoaded('events', fn () => EventResource::collection($this->events)),
         ];
     }
 }

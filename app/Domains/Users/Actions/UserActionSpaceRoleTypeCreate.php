@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Users\Actions;
@@ -10,7 +11,9 @@ use App\Domains\Users\Models\User;
 class UserActionSpaceRoleTypeCreate
 {
     private User $user;
+
     private Space $space;
+
     private EnumUserSpaceRoleType $role_type;
 
     private function __construct($user, $space, $role_type)

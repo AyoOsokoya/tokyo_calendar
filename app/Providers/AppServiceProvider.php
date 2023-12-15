@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -27,17 +28,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Response::macro('jsonIcalResponse', function(
+        Response::macro('jsonIcalResponse', function (
             Collection $events,
             EnumApiResponseFormat $response_format = EnumApiResponseFormat::JSON
-        ){
+        ) {
             // Could use content negotiation https://laravel.com/docs/10.x/requests#content-negotiation
             if ($response_format === EnumApiResponseFormat::ICAL) {
                 $events_array = [];
                 // TODO: use EventResource toIcalArray
                 foreach ($events as $event) {
                     /** @var Event $event */
-                    $events_array []= iCalEvent::create(
+                    $events_array[] = iCalEvent::create(
                         "{$event->event_source->name_display_short}: $event->name"
                     )
                         ->startsAt($event->starts_at)
@@ -54,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
 
                 return response($calendar->get())
                     ->withHeaders([
-                        'Content-Type' => 'text/plain'
+                        'Content-Type' => 'text/plain',
                     ]);
             } else {
                 return response()->json(EventResource::collection($events));

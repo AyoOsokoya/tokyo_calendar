@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Spaces\Actions;
@@ -7,16 +8,20 @@ namespace App\Domains\Spaces\Actions;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
-use App\Domains\Users\Models\User;
 use App\Domains\Users\Models\Tables\TableUserSpace as US;
+use App\Domains\Users\Models\User;
 
 class SpaceActionUserInviteUpdate
 {
     private Space $space;
+
     private User $user;
+
     private User $invited_user;
-    Private EnumUserSpaceInviteStatus $invite_status;
-    Private EnumUserSpaceRoleType $role_type;
+
+    private EnumUserSpaceInviteStatus $invite_status;
+
+    private EnumUserSpaceRoleType $role_type;
 
     private function __construct($space, $user, $invited_user, $invite_status, $role_type)
     {
@@ -33,8 +38,7 @@ class SpaceActionUserInviteUpdate
         User $invited_user,
         EnumUserSpaceInviteStatus $invite_status,
         EnumUserSpaceRoleType $role_type
-    ): SpaceActionUserInviteUpdate
-    {
+    ): SpaceActionUserInviteUpdate {
         return new SpaceActionUserInviteUpdate($space, $user, $invited_user, $invite_status, $role_type);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domains\Users\Actions;
@@ -9,6 +10,7 @@ use App\Domains\Users\Models\User;
 class UserActionUserRelationshipUpdate
 {
     private array $user_data;
+
     private User $user;
 
     private function __construct(User $user, array $user_data)

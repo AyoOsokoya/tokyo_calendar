@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
+use App\Domains\Spaces\Models\Tables\TableSpace as _;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Domains\Spaces\Models\Tables\TableSpace as _;
 
 // TODO: Figure out how to store addresses in the database.
 /*
@@ -14,7 +15,8 @@ use App\Domains\Spaces\Models\Tables\TableSpace as _;
  https://softwareengineering.stackexchange.com/questions/357900/whats-a-universal-way-to-store-a-geographical-address-location-in-a-database
  */
 
-return new class extends Migration {
+return new class extends Migration
+{
     // Address format from
     // https://softwareengineering.stackexchange.com/questions/357900/whats-a-universal-way-to-store-a-geographical-address-location-in-a-database
     // https://github.com/google/libaddressinput consider this for validating addresses
