@@ -13,9 +13,9 @@ return new class extends Migration {
             $table->id();
             $table->string(_::country); // iso 3166-1 alpha-3
             $table->string(_::city);
+            $table->string(_::state);
             $table->string(_::street_address);
             $table->string(_::post_code);
-            $table->string(_::state_province);
             $table->string(_::other);
 
             // TODO: consider using spacialIndex for coordinates
