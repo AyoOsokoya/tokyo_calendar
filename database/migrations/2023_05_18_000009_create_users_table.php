@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string(_::name_handle);
             $table->string(_::avatar)->nullable();
             $table->datetime(_::date_of_birth)->nullable();
-            $table->string(_::user_type);
+            $table->string(_::user_role_type);
             $table->string(_::account_status);
             $table->string(_::account_type);
             $table->string(_::email)->unique();

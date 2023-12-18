@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Domains\Users\Enums\EnumUserType;
+use App\Domains\Users\Enums\EnumUserRoleType;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,7 +32,7 @@ class UserFactory extends Factory
             _::name_handle => fake()->userName(),
             _::avatar => fake()->imageUrl(),
             _::date_of_birth => Carbon::now()->subYears(rand(12, 80)),
-            _::user_type => EnumUserType::STANDARD,
+            _::user_role_type => EnumUserRoleType::STANDARD,
             _::email => fake()->unique()->safeEmail(),
             _::email_verified_at => now(),
             _::password => Str::random(32),
@@ -54,10 +54,10 @@ class UserFactory extends Factory
         ]);
     }
 
-    public function userType(EnumUserType $user_type): static
+    public function userType(EnumUserRoleType $user_type): static
     {
         return $this->state(fn (array $attributes) => [
-            _::user_type => $user_type,
+            _::user_role_type => $user_type,
         ]);
     }
 }

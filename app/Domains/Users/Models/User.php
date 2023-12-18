@@ -11,7 +11,7 @@ use App\Domains\Users\Enums\EnumUserAccountType;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
-use App\Domains\Users\Enums\EnumUserType;
+use App\Domains\Users\Enums\EnumUserRoleType;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
 use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as ur;
@@ -33,6 +33,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $age
  * @property string $user_type
  * @property string $email
+ * @property string $user_role_type
  * @property string $account_status
  * @property string $account_type
  * @property string $email_verified_at
@@ -58,7 +59,7 @@ class User extends Authenticatable
         _::name_handle,
         _::avatar,
         _::date_of_birth,
-        _::user_type,
+        _::user_role_type,
         _::account_type,
         _::account_status,
         _::email_verified_at,
@@ -82,7 +83,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         _::email_verified_at => 'datetime',
-        _::user_type => EnumUserType::class,
+        _::user_role_type => EnumUserRoleType::class,
         _::account_status => EnumUserAccountStatus::class,
         _::account_type => EnumUserAccountType::class,
     ];
