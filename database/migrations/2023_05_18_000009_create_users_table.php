@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string(_::avatar)->nullable();
             $table->datetime(_::date_of_birth)->nullable();
             $table->string(_::user_type);
+            $table->string(_::account_status);
+            $table->string(_::account_type);
             $table->string(_::email)->unique();
             $table->dateTime(_::email_verified_at)->nullable();
             $table->string(_::password);

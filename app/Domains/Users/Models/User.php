@@ -6,6 +6,8 @@ namespace App\Domains\Users\Models;
 
 use App\Domains\Events\Models\Event;
 use App\Domains\Spaces\Models\Space;
+use App\Domains\Users\Enums\EnumUserAccountStatus;
+use App\Domains\Users\Enums\EnumUserAccountType;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
@@ -31,6 +33,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $age
  * @property string $user_type
  * @property string $email
+ * @property string $account_status
+ * @property string $account_type
  * @property string $email_verified_at
  * @property UserEvent $pivot
  * @property Collection $events
@@ -55,6 +59,8 @@ class User extends Authenticatable
         _::avatar,
         _::date_of_birth,
         _::user_type,
+        _::account_type,
+        _::account_status,
         _::email_verified_at,
         _::password,
     ];
@@ -77,6 +83,8 @@ class User extends Authenticatable
     protected $casts = [
         _::email_verified_at => 'datetime',
         _::user_type => EnumUserType::class,
+        _::account_status => EnumUserAccountStatus::class,
+        _::account_type => EnumUserAccountType::class,
     ];
 
     public function events(): BelongsToMany
@@ -164,7 +172,8 @@ class User extends Authenticatable
                 us::user_space_role_type,
                 EnumUserSpaceRoleType::ADMIN
             )->wherePivot(
-                us::space_id, $space->id
+                us::space_id,
+                $space->id
             )->exists();
     }
 
@@ -175,7 +184,8 @@ class User extends Authenticatable
                 us::user_space_role_type,
                 EnumUserSpaceRoleType::STAFF
             )->wherePivot(
-                us::space_id, $space->id
+                us::space_id,
+                $space->id
             )->exists();
     }
 
@@ -183,7 +193,8 @@ class User extends Authenticatable
     {
         return $this->spaces()
             ->wherePivot(
-                us::space_id, $space->id
+                us::space_id,
+                $space->id
             )->exists();
     }
 
