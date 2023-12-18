@@ -25,8 +25,11 @@ class TableUser
     public const email = 'email';
 
     public const user_role_type = 'user_role_type';
+
     public const account_status = 'account_status';
+
     public const account_type = 'account_type';
+
     public const email_verified_at = 'email_verified_at';
 
     public const password = 'password';
