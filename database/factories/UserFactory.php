@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Domains\Users\Enums\EnumUserRegistrationStatus;
 use App\Domains\Users\Enums\EnumUserRoleType;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\User;
@@ -51,6 +52,7 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             _::email_verified_at => null,
+            _::account_status => EnumUserRegistrationStatus::UNVERIFIED,
         ]);
     }
 

@@ -31,8 +31,8 @@ class SpaceFactory extends Factory
     // TODO: withUsers()
     // TODO: withEvents()
     // TODO: withLocation()
-    // TODO: verificationStatus()
-    // TODO: activityStatus()
+    // TODO: verificationStatus() // NO state needed
+    // TODO: activityStatus() // NO state needed
 
     public function configure(): static
     {

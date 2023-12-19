@@ -10,6 +10,7 @@ use App\Domains\Events\Models\Event;
 use App\Domains\Events\Models\EventSource;
 use App\Domains\Events\Models\Tables\TableEvent as _;
 use App\Domains\Import\Actions\EventActionCreateImportDataHash;
+use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Models\Tables\TableUserEvent as UE;
 use App\Domains\Users\Models\User;
@@ -29,7 +30,6 @@ class EventFactory extends Factory
     public function definition(): array
     {
         $event_start = Carbon::now()->addDays(rand(1, 45));
-
         $url = fake()->url();
 
         return [
@@ -38,24 +38,18 @@ class EventFactory extends Factory
             _::space_id => null,
 
             _::starts_at => $event_start,
-            _::ends_at => $event_start->addHours(rand(1, 7)),
+            _::ends_at => $event_start->addHours(rand(1, 24)),
 
             _::event_status => EnumEventStatus::ACTIVE,
             _::event_category => collect(EnumEventCategories::cases())->random(),
-            _::gallery_json => json_encode([
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-                fake()->imageUrl(),
-            ]),
+            _::gallery_json => json_encode($this->gallery()),
 
             _::url_cover_image => fake()->imageUrl(),
             _::url => $url,
 
             _::event_source_id => null,
             _::import_unique_id => md5($url.$event_start->toString()),
-            _::import_data_hash => '',
+            _::import_data_hash => md5($url),
         ];
     }
 
@@ -87,4 +81,28 @@ class EventFactory extends Factory
             );
         });
     }
+
+    public function withSpace(): static
+    {
+        return $this->afterCreating(function (Event $event) {
+            $space = Space::factory()->create();
+
+            $event->space_id = $space->id;
+            $event->save();
+        });
+    }
+
+    private function gallery(): array
+    {
+        return [
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+        ];
+    }
+
+    // States:
+    // ActivityStatus No need to creat states just pass in attribute
 }
