@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string(_::schedule_text)->nullable();
             $table->json(_::gallery_json)->nullable();
             $table->string(_::website_url)->nullable();
+            $table->string(_::location_id)->index()->nullable();
             $table->string(_::space_activity_status)->index();
             $table->string(_::space_verification_status)->index();
 

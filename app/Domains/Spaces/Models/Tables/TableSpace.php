@@ -22,6 +22,8 @@ class TableSpace
 
     const website_url = 'website_url';
 
+    const location_id = 'location_id';
+
     const space_activity_status = 'space_activity_status';
 
     const space_verification_status = 'space_verification_status';

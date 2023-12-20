@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Domains\Location\Models\Location;
 use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
 use App\Domains\Spaces\Models\Tables\TableSpace as _;
@@ -22,6 +23,7 @@ class SpaceFactory extends Factory
             _::socials_json => $this->socials($socials_name)->toJson(),
             _::schedule_text => fake()->paragraph(),
             _::gallery_json => $this->gallery()->toJson(),
+            _::location_id => Location::factory(), // create a new location for each space
             _::website_url => fake()->url(),
             _::space_activity_status => EnumSpaceActivityStatus::ACTIVE,
             _::space_verification_status => EnumSpaceVerificationStatus::VERIFIED,

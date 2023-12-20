@@ -31,6 +31,7 @@ class Space extends Model
         _::schedule_text,
         _::gallery_json,
         _::website_url,
+        _::location_id,
         _::space_activity_status,
         _::space_verification_status,
     ];
