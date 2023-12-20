@@ -7,12 +7,14 @@ namespace Database\Factories;
 use App\Domains\Location\Models\Location;
 use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
+use App\Domains\Spaces\Models\Space;
 use App\Domains\Spaces\Models\Tables\TableSpace as _;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
 
 class SpaceFactory extends Factory
 {
+    protected $model = Space::class;
     public function definition(): array
     {
         $socials_name = fake()->userName();

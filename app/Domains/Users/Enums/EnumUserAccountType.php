@@ -8,5 +8,4 @@ enum EnumUserAccountType: string
 {
     case PROFESSIONAL = 'professional';
     case PERSONAL = 'personal';
-
 }

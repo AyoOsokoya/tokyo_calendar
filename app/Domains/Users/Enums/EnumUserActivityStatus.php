@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Users\Enums;
 
-enum EnumUserAccountStatus: string
+enum EnumUserActivityStatus: string
 {
     case PENDING = 'pending';
     case ACTIVE = 'active';

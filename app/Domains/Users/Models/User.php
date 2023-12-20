@@ -6,16 +6,17 @@ namespace App\Domains\Users\Models;
 
 use App\Domains\Events\Models\Event;
 use App\Domains\Spaces\Models\Space;
-use App\Domains\Users\Enums\EnumUserAccountStatus;
+use App\Domains\Users\Enums\EnumUserActivityStatus;
 use App\Domains\Users\Enums\EnumUserAccountType;
 use App\Domains\Users\Enums\EnumUserRelationshipStatus;
+use App\Domains\Users\Enums\EnumUserStaffRole;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
-use App\Domains\Users\Enums\EnumUserRoleType;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
 use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as ur;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,9 +34,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $age
  * @property string $user_type
  * @property string $email
- * @property string $user_role_type
- * @property string $account_status
+ * @property string $staff_role
  * @property string $account_type
+ * @property string $activity_status
  * @property string $email_verified_at
  * @property UserEvent $pivot
  * @property Collection $events
@@ -46,6 +47,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $table = _::table_name;
+    public $timestamps = 'false';
 
     /**
      * The attributes that are mass assignable.
@@ -59,9 +61,9 @@ class User extends Authenticatable
         _::name_handle,
         _::avatar,
         _::date_of_birth,
-        _::user_role_type,
+        _::staff_role,
         _::account_type,
-        _::account_status,
+        _::activity_status,
         _::email_verified_at,
         _::password,
     ];
@@ -83,8 +85,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         _::email_verified_at => 'datetime',
-        _::user_role_type => EnumUserRoleType::class,
-        _::account_status => EnumUserAccountStatus::class,
+        _::staff_role => EnumUserStaffRole::class,
+        _::activity_status => EnumUserActivityStatus::class,
         _::account_type => EnumUserAccountType::class,
     ];
 
@@ -199,7 +201,7 @@ class User extends Authenticatable
             )->exists();
     }
 
-    private function hasSpaceInvite(Space $space)
+    public function hasSpaceInvite(Space $space)
     {
         return $this->spaces()
             ->wherePivot(us::space_id, $space->id)
@@ -208,5 +210,10 @@ class User extends Authenticatable
                 us::user_space_invite_status,
                 [EnumUserSpaceInviteStatus::CANCELLED]
             )->exists();
+    }
+
+    public static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
     }
 }

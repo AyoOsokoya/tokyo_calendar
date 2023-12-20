@@ -16,5 +16,5 @@ class TableUserSpace
 
     const user_space_role_type = 'user_space_role_type';
 
-    const user_space_invite_status = 'user_space_status';
+    const user_space_invite_status = 'user_space_invite_status';
 }

@@ -12,7 +12,7 @@ use App\Domains\Events\Models\Tables\TableEvent as _;
 use App\Domains\Import\Actions\EventActionCreateImportDataHash;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
-use App\Domains\Users\Models\Tables\TableUserEvent as UE;
+use App\Domains\Users\Models\Tables\TableUserEvent as ue;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  */
 class EventFactory extends Factory
 {
+    protected $model = Event::class;
     /**
      * Define the model's default state.
      *
@@ -77,7 +78,7 @@ class EventFactory extends Factory
 
             $user->events()->attach(
                 $event,
-                [UE::user_event_attendance_status => EnumUserEventAttendanceStatus::GOING]
+                [ue::user_event_attendance_status => EnumUserEventAttendanceStatus::GOING]
             );
         });
     }
@@ -102,7 +103,4 @@ class EventFactory extends Factory
             fake()->imageUrl(),
         ];
     }
-
-    // States:
-    // ActivityStatus No need to creat states just pass in attribute
 }

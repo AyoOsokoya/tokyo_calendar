@@ -26,9 +26,9 @@ return new class extends Migration
         Schema::create(_::table_name, function (Blueprint $table) {
             $table->id();
             $table->string(_::name);
-            $table->string(_::description)->nullable();
+            $table->text(_::description)->nullable();
             $table->json(_::socials_json)->nullable();
-            $table->string(_::schedule_text)->nullable();
+            $table->text(_::schedule_text)->nullable();
             $table->json(_::gallery_json)->nullable();
             $table->string(_::website_url)->nullable();
             $table->string(_::location_id)->index()->nullable();

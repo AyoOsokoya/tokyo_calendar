@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Domains\Users\Enums\EnumUserAccountType;
+use App\Domains\Users\Enums\EnumUserActivityStatus;
 use App\Domains\Users\Enums\EnumUserRegistrationStatus;
-use App\Domains\Users\Enums\EnumUserRoleType;
+use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
+use App\Domains\Users\Enums\EnumUserSpaceRoleType;
+use App\Domains\Users\Enums\EnumUserStaffRole;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
 
 /**
  * @extends Factory
@@ -19,11 +25,6 @@ class UserFactory extends Factory
 {
     protected $model = User::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -33,7 +34,9 @@ class UserFactory extends Factory
             _::name_handle => fake()->userName(),
             _::avatar => fake()->imageUrl(),
             _::date_of_birth => Carbon::now()->subYears(rand(12, 80)),
-            _::user_role_type => EnumUserRoleType::STANDARD,
+            _::staff_role => EnumUserStaffRole::NONE,
+            _::activity_status => EnumUserActivityStatus::ACTIVE,
+            _::account_type => EnumUserAccountType::PERSONAL,
             _::email => fake()->unique()->safeEmail(),
             _::email_verified_at => now(),
             _::password => Str::random(32),
@@ -41,25 +44,40 @@ class UserFactory extends Factory
         ];
     }
 
-    public function configure(): static
-    {
-        return $this->afterMaking(function () {
-        })->afterCreating(function () {
-        });
-    }
-
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
             _::email_verified_at => null,
-            _::account_status => EnumUserRegistrationStatus::UNVERIFIED,
+            _::activity_status => EnumUserRegistrationStatus::UNVERIFIED,
         ]);
     }
 
-    public function userType(EnumUserRoleType $user_type): static
+    public function roleType(EnumUserStaffRole $user_type): static
     {
         return $this->state(fn (array $attributes) => [
-            _::user_role_type => $user_type,
+            _::staff_role => $user_type,
         ]);
+    }
+
+    public function withSpaces(Collection $spaces): static
+    {
+        return $this->afterCreating(function (User $user) use ($spaces) {
+            $spaces->each(function ($space) use ($user) {
+                // TODO: use an action
+                $space->users()->attach($user->id, [
+                    us::user_space_role_type => EnumUserSpaceRoleType::ADMIN,
+                    us::user_space_invite_status => EnumUserSpaceInviteStatus::ACCEPTED,
+                ]);
+            });
+        });
+    }
+
+    public function withEvents(Collection $events): static
+    {
+        return $this->afterCreating(function (User $user) use ($events) {
+            $events->each(function ($event) use ($user) {
+                $event->users()->attach($user->id);
+            });
+        });
     }
 }

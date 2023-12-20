@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domains\Users\Enums;
 
-enum EnumUserRoleType: string
+enum EnumUserStaffRole: string
 {
     case ADMIN = 'admin';
     case STAFF = 'staff';
-    case STANDARD = 'standard';
+    case NONE = 'none';
 }

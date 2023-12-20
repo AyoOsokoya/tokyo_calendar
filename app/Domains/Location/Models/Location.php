@@ -6,6 +6,7 @@ namespace App\Domains\Location\Models;
 
 use App\Domains\Location\Models\Tables\TableLocation as _;
 use App\Domains\Spaces\Models\Space;
+use Database\Factories\LocationFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,5 +51,10 @@ class Location extends Model
     public function spaces(): HasMany
     {
         return $this->hasMany(Space::class);
+    }
+
+    public static function newFactory(): LocationFactory
+    {
+        return LocationFactory::new();
     }
 }

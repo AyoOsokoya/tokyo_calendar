@@ -6,6 +6,7 @@ namespace App\Domains\Events\Models;
 
 use App\Domains\Events\Enums\EnumEventSourceDataType;
 use App\Domains\Events\Models\Tables\TableEventSource as _;
+use Database\Factories\EventSourceFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,7 +36,7 @@ class EventSource extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'event_source';
+    protected $table = 'event_sources';
 
     /**
      * The attributes that are mass assignable.
@@ -66,5 +67,10 @@ class EventSource extends Model
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
+    }
+
+    public static function newFactory(): EventSourceFactory
+    {
+        return EventSourceFactory::new();
     }
 }

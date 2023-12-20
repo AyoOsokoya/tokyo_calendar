@@ -7,8 +7,10 @@ namespace App\Domains\Events\Models;
 use App\Domains\Events\Enums\EnumEventCategories;
 use App\Domains\Events\Enums\EnumEventStatus;
 use App\Domains\Events\Models\Tables\TableEvent as _;
+use App\Domains\Users\Models\Tables\TableUser as u;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Models\User;
+use Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -96,5 +98,33 @@ class Event extends Model
     public function space(): BelongsTo
     {
         return $this->belongsTo(Space::class, _::space_id);
+    }
+
+    public static function newFactory(): EventFactory
+    {
+        return EventFactory::new();
+    }
+
+    public function scopeWithUsers($query): void
+    {
+        $query->with([
+            'users' => function ($query) {
+                $query->select([
+                    u::id,
+                    u::name_first,
+                    u::name_last,
+                    u::name_middle,
+                    u::name_handle,
+                    u::avatar,
+                    u::date_of_birth,
+                    u::staff_role,
+                    u::account_type,
+                    u::activity_status,
+                    u::email_verified_at,
+                    u::password,
+                    u::remember_token,
+                ]);
+            },
+        ]);
     }
 }

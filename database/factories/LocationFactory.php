@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Domains\Location\Models\Location;
 use App\Domains\Location\Models\Tables\TableLocation as _;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LocationFactory extends Factory
 {
+    protected $model = Location::class;
     /**
      * Define the model's default state.
      *
@@ -18,13 +20,13 @@ class LocationFactory extends Factory
     {
         return [
             _::country => '',
-            _::city => '',
-            _::state => '',
-            _::street_address => '',
-            _::post_code => '',
-            _::other => '',
-            _::longitude => '',
-            _::latitude => '',
+            _::city => fake()->city(),
+            _::state => fake()->city(),
+            _::street_address => fake()->streetAddress(),
+            _::post_code => fake()->postcode(),
+            _::other => fake()->address(),
+            _::longitude => fake()->longitude(),
+            _::latitude => fake()->latitude()
         ];
     }
 

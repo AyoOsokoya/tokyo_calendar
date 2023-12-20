@@ -24,9 +24,9 @@ class TableUser
 
     public const email = 'email';
 
-    public const user_role_type = 'user_role_type';
+    public const staff_role = 'staff_role';
 
-    public const account_status = 'account_status';
+    public const activity_status = 'activity_status';
 
     public const account_type = 'account_type';
 
