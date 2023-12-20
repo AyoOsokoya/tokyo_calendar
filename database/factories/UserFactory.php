@@ -6,17 +6,20 @@ namespace Database\Factories;
 
 use App\Domains\Users\Enums\EnumUserAccountType;
 use App\Domains\Users\Enums\EnumUserActivityStatus;
+use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
+use App\Domains\Users\Enums\EnumUserEventRoleType;
 use App\Domains\Users\Enums\EnumUserRegistrationStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserStaffRole;
 use App\Domains\Users\Models\Tables\TableUser as _;
+use App\Domains\Users\Models\Tables\TableUserEvent as ue;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use App\Domains\Users\Models\Tables\TableUserSpace as us;
 
 /**
  * @extends Factory
@@ -76,7 +79,11 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) use ($events) {
             $events->each(function ($event) use ($user) {
-                $event->users()->attach($user->id);
+                $event->users()->attach($user->id, [
+                    ue::user_event_role_type => EnumUserEventRoleType::ADMIN,
+                    ue::user_event_attendance_status => EnumUserEventAttendanceStatus::GOING,
+                    ue::inviter_id => $user->id, // user is self inviter
+                ]);
             });
         });
     }
