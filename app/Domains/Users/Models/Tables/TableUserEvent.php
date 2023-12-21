@@ -6,7 +6,7 @@ namespace App\Domains\Users\Models\Tables;
 
 class TableUserEvent
 {
-    const table_name = 'user_events';
+    const table_name = 'user_event';
 
     const id = 'id';
 

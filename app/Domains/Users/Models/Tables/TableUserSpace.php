@@ -6,7 +6,7 @@ namespace App\Domains\Users\Models\Tables;
 
 class TableUserSpace
 {
-    const table_name = 'user_spaces';
+    const table_name = 'user_space';
 
     const id = 'id';
 
