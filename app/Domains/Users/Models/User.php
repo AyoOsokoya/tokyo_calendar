@@ -8,13 +8,13 @@ use App\Domains\Events\Models\Event;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserActivityStatus;
 use App\Domains\Users\Enums\EnumUserAccountType;
-use App\Domains\Users\Enums\EnumUserRelationshipStatus;
+use App\Domains\Users\Enums\EnumUserUserStatus;
 use App\Domains\Users\Enums\EnumUserStaffRole;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
-use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as ur;
+use App\Domains\Users\Models\Tables\TableUserUser as ur;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -111,12 +111,12 @@ class User extends Authenticatable
             ur::user_id,
             ur::relation_id
         )->wherePivot(
-            ur::user_relationship_to_user_status,
-            EnumUserRelationshipStatus::MUTUAL_FOLLOW
+            ur::user_user_status,
+            EnumUserUserStatus::MUTUAL_FOLLOW
         )->withPivot([
             ur::user_id,
             ur::relation_id,
-            ur::user_relationship_to_user_status,
+            ur::user_user_status,
         ])->withTimestamps();
     }
 
@@ -128,12 +128,12 @@ class User extends Authenticatable
             ur::user_id,
             ur::relation_id
         )->wherePivot(
-            ur::user_relationship_to_user_status,
-            EnumUserRelationshipStatus::FOLLOW
+            ur::user_user_status,
+            EnumUserUserStatus::FOLLOW
         )->withPivot([
             ur::user_id,
             ur::relation_id,
-            ur::user_relationship_to_user_status,
+            ur::user_user_status,
         ])->withTimestamps();
     }
 
@@ -145,11 +145,11 @@ class User extends Authenticatable
             ur::user_id,
             ur::relation_id
         )->wherePivot(
-            ur::user_relationship_to_user_status,
+            ur::user_user_status,
         )->withPivot([
             ur::user_id,
             ur::relation_id,
-            ur::user_relationship_to_user_status,
+            ur::user_user_status,
         ])->withTimestamps();
     }
 

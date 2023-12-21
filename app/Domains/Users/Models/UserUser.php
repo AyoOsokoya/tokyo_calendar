@@ -2,8 +2,8 @@
 
 namespace App\Domains\Users\Models;
 
-use App\Domains\Users\Enums\EnumUserRelationshipStatus;
-use App\Domains\Users\Models\Tables\TableUserRelationshipToUser as _;
+use App\Domains\Users\Enums\EnumUserUserStatus;
+use App\Domains\Users\Models\Tables\TableUserUser as _;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $user_id
  * @property int $relation_id
- * @property EnumUserRelationshipStatus $user_relationship_status
+ * @property EnumUserUserStatus $user_user_status
  * @property User $user
  * @property User $relation
  * @property Carbon $created_at
@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  *
  * @mixin Eloquent
  */
-class UserRelationshipToUser extends Model
+class UserUser extends Model
 {
     use HasFactory;
 
@@ -30,10 +30,10 @@ class UserRelationshipToUser extends Model
     protected $fillable = [
         _::user_id,
         _::relation_id,
-        _::user_relationship_to_user_status,
+        _::user_user_status,
     ];
 
     protected $casts = [
-        _::user_relationship_to_user_status => EnumUserRelationshipStatus::class,
+        _::user_user_status => EnumUserUserStatus::class,
     ];
 }
