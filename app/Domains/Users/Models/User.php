@@ -64,6 +64,7 @@ class User extends Authenticatable
         _::staff_role,
         _::account_type,
         _::activity_status,
+        _::email,
         _::email_verified_at,
         _::password,
     ];
@@ -92,15 +93,18 @@ class User extends Authenticatable
 
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class)
-            ->withPivot([
-                ue::inviter_id,
-                ue::user_id,
-                ue::event_id,
-                ue::user_event_role_type,
-                ue::user_event_attendance_status,
-            ])
-            ->withTimestamps();
+        return $this->belongsToMany(
+            Event::class,
+            ue::table_name,
+            ue::user_id,
+            ue::event_id
+        )->withPivot([
+            ue::inviter_id,
+            ue::user_id,
+            ue::event_id,
+            ue::user_event_role_type,
+            ue::user_event_attendance_status,
+        ])->withTimestamps();
     }
 
     public function friends(): BelongsToMany

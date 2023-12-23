@@ -5,15 +5,40 @@ declare(strict_types=1);
 namespace Tests\Unit\Domains\Users\Models;
 
 use App\Domains\Events\Models\Event;
-use App\Domains\Location\Models\Location;
 use App\Domains\Spaces\Models\Space;
+use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
+use App\Domains\Users\Enums\EnumUserEventRoleType;
+use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
+use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserStaffRole;
-use App\Domains\Users\Models\User;
 use App\Domains\Users\Models\Tables\TableUser as _;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
+use App\Domains\Users\Models\Tables\TableUserEvent as ue;
+use App\Domains\Users\Models\User;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    public function test_create_user_and_relationships(): void
+    {
+        $user = User::factory()
+            ->hasAttached(Space::factory()->count(10), [
+                us::user_space_role_type => EnumUserSpaceRoleType::ADMIN,
+                us::user_space_invite_status => EnumUserSpaceInviteStatus::ACCEPTED,
+            ])
+            ->hasAttached(Event::factory()->count(10), [
+                ue::user_event_role_type => EnumUserEventRoleType::ADMIN,
+                ue::user_event_attendance_status => EnumUserEventAttendanceStatus::GOING,
+                // TODO: ue::inviter_id => $user->id, // user is self inviter
+            ])
+            ->create();
+
+        // Assert relationships
+        // Assert user has 10 spaces
+        // Assert user has 10 events
+        // Add
+    }
+
     public function test_user_factory_creation(): void
     {
         $spaces = Space::factory()
@@ -34,30 +59,6 @@ class UserTest extends TestCase
         $this->assertDatabaseCount('spaces', 10);
         $this->assertDatabaseCount('events', 10);
 
-        // Create 10 spaces
-            // create 10 events for each space
-
-        // Create a default database
-        // Users, Events, Spaces
-        // User follows many spaces
-            // is an admin, guest etc at a space
-        // User follows many events
-            // user has differing roles for event (admin, guest etc)
-            // user has differing attendance status for event
-            // user has differing role types for space?
-                // User event role type does not depend on space usually
-                    // TODO: think about the relationship between event roles and user event roles
-            // Create one staff Admin (user 1)
-            // Create one space admin for each space space 2 admin = user 2, space 3 admin = user 3 etc
-            // Create 100 users who are just default users
-                // follow PSEUDO random events and spaces (srand())
-            // Follow 25 spaces each
-            // Follow 25 events each
-            // Follow 25 friends and make follow backs (do this in the specific test)
-
-        // Can spaces follow other spaces ???
-
-        // 100 users
         $staff_admin = User::factory()->state([
             _::name_first => 'Admin',
             _::name_middle => 'Test',
@@ -66,32 +67,20 @@ class UserTest extends TestCase
             _::email => 'admin@user.com',
             _::staff_role => EnumUserStaffRole::ADMIN->value,
         ])->create();
-
-        $users = User::factory()->count(100)->create();
-        $spaces = Space::factory()->count(10)->create();
-        // 10 spaces
-        // 15 events per space
-            // some in the past
-            // some in the future
-            // some happening now
-        // Users follow spaces
-        $users->each(function (User $user) use ($spaces) {
-            $user->spaces()->attach($spaces->random(25));
-        });
-        // users follow/attend events
-
-        User::factory()->has(
-            Space::factory()
-                ->count(10)
-                ->state(function (array $attributes, User $user) {
-                    return ['user_id' => $user->id];
-                })->has(
-                    Event::factory()
-                        ->count(10)
-                        ->state(function (array $attributes, Space $space) {
-                            return ['space_id' => $space->id];
-                        })
-                )
-        )->create();
     }
+
+    // Create user
+    // update user
+    // validation
+    // update by other user?/admin
+    // Add user to space
+    // Change role in space
+    // User relationships to others
+    // follow user
+    // follow back
+    // User role to events
+    // staff role type
+    // user event role type
+    // follow event
+    // invite friends
 }
