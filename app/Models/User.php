@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Domains\Events\Models\Event;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserAccountType;
@@ -26,13 +28,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
+
 /**
  * @property int $id
- * @property string $name_first
- * @property string $name_last
- * @property string $name_middle
- * @property string $name_handle // nickname
- * @property int $age
+ * @property string $name
+ * @property string $handle // nickname
+ * @property Carbon $date_of_birth
  * @property string $user_type
  * @property string $email
  * @property string $staff_role
@@ -43,12 +44,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Collection $events
  * @property string $password
  */
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $table = _::table_name;
-    public $timestamps = 'false';
 
     /**
      * The attributes that are mass assignable.
@@ -56,10 +57,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        _::name_first,
-        _::name_last,
-        _::name_middle,
-        _::name_handle,
+        _::name,
+        _::handle,
         _::avatar,
         _::date_of_birth,
         _::staff_role,
@@ -76,8 +75,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        _::password,
-        _::remember_token,
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -86,6 +85,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        _::password => 'hashed',
         _::email_verified_at => 'datetime',
         _::staff_role => EnumUserStaffRole::class,
         _::activity_status => EnumUserActivityStatus::class,

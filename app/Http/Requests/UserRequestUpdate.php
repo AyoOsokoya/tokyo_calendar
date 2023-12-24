@@ -23,10 +23,9 @@ class UserRequestUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            u::name_first => 'required|string',
-            u::name_last => 'required|string',
+            u::name => 'required|string',
             u::email => 'required|email|unique:users',
-            u::name_handle => 'unique:users', // TODO: Don't allow normal user to change name_handle
+            u::handle => 'unique:users', // TODO: Don't allow normal user to change name_handle
             u::password => 'required|string',
             u::avatar => 'nullable|url',
             u::staff_role => ['required', Rule::enum(EnumUserStaffRole::class)],

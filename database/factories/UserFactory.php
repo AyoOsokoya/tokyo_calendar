@@ -17,36 +17,39 @@ use App\Domains\Users\Models\Tables\TableUserEvent as ue;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
- * @extends Factory
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
-    protected $model = User::class;
+    /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password;
 
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            _::name_first => fake()->firstName(),
-            _::name_last => fake()->lastName(),
-            _::name_middle => fake()->lastName(),
-            _::name_handle => fake()->userName(),
-            _::avatar => fake()->imageUrl(),
-            _::date_of_birth => Carbon::now()->subYears(rand(12, 80)),
-            _::staff_role => EnumUserStaffRole::NONE,
-            _::activity_status => EnumUserActivityStatus::ACTIVE,
-            _::account_type => EnumUserAccountType::PERSONAL,
-            _::email => fake()->unique()->safeEmail(),
-            _::email_verified_at => now(),
-            _::password => Str::random(32),
-            _::remember_token => Str::random(10),
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
         ];
     }
 
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [

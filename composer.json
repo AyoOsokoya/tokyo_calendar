@@ -1,36 +1,30 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "doctrine/dbal": "^3.6",
+        "doctrine/dbal": "^3.7",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.0",
+        "inertiajs/inertia-laravel": "^0.6.8",
+        "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "spatie/icalendar-generator": "^2.5",
-        "vinkla/hashids": "^11.0",
-        "ext-curl": "*"
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.8",
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
-        "friendsofphp/php-cs-fixer": "^3.39",
-        "laravel/breeze": "^1.21",
-        "laravel/pint": "^1.13",
-        "laravel/sail": "^1.22",
+        "laravel/breeze": "^1.27",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "overtrue/phplint": "^9.0",
-        "phpmd/phpmd": "@stable",
-        "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0",
-        "squizlabs/php_codesniffer": "3.*",
-        "styleci/cli": "^1.5"
+        "nunomaduro/collision": "^7.10",
+        "phpunit/phpunit": "^10.5",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "psr-4": {

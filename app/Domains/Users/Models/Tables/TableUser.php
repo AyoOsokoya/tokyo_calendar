@@ -10,13 +10,9 @@ class TableUser
 
     public const id = 'id';
 
-    public const name_first = 'name_first';
+    public const name = 'name';
 
-    public const name_last = 'name_last';
-
-    public const name_middle = 'name_middle';
-
-    public const name_handle = 'name_handle';
+    public const handle = 'name_handle';
 
     public const avatar = 'avatar';
 

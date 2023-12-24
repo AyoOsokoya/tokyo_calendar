@@ -21,10 +21,8 @@ return new class extends Migration
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->id();
-            $table->string(_::name_first);
-            $table->string(_::name_last)->nullable();
-            $table->string(_::name_middle)->nullable();
-            $table->string(_::name_handle);
+            $table->string(_::name);
+            $table->string(_::handle);
             $table->string(_::avatar)->nullable();
             $table->datetime(_::date_of_birth)->nullable();
             $table->string(_::staff_role);

@@ -19,10 +19,9 @@ class UserRequestCreate extends FormRequest
     public function rules(): array
     {
         return [
-             u::name_first => 'required|string',
-             u::name_last => 'required|string',
+             u::name => 'required|string',
              u::email => 'required|email|unique:users',
-             u::name_handle => 'required|unique:users',
+             u::handle => 'required|unique:users',
              u::password => 'required|string',
              u::avatar => 'nullable|url',
              u::staff_role => ['required', Rule::enum(EnumUserStaffRole::class)],

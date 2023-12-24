@@ -60,10 +60,8 @@ class UserTest extends TestCase
         $this->assertDatabaseCount('events', 10);
 
         $staff_admin = User::factory()->state([
-            _::name_first => 'Admin',
-            _::name_middle => 'Test',
-            _::name_last => 'User',
-            _::name_handle => 'admin',
+            _::name => 'Admin',
+            _::handle => 'admin',
             _::email => 'admin@user.com',
             _::staff_role => EnumUserStaffRole::ADMIN->value,
         ])->create();
