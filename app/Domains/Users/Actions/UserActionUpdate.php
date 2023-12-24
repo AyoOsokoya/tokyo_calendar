@@ -8,23 +8,23 @@ use App\Domains\Users\Models\User;
 
 class UserActionUpdate
 {
-    private User $user;
+    private User $acting_user;
 
     private array $user_data;
 
-    private function __construct($user, $user_data)
+    private function __construct($acting_user, $user_data)
     {
-        $this->user = $user;
+        $this->acting_user = $acting_user;
         $this->user_data = $user_data;
     }
 
-    public static function make(User $user, array $user_data): UserActionUpdate
+    public static function make(User $acting_user, array $user_data): UserActionUpdate
     {
-        return new UserActionUpdate($user, $user_data);
+        return new UserActionUpdate($acting_user, $user_data);
     }
 
     public function execute(): void
     {
-        $this->user->update($this->user_data);
+        $this->acting_user->update($this->user_data);
     }
 }

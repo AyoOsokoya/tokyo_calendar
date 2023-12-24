@@ -29,7 +29,8 @@ Route::prefix('/v1')
         Route::get('/user/events/attendance_status/{attendance_status}/{response_format?}', [EventController::class, 'userEventsByAttendanceStatus']);
 
         Route::prefix('/user')->group(function () {
-            Route::get('/{user?}', [UserController::class, 'user']);
+            Route::get('/{user}', [UserController::class, 'userById']);
+            Route::get('/', [UserController::class, 'currentUser']);
             Route::post('/', [UserController::class, 'createUser']);
             // Route::put('/', [UserController::class, 'updateUser']);
             Route::delete('/{user}', [UserController::class, 'deleteUser']);

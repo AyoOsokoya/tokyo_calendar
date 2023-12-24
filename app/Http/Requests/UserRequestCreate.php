@@ -9,7 +9,7 @@ use App\Domains\Users\Models\Tables\TableUser as u;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserCreateRequest extends FormRequest
+class UserRequestCreate extends FormRequest
 {
     public function authorize(): bool
     {

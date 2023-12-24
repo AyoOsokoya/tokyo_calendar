@@ -5,21 +5,30 @@ namespace App\Http\Controllers;
 
 use App\Domains\Users\Actions\UserActionCreate;
 use App\Domains\Users\Actions\UserActionDelete;
+use App\Domains\Users\Actions\UserActionUpdate;
 use App\Domains\Users\Models\User;
 use App\Enums\EnumHttpResponseStatusCode;
-use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserRequestCreate;
+use App\Http\Requests\UserRequestUpdate;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
-    public function user(User $user): JsonResponse
+    public function currentUser(): JsonResponse
+    {
+        return response()->json([
+            User::first(), //TODO: Use auth()->user();
+        ], EnumHttpResponseStatusCode::OK->value);
+    }
+
+    public function userById(User $user): JsonResponse
     {
         return response()->json([
             $user,
         ], EnumHttpResponseStatusCode::OK->value);
     }
 
-    public function createUser(UserCreateRequest $request): JsonResponse
+    public function createUser(UserRequestCreate $request): JsonResponse
     {
         // TODO: if Auth User is Admin, allow creation of any user type
         UserActionCreate::make(
@@ -31,8 +40,15 @@ class UserController extends Controller
         ], EnumHttpResponseStatusCode::CREATED->value);
     }
 
-    public function updateUser(): void
+    public function updateUser(UserRequestUpdate $request): JsonResponse
     {
+        // UserActionUpdate::make(
+        //     $request->validated()
+        // )->execute();
+
+        return response()->json([
+            'message' => 'User updated successfully',
+        ], EnumHttpResponseStatusCode::OK->value);
         // Validate User Data
         // return appropriate error if validation fails
         // Update user
