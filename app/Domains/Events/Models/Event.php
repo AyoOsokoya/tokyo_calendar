@@ -10,7 +10,7 @@ use App\Domains\Events\Models\Tables\TableEvent as _;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Models\Tables\TableUser as u;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
-use App\Domains\Users\Models\User;
+use App\Models\User;
 use Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

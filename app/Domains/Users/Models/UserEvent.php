@@ -8,6 +8,7 @@ use App\Domains\Events\Models\Event;
 use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Enums\EnumUserEventRoleType;
 use App\Domains\Users\Models\Tables\TableUserEvent as _;
+use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

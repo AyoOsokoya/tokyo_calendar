@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Users\Models;
+namespace App\Models;
 
 use App\Domains\Events\Models\Event;
 use App\Domains\Spaces\Models\Space;
-use App\Domains\Users\Enums\EnumUserActivityStatus;
 use App\Domains\Users\Enums\EnumUserAccountType;
-use App\Domains\Users\Enums\EnumUserUserStatus;
-use App\Domains\Users\Enums\EnumUserStaffRole;
+use App\Domains\Users\Enums\EnumUserActivityStatus;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
+use App\Domains\Users\Enums\EnumUserStaffRole;
+use App\Domains\Users\Enums\EnumUserUserStatus;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
-use App\Domains\Users\Models\Tables\TableUserUser as ur;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
+use App\Domains\Users\Models\Tables\TableUserUser as ur;
+use App\Domains\Users\Models\UserEvent;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

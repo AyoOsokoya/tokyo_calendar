@@ -15,7 +15,7 @@ use App\Domains\Users\Enums\EnumUserStaffRole;
 use App\Domains\Users\Models\Tables\TableUser as _;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
-use App\Domains\Users\Models\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;

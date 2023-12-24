@@ -10,7 +10,7 @@ use App\Domains\Spaces\Enums\EnumSpaceActivityStatus;
 use App\Domains\Spaces\Enums\EnumSpaceVerificationStatus;
 use App\Domains\Spaces\Models\Tables\TableSpace as _;
 use App\Domains\Users\Models\Tables\TableUserSpace as us;
-use App\Domains\Users\Models\User;
+use App\Models\User;
 use Database\Factories\SpaceFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

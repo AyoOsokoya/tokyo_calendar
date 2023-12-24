@@ -13,7 +13,7 @@ use App\Domains\Import\Actions\EventActionCreateImportDataHash;
 use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
-use App\Domains\Users\Models\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 

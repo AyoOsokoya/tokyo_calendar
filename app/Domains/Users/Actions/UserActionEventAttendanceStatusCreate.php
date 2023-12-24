@@ -6,7 +6,7 @@ namespace App\Domains\Users\Actions;
 
 use App\Domains\Events\Models\Event;
 use App\Domains\Users\Enums\EnumUserEventAttendanceStatus;
-use App\Domains\Users\Models\User;
+use App\Models\User;
 
 class UserActionEventAttendanceStatusCreate
 {

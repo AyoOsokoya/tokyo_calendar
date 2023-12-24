@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Domains\Users\Actions\UserActionCreate;
 use App\Domains\Users\Actions\UserActionDelete;
-use App\Domains\Users\Actions\UserActionUpdate;
-use App\Domains\Users\Models\User;
 use App\Enums\EnumHttpResponseStatusCode;
 use App\Http\Requests\UserRequestCreate;
 use App\Http\Requests\UserRequestUpdate;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller

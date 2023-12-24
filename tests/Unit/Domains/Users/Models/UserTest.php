@@ -12,9 +12,9 @@ use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Enums\EnumUserStaffRole;
 use App\Domains\Users\Models\Tables\TableUser as _;
-use App\Domains\Users\Models\Tables\TableUserSpace as us;
 use App\Domains\Users\Models\Tables\TableUserEvent as ue;
-use App\Domains\Users\Models\User;
+use App\Domains\Users\Models\Tables\TableUserSpace as us;
+use App\Models\User;
 use Tests\TestCase;
 
 class UserTest extends TestCase

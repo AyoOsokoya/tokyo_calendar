@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Users\Actions;
 
-use App\Domains\Users\Models\User;
+use App\Models\User;
 
 class UserActionUpdate
 {

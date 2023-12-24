@@ -8,6 +8,7 @@ use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Models\Tables\TableUserSpace as _;
+use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

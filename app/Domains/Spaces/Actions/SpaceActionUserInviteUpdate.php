@@ -9,7 +9,7 @@ use App\Domains\Spaces\Models\Space;
 use App\Domains\Users\Enums\EnumUserSpaceInviteStatus;
 use App\Domains\Users\Enums\EnumUserSpaceRoleType;
 use App\Domains\Users\Models\Tables\TableUserSpace as US;
-use App\Domains\Users\Models\User;
+use App\Models\User;
 
 class SpaceActionUserInviteUpdate
 {

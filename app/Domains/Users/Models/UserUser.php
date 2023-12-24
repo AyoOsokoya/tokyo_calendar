@@ -4,6 +4,7 @@ namespace App\Domains\Users\Models;
 
 use App\Domains\Users\Enums\EnumUserUserStatus;
 use App\Domains\Users\Models\Tables\TableUserUser as _;
+use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
