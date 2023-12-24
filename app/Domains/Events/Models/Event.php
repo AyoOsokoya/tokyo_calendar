@@ -117,10 +117,8 @@ class Event extends Model
             'users' => function ($query) {
                 $query->select([
                     u::id,
-                    u::name_first,
-                    u::name_last,
-                    u::name_middle,
-                    u::name_handle,
+                    u::name,
+                    u::handle,
                     u::avatar,
                     u::date_of_birth,
                     u::staff_role,

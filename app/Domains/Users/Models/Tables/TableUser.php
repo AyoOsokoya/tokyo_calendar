@@ -12,7 +12,7 @@ class TableUser
 
     public const name = 'name';
 
-    public const handle = 'name_handle';
+    public const handle = 'handle';
 
     public const avatar = 'avatar';
 
