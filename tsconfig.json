@@ -14,7 +14,13 @@
         "paths": {
             "@/*": ["./resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
-        }
+        },
+        "types": [
+            "./node_modules/@types/*",
+            "./vendor/tightenco/ziggy/dist/index.d.ts",
+            "./vendor/tightenco/ziggy/dist/vue.d.ts",
+            "vuetify"
+        ]
     },
     "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue"]
 }
