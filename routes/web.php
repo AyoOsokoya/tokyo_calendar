@@ -25,6 +25,10 @@ Route::get('/', function () {
     ]);
 });
 
+route::get('space', function () {
+    return Inertia::render('SpaceProfile');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
