@@ -39,11 +39,16 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            _::name => fake()->name(),
+            _::handle => fake()->userName(),
+            _::date_of_birth => fake()->date(),
+            _::email => fake()->unique()->safeEmail(),
+            _::account_type => EnumUserAccountType::PERSONAL,
+            _::staff_role => EnumUserStaffRole::NONE,
+            _::email_verified_at => now(),
+            _::activity_status => EnumUserActivityStatus::ACTIVE,
+            _::password => static::$password ??= Hash::make('password'),
+            _::remember_token => Str::random(10),
         ];
     }
 
